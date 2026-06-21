@@ -960,7 +960,7 @@ function renderToday() {
   const now = new Date();
   // Window: from 08:00 today to 05:00 next day
   const windowStart = new Date(now);
-  windowStart.setHours(10, 0, 0, 0);
+  windowStart.setHours(12, 0, 0, 0);
   const windowEnd = new Date(now);
   windowEnd.setDate(windowEnd.getDate() + 1);
   windowEnd.setHours(7, 59, 0, 0);
@@ -1117,7 +1117,7 @@ function renderTomorrow() {
 
   // Tomorrow's window = today's window shifted exactly +24h
   const windowStart = new Date(now);
-  windowStart.setHours(10, 0, 0, 0);
+  windowStart.setHours(12, 0, 0, 0);
   if (now < windowStart) windowStart.setDate(windowStart.getDate() - 1);
   // Shift +24h
   windowStart.setDate(windowStart.getDate() + 1);
