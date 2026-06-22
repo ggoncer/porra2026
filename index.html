@@ -1795,7 +1795,13 @@ function render() {
 buildStats();
 render();
 updateResultCells();
-loadResults().then(() => updateResultCells());
+loadResults().then(() => {
+  updateResultCells();
+  // Re-render si estamos en partidos de hoy o mañana para actualizar líderes
+  if (activePhase === 'today' || activePhase === 'tomorrow') {
+    render();
+  }
+});
 </script>
 </body>
 </html>
