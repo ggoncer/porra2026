@@ -1350,19 +1350,38 @@ async function loadResults() {
     const res = await fetch('/api/results');
     if (!res.ok) return;
     const data = await res.json();
+
+    // Update match results
     (data.matches || []).forEach(m => {
       const h = FD_TEAM_MAP[m.homeTeam.name] || m.homeTeam.name;
       const a = FD_TEAM_MAP[m.awayTeam.name] || m.awayTeam.name;
       const gh = m.score.fullTime.home;
       const ga = m.score.fullTime.away;
       if (gh === null || ga === null) return;
-      RESULTS_CACHE[`${h}-${a}`] = `${gh}-${ga}`;
+      if (!EMBEDDED_RESULTS[`${h}-${a}`]) {
+        RESULTS_CACHE[`${h}-${a}`] = `${gh}-${ga}`;
+      }
     });
+
+    // Update group standings (only for completed groups: 3 games played)
+    (data.standings || []).forEach(standing => {
+      if (standing.type !== 'TOTAL') return;
+      const group = standing.group;
+      const letter = group ? group.replace('GROUP_', '') : null;
+      if (!letter) return;
+      standing.table.forEach(row => {
+        const teamName = FD_TEAM_MAP[row.team.name] || row.team.name;
+        const pos = row.position;
+        if (row.playedGames >= 3) {
+          GROUP_STANDINGS[`${pos}${letter}`] = teamName;
+        }
+      });
+    });
+
   } catch(e) {
     console.warn('Results fetch failed:', e);
   }
 }
-
 function isMatchPlayed(partido) {
   return !!RESULTS_CACHE[partido];
 }
