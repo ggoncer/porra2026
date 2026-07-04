@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 Porra Mundial 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --green: #00c853;
+    --green-dim: #00963e;
+    --pitch: #0a1f0d;
+    --dark: #0d1117;
+    --card: #161b22;
+    --border: #21262d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --gold: #f0c040;
+    --red: #f85149;
+    --blue: #58a6ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--pitch) 0%, #0d2b12 50%, var(--pitch) 100%);
+    border-bottom: 2px solid var(--green);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 3px;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  header h1 span {
+    color: var(--green);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .ball {
+    font-size: 2.5rem;
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  /* CONTROLS */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+
+  .search-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    width: 220px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box:focus {
+    border-color: var(--green);
+  }
+
+  .filter-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover { border-color: var(--green); color: var(--text); }
+  .filter-btn.active { background: var(--green); border-color: var(--green); color: #000; font-weight: 600; }
+
+  .participant-filter {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* PHASE SECTION */
+  .phase-section {
+    margin-bottom: 32px;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 10px 16px;
+    background: var(--card);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .phase-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--green);
+  }
+
+  .phase-count {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* TABLE */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+  }
+
+  thead th {
+    background: #1a2233;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+  }
+
+  thead th.partido-col {
+    text-align: left;
+    min-width: 180px;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover {
+    background: rgba(0, 200, 83, 0.04);
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  td {
+    padding: 8px 10px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  td.match-name {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text);
+    padding-left: 14px;
+  }
+
+  td.match-name .teams {
+    display: block;
+  }
+
+  td.match-name .fase-tag {
+    display: inline-block;
+    font-size: 10px;
+    background: rgba(0,200,83,0.15);
+    color: var(--green);
+    border-radius: 4px;
+    padding: 1px 5px;
+    margin-top: 2px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* BET BADGES */
+  .bet {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+
+  .sign {
+    font-weight: 700;
+    font-size: 13px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .sign-1 { background: rgba(88,166,255,0.2); color: #7ec8ff; }
+  .sign-X { background: rgba(240,192,64,0.2); color: var(--gold); }
+  .sign-2 { background: rgba(248,81,73,0.2); color: #ff8b87; }
+
+  .score {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* KNOCKOUT: country picks */
+  .pick {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--text);
+    white-space: nowrap;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* MATCH ENTRY: for 1/16 match bets with format team·sign */
+  .match-pick {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* PHASE TABS */
+  .tab-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* STATS */
+  .stats-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .stat-card .val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .stat-card .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* GROUP TOGGLE */
+  .group-letter {
+    font-weight: 700;
+    color: var(--green);
+    font-size: 12px;
+  }
+
+  .participant-header {
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 6px 4px !important;
+    height: 110px;
+    vertical-align: bottom;
+    text-align: left;
+  }
+  .participant-header span {
+    display: inline-block;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .participant-header.highlighted {
+    color: var(--gold) !important;
+    background: rgba(240,192,64,0.1) !important;
+  }
+
+  td.highlighted-col {
+    background: rgba(240,192,64,0.05);
+  }
+
+
+  .datetime-col {
+    min-width: 70px;
+    text-align: center;
+  }
+  .dt-date {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 600;
+    white-space: nowrap;
+    display: block;
+  }
+  .dt-time {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 700;
+    white-space: nowrap;
+    display: block;
+  }
+
+  /* TODAY VIEW */
+  .today-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .today-date-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--text);
+    letter-spacing: 3px;
+  }
+  .today-count {
+    background: var(--green);
+    color: #000;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .today-match-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+  .today-match-header {
+    background: linear-gradient(135deg, #0d2b12 0%, #162b1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .today-match-teams {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .team-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+  .vs-badge {
+    background: var(--green);
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 6px;
+    letter-spacing: 2px;
+  }
+  .today-match-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .today-time {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .results-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 0;
+  }
+  .result-col {
+    flex: 1;
+    min-width: 140px;
+    padding: 20px 20px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .result-col:last-child { border-right: none; }
+  .result-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .result-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--text);
+    letter-spacing: 2px;
+  }
+  .result-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .result-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .bettor-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+  .bettor-name {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .today-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+  }
+  .today-empty-icon { font-size: 4rem; margin-bottom: 16px; }
+  .today-empty-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--text); margin-bottom: 8px; }
+  .today-empty-sub { font-size: 14px; }
+
+
+  /* RESULT COLUMN */
+  .result-col-header {
+    min-width: 80px;
+    text-align: center;
+  }
+  .result-cell {
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-badge {
+    display: inline-block;
+    background: rgba(0,200,83,0.15);
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .score-pending {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .score-loading {
+    color: var(--muted);
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  /* BET CORRECT */
+  .bet-correct .sign {
+    border: 2px solid #fff !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+    box-shadow: 0 0 6px rgba(255,255,255,0.4);
+  }
+  .bet-correct .score {
+    color: var(--muted);
+  }
+  /* BET EXACT - acertó resultado exacto */
+  .bet-exact .sign {
+    border: 2px solid #fff !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+    box-shadow: 0 0 6px rgba(255,255,255,0.4);
+  }
+  .bet-exact .score {
+    color: #fff !important;
+    font-weight: 700 !important;
+  }
+
+
+  /* RANKING */
+  .ranking-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .ranking-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .ranking-table thead th {
+    background: #1a2233;
+    padding: 10px 14px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .ranking-table thead th.left { text-align: left; }
+  .ranking-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .ranking-table tbody tr:hover { background: rgba(0,200,83,0.04); }
+  .ranking-table tbody tr:last-child { border-bottom: none; }
+  .ranking-table td {
+    padding: 10px 14px;
+    text-align: center;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .ranking-table td.left { text-align: left; }
+  .rank-pos {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--muted);
+    width: 40px;
+  }
+  .rank-pos.gold   { color: #f0c040; }
+  .rank-pos.silver { color: #c0c0c0; }
+  .rank-pos.bronze { color: #cd7f32; }
+  .rank-name {
+    font-weight: 600;
+    color: var(--text);
+    text-align: left;
+  }
+  .rank-pts {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--green);
+  }
+  .rank-sub {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .rank-breakdown {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: left;
+  }
+  .ranking-legend {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .ranking-legend span { white-space: nowrap; }
+  .ranking-legend b { color: var(--text); }
+
+
+  /* APUESTAS ESPECIALES */
+  .apuestas-section {
+    margin-bottom: 32px;
+  }
+  .apuestas-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--green);
+    padding: 10px 16px;
+    background: var(--card);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px;
+  }
+  .apuestas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .apuesta-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .apuesta-card .ap-name {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .apuesta-card .ap-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .apuesta-card .ap-value.correct {
+    color: var(--green);
+    font-weight: 800;
+  }
+  .apuesta-card .ap-value.wrong {
+    color: var(--muted);
+    opacity: 0.5;
+  }
+  .pos-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .pos-table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 600px;
+  }
+  .pos-table thead th {
+    background: #1a2233;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .pos-table thead th.left { text-align: left; }
+  .pos-table tbody tr { border-bottom: 1px solid var(--border); }
+  .pos-table tbody tr:last-child { border-bottom: none; }
+  .pos-table td {
+    padding: 7px 10px;
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .pos-table td.left { text-align: left; font-weight: 600; }
+  .pos-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 11px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+  }
+  .pos-chip.correct {
+    background: rgba(0,200,83,0.2);
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: 700;
+  }
+  .pos-chip.wrong {
+    opacity: 0.35;
+  }
+
+  /* LÍDERES DE LA JORNADA */
+  .leaders-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .leaders-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .leaders-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .leaders-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .leader-card {
+    flex: 1;
+    min-width: 130px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .leader-medal {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  .leader-name {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .leader-pts {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--green);
+    line-height: 1;
+  }
+  .leader-pts-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .leader-detail {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    header { padding: 16px; flex-wrap: wrap; }
+    header h1 { font-size: 1.8rem; }
+    .controls { gap: 8px; }
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ball">⚽</div>
+  <div>
+    <h1>PORRA MUNDIAL <span>2026</span></h1>
+    <div class="subtitle">Apuestas de los participantes · 23 porredores</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- STATS -->
+  <div class="stats-bar" id="statsBar" style="display:none"></div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div id="phaseFilters" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+  </div>
+
+  <div id="content"></div>
+
+</div>
+
+<footer>
+  PORRA MUNDIAL 2026 · Generado automáticamente desde el Excel de apuestas
+</footer>
+
+<script>
+
+const SCHEDULE = {"México-Sudáfrica": ["11 jun", "21:00"], "Corea del Sur-República Checa": ["12 jun", "04:00"], "República Checa-Sudáfrica": ["18 jun", "18:00"], "México-Corea del Sur": ["19 jun", "03:00"], "República Checa-México": ["25 jun", "03:00"], "Sudáfrica-Corea del Sur": ["25 jun", "03:00"], "Canadá-Bosnia y Herzegovina": ["12 jun", "21:00"], "Catar-Suiza": ["13 jun", "21:00"], "Suiza-Bosnia y Herzegovina": ["18 jun", "21:00"], "Canadá-Catar": ["19 jun", "00:00"], "Suiza-Canadá": ["24 jun", "21:00"], "Bosnia y Herzegovina-Catar": ["24 jun", "21:00"], "Brasil-Marruecos": ["14 jun", "00:00"], "Haití-Escocia": ["14 jun", "03:00"], "Brasil-Haití": ["20 jun", "00:00"], "Escocia-Marruecos": ["20 jun", "03:00"], "Escocia-Brasil": ["25 jun", "00:00"], "Marruecos-Haití": ["25 jun", "00:00"], "Estados Unidos-Paraguay": ["13 jun", "03:00"], "Australia-Turquía": ["13 jun", "06:00"], "Turquía-Paraguay": ["19 jun", "06:00"], "Estados Unidos-Australia": ["19 jun", "21:00"], "Turquía-Estados Unidos": ["26 jun", "04:00"], "Paraguay-Australia": ["26 jun", "04:00"], "Alemania-Curazao": ["14 jun", "19:00"], "Costa de Marfil-Ecuador": ["15 jun", "01:00"], "Alemania-Costa de Marfil": ["21 jun", "00:00"], "Ecuador-Curazao": ["21 jun", "02:00"], "Ecuador-Alemania": ["26 jun", "00:00"], "Curazao-Costa de Marfil": ["26 jun", "00:00"], "Países Bajos-Japón": ["14 jun", "22:00"], "Suecia-Túnez": ["15 jun", "04:00"], "Países Bajos-Suecia": ["20 jun", "19:00"], "Túnez-Japón": ["20 jun", "06:00"], "Túnez-Países Bajos": ["26 jun", "01:00"], "Japón-Suecia": ["26 jun", "01:00"], "Bélgica-Egipto": ["15 jun", "21:00"], "Irán-Nueva Zelanda": ["16 jun", "03:00"], "Bélgica-Irán": ["21 jun", "21:00"], "Nueva Zelanda-Egipto": ["22 jun", "03:00"], "Nueva Zelanda-Bélgica": ["27 jun", "05:00"], "Egipto-Irán": ["27 jun", "05:00"], "España-Cabo Verde": ["15 jun", "18:00"], "Arabia Saudita-Uruguay": ["16 jun", "00:00"], "España-Arabia Saudita": ["21 jun", "18:00"], "Uruguay-Cabo Verde": ["22 jun", "00:00"], "Uruguay-España": ["27 jun", "02:00"], "Cabo Verde-Arabia Saudita": ["27 jun", "02:00"], "Francia-Senegal": ["16 jun", "21:00"], "Irak-Noruega": ["17 jun", "00:00"], "Francia-Irak": ["22 jun", "23:00"], "Noruega-Senegal": ["23 jun", "02:00"], "Noruega-Francia": ["26 jun", "21:00"], "Senegal-Irak": ["26 jun", "21:00"], "Argentina-Argelia": ["17 jun", "03:00"], "Austria-Jordania": ["17 jun", "06:00"], "Argentina-Austria": ["22 jun", "19:00"], "Jordania-Argelia": ["23 jun", "05:00"], "Jordania-Argentina": ["28 jun", "04:00"], "Argelia-Austria": ["28 jun", "04:00"], "Portugal-RD Congo": ["17 jun", "19:00"], "Uzbekistán-Colombia": ["18 jun", "04:00"], "Portugal-Uzbekistán": ["23 jun", "19:00"], "Colombia-RD Congo": ["24 jun", "04:00"], "Colombia-Portugal": ["28 jun", "01:30"], "RD Congo-Uzbekistán": ["28 jun", "01:30"], "Inglaterra-Croacia": ["17 jun", "22:00"], "Ghana-Panamá": ["18 jun", "01:00"], "Inglaterra-Ghana": ["23 jun", "22:00"], "Panamá-Croacia": ["24 jun", "01:00"], "Panamá-Inglaterra": ["28 jun", "04:00"], "Croacia-Ghana": ["28 jun", "04:00"],
+  "Canadá-Marruecos": ["4 jul", "19:00"],
+  "Paraguay-Francia": ["4 jul", "23:00"],
+  "Brasil-Noruega": ["5 jul", "22:00"],
+  "México-Inglaterra": ["6 jul", "02:00"],
+  "Portugal-España": ["6 jul", "21:00"],
+  "Estados Unidos-Bélgica": ["7 jul", "02:00"],
+  "Argentina-Egipto": ["7 jul", "18:00"],
+  "Suiza-Colombia": ["7 jul", "22:00"]};
+
+const DATA = {"participants": ["Roco", "Fer", "Cubelos", "Nachi", "Quique", "Gonzalo Diaz", "Gonzalo Goncer", "Pablo Estevez", "Pablo", "Álvaro Rico", "Abo", "Angel", "Tito", "Nico Muñoz", "Sergio", "Pozancos", "Alberto Castillo", "Rober", "Goncho", "Urreison", "Juan Dionis", "Juanmi", "El Oráculo"], "matches": [{"fase": "A1", "partido": "México-Sudáfrica", "bets": {"Roco": "1|2-0", "Fer": "1|2-0", "Cubelos": "1|2-0", "Nachi": "1|2-1", "Quique": "1|2-0", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|3-1", "Pablo Estevez": "1|2-0", "Pablo": "1|2-0", "Álvaro Rico": "1|2-0", "Abo": "1|3-0", "Angel": "1|2-1", "Tito": "1|3-1", "Nico Muñoz": "1|2-0", "Sergio": "1|2-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|3-0", "Rober": "1|2-0", "Goncho": "1|2-0", "Urreison": "1|3-1", "Juan Dionis": "1|3-1", "Juanmi": "1|3-1", "El Oráculo": "1|2-1"}}, {"fase": "A1", "partido": "Corea del Sur-República Checa", "bets": {"Roco": "1|2-1", "Fer": "X|1-1", "Cubelos": "1|2-1", "Nachi": "X|1-1", "Quique": "X|1-1", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "2|1-2", "Álvaro Rico": "1|1-0", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|1-1", "Nico Muñoz": "X|1-1", "Sergio": "2|1-2", "Pozancos": "X|1-1", "Alberto Castillo": "X|1-1", "Rober": "1|1-0", "Goncho": "X|1-1", "Urreison": "1|2-1", "Juan Dionis": "X|1-1", "Juanmi": "X|1-1", "El Oráculo": "X|1-1"}}, {"fase": "B1", "partido": "Canadá-Bosnia y Herzegovina", "bets": {"Roco": "1|2-1", "Fer": "X|1-1", "Cubelos": "X|1-1", "Nachi": "X|1-1", "Quique": "1|2-1", "Gonzalo Diaz": "1|1-0", "Gonzalo Goncer": "X|1-1", "Pablo Estevez": "X|1-1", "Pablo": "X|1-1", "Álvaro Rico": "2|0-1", "Abo": "1|2-1", "Angel": "1|2-1", "Tito": "1|2-1", "Nico Muñoz": "1|2-1", "Sergio": "X|1-1", "Pozancos": "X|1-1", "Alberto Castillo": "1|2-1", "Rober": "2|1-3", "Goncho": "1|2-1", "Urreison": "X|1-1", "Juan Dionis": "X|2-2", "Juanmi": "X|0-0", "El Oráculo": "1|2-0"}}, {"fase": "B1", "partido": "Catar-Suiza", "bets": {"Roco": "2|0-2", "Fer": "2|0-2", "Cubelos": "2|0-2", "Nachi": "2|0-2", "Quique": "2|0-2", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|0-2", "Pablo Estevez": "2|0-2", "Pablo": "2|1-3", "Álvaro Rico": "2|0-3", "Abo": "2|0-1", "Angel": "2|0-3", "Tito": "2|0-3", "Nico Muñoz": "2|0-3", "Sergio": "2|0-3", "Pozancos": "2|0-2", "Alberto Castillo": "2|0-2", "Rober": "2|0-3", "Goncho": "2|0-2", "Urreison": "2|1-2", "Juan Dionis": "2|0-2", "Juanmi": "2|0-3", "El Oráculo": "2|0-2"}}, {"fase": "C1", "partido": "Brasil-Marruecos", "bets": {"Roco": "1|2-1", "Fer": "1|2-1", "Cubelos": "1|2-1", "Nachi": "X|1-1", "Quique": "2|0-1", "Gonzalo Diaz": "X|2-2", "Gonzalo Goncer": "1|3-1", "Pablo Estevez": "1|2-1", "Pablo": "1|2-1", "Álvaro Rico": "2|1-2", "Abo": "2|1-2", "Angel": "1|2-0", "Tito": "1|3-1", "Nico Muñoz": "1|2-1", "Sergio": "X|1-1", "Pozancos": "1|2-1", "Alberto Castillo": "2|1-2", "Rober": "1|3-1", "Goncho": "X|1-1", "Urreison": "2|1-3", "Juan Dionis": "1|3-1", "Juanmi": "2|1-2", "El Oráculo": "1|2-1"}}, {"fase": "C1", "partido": "Haití-Escocia", "bets": {"Roco": "2|0-2", "Fer": "2|0-3", "Cubelos": "2|0-2", "Nachi": "2|0-2", "Quique": "2|0-2", "Gonzalo Diaz": "2|0-3", "Gonzalo Goncer": "2|0-3", "Pablo Estevez": "2|0-2", "Pablo": "2|0-2", "Álvaro Rico": "2|0-3", "Abo": "2|0-1", "Angel": "2|1-2", "Tito": "2|1-4", "Nico Muñoz": "2|0-2", "Sergio": "2|0-1", "Pozancos": "2|0-2", "Alberto Castillo": "2|0-3", "Rober": "2|0-3", "Goncho": "2|0-2", "Urreison": "2|0-1", "Juan Dionis": "2|0-2", "Juanmi": "2|0-3", "El Oráculo": "X|1-1"}}, {"fase": "D1", "partido": "Estados Unidos-Paraguay", "bets": {"Roco": "1|2-1", "Fer": "X|1-1", "Cubelos": "1|2-0", "Nachi": "1|2-1", "Quique": "X|1-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "X|1-1", "Pablo": "1|2-1", "Álvaro Rico": "1|1-0", "Abo": "1|1-0", "Angel": "1|2-1", "Tito": "1|2-1", "Nico Muñoz": "1|2-1", "Sergio": "1|1-0", "Pozancos": "X|1-1", "Alberto Castillo": "1|2-1", "Rober": "2|0-1", "Goncho": "1|2-1", "Urreison": "1|1-0", "Juan Dionis": "1|3-1", "Juanmi": "X|1-1", "El Oráculo": "1|2-0"}}, {"fase": "D1", "partido": "Australia-Turquía", "bets": {"Roco": "X|1-1", "Fer": "2|1-3", "Cubelos": "X|1-1", "Nachi": "X|1-1", "Quique": "2|0-2", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-3", "Pablo Estevez": "2|1-2", "Pablo": "2|0-2", "Álvaro Rico": "2|0-3", "Abo": "X|1-1", "Angel": "2|0-1", "Tito": "2|0-2", "Nico Muñoz": "2|1-3", "Sergio": "2|0-1", "Pozancos": "2|0-2", "Alberto Castillo": "1|2-1", "Rober": "2|1-2", "Goncho": "2|1-2", "Urreison": "2|1-2", "Juan Dionis": "2|0-3", "Juanmi": "2|1-3", "El Oráculo": "2|1-2"}}, {"fase": "E1", "partido": "Alemania-Curazao", "bets": {"Roco": "1|4-0", "Fer": "1|4-0", "Cubelos": "1|3-0", "Nachi": "1|4-1", "Quique": "1|4-0", "Gonzalo Diaz": "1|5-0", "Gonzalo Goncer": "1|6-0", "Pablo Estevez": "1|4-0", "Pablo": "1|7-0", "Álvaro Rico": "1|6-0", "Abo": "1|3-0", "Angel": "1|4-0", "Tito": "1|4-0", "Nico Muñoz": "1|4-0", "Sergio": "1|4-0", "Pozancos": "1|5-0", "Alberto Castillo": "1|4-0", "Rober": "1|4-0", "Goncho": "1|3-0", "Urreison": "1|5-0", "Juan Dionis": "1|6-0", "Juanmi": "1|4-0", "El Oráculo": "1|3-0"}}, {"fase": "E1", "partido": "Costa de Marfil-Ecuador", "bets": {"Roco": "X|1-1", "Fer": "X|1-1", "Cubelos": "2|0-1", "Nachi": "1|2-1", "Quique": "X|1-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "X|2-2", "Pablo Estevez": "X|1-1", "Pablo": "2|0-1", "Álvaro Rico": "2|2-3", "Abo": "X|1-1", "Angel": "2|1-2", "Tito": "2|2-4", "Nico Muñoz": "X|2-2", "Sergio": "1|2-1", "Pozancos": "2|0-1", "Alberto Castillo": "1|2-1", "Rober": "X|1-1", "Goncho": "2|1-2", "Urreison": "1|3-1", "Juan Dionis": "X|1-1", "Juanmi": "X|2-2", "El Oráculo": "X|1-1"}}, {"fase": "F1", "partido": "Países Bajos-Japón", "bets": {"Roco": "X|1-1", "Fer": "1|2-1", "Cubelos": "1|2-1", "Nachi": "1|3-1", "Quique": "X|1-1", "Gonzalo Diaz": "X|2-2", "Gonzalo Goncer": "X|1-1", "Pablo Estevez": "1|2-1", "Pablo": "1|2-1", "Álvaro Rico": "X|1-1", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "X|1-1", "Sergio": "1|1-0", "Pozancos": "1|1-0", "Alberto Castillo": "X|2-2", "Rober": "1|2-0", "Goncho": "1|2-1", "Urreison": "X|1-1", "Juan Dionis": "X|1-1", "Juanmi": "1|3-0", "El Oráculo": "1|2-1"}}, {"fase": "F1", "partido": "Suecia-Túnez", "bets": {"Roco": "1|1-0", "Fer": "1|2-1", "Cubelos": "X|1-1", "Nachi": "1|2-1", "Quique": "X|1-1", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "X|1-1", "Pablo": "1|2-0", "Álvaro Rico": "1|3-0", "Abo": "1|1-0", "Angel": "1|2-0", "Tito": "1|2-0", "Nico Muñoz": "1|2-1", "Sergio": "1|2-1", "Pozancos": "1|2-0", "Alberto Castillo": "1|2-1", "Rober": "1|2-0", "Goncho": "1|2-1", "Urreison": "X|1-1", "Juan Dionis": "X|1-1", "Juanmi": "1|2-0", "El Oráculo": "1|1-0"}}, {"fase": "G1", "partido": "Bélgica-Egipto", "bets": {"Roco": "1|2-0", "Fer": "1|2-1", "Cubelos": "1|2-0", "Nachi": "1|2-0", "Quique": "X|1-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-1", "Pablo": "1|2-0", "Álvaro Rico": "2|1-2", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "1|1-0", "Sergio": "1|2-0", "Pozancos": "1|2-0", "Alberto Castillo": "1|2-1", "Rober": "1|3-1", "Goncho": "X|1-1", "Urreison": "1|2-0", "Juan Dionis": "1|3-1", "Juanmi": "1|3-1", "El Oráculo": "1|2-0"}}, {"fase": "G1", "partido": "Irán-Nueva Zelanda", "bets": {"Roco": "1|1-0", "Fer": "1|2-1", "Cubelos": "1|2-0", "Nachi": "X|1-1", "Quique": "1|1-0", "Gonzalo Diaz": "1|2-0", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "1|2-0", "Pablo": "1|2-1", "Álvaro Rico": "1|1-0", "Abo": "1|1-0", "Angel": "2|0-2", "Tito": "1|2-0", "Nico Muñoz": "1|1-0", "Sergio": "X|1-1", "Pozancos": "1|1-0", "Alberto Castillo": "X|1-1", "Rober": "1|1-0", "Goncho": "1|2-0", "Urreison": "X|1-1", "Juan Dionis": "1|2-1", "Juanmi": "1|2-0", "El Oráculo": "1|1-0"}}, {"fase": "H1", "partido": "España-Cabo Verde", "bets": {"Roco": "1|3-0", "Fer": "1|4-0", "Cubelos": "1|3-0", "Nachi": "1|3-0", "Quique": "1|3-0", "Gonzalo Diaz": "1|4-0", "Gonzalo Goncer": "1|5-0", "Pablo Estevez": "1|3-0", "Pablo": "1|6-0", "Álvaro Rico": "1|5-0", "Abo": "1|3-0", "Angel": "1|2-0", "Tito": "1|4-0", "Nico Muñoz": "1|3-0", "Sergio": "1|2-0", "Pozancos": "1|3-0", "Alberto Castillo": "1|3-0", "Rober": "1|2-0", "Goncho": "1|3-0", "Urreison": "1|3-0", "Juan Dionis": "1|5-0", "Juanmi": "1|5-0", "El Oráculo": "1|3-0"}}, {"fase": "H1", "partido": "Arabia Saudita-Uruguay", "bets": {"Roco": "2|0-2", "Fer": "2|0-2", "Cubelos": "2|0-2", "Nachi": "2|1-2", "Quique": "2|0-2", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-3", "Pablo Estevez": "2|0-2", "Pablo": "2|0-3", "Álvaro Rico": "2|0-3", "Abo": "2|1-2", "Angel": "2|0-2", "Tito": "2|1-2", "Nico Muñoz": "X|1-1", "Sergio": "2|0-2", "Pozancos": "2|0-1", "Alberto Castillo": "2|1-2", "Rober": "2|0-2", "Goncho": "2|0-2", "Urreison": "2|1-2", "Juan Dionis": "2|0-2", "Juanmi": "2|0-3", "El Oráculo": "2|0-1"}}, {"fase": "I1", "partido": "Francia-Senegal", "bets": {"Roco": "1|3-1", "Fer": "1|2-1", "Cubelos": "1|2-1", "Nachi": "1|3-1", "Quique": "1|2-1", "Gonzalo Diaz": "1|3-2", "Gonzalo Goncer": "1|4-1", "Pablo Estevez": "1|2-0", "Pablo": "1|4-0", "Álvaro Rico": "X|1-1", "Abo": "1|2-0", "Angel": "1|3-1", "Tito": "1|3-2", "Nico Muñoz": "1|2-0", "Sergio": "X|1-1", "Pozancos": "1|2-1", "Alberto Castillo": "1|3-1", "Rober": "1|3-1", "Goncho": "1|3-1", "Urreison": "1|4-2", "Juan Dionis": "1|3-1", "Juanmi": "X|1-1", "El Oráculo": "1|2-1"}}, {"fase": "I1", "partido": "Irak-Noruega", "bets": {"Roco": "2|0-2", "Fer": "2|0-2", "Cubelos": "2|0-2", "Nachi": "2|0-3", "Quique": "2|0-3", "Gonzalo Diaz": "2|0-3", "Gonzalo Goncer": "2|0-3", "Pablo Estevez": "2|0-2", "Pablo": "2|0-3", "Álvaro Rico": "2|1-2", "Abo": "2|0-1", "Angel": "2|0-2", "Tito": "2|0-3", "Nico Muñoz": "2|1-3", "Sergio": "2|0-1", "Pozancos": "2|0-1", "Alberto Castillo": "2|1-3", "Rober": "2|0-2", "Goncho": "2|0-2", "Urreison": "2|1-2", "Juan Dionis": "2|0-4", "Juanmi": "2|0-3", "El Oráculo": "2|1-2"}}, {"fase": "J1", "partido": "Argentina-Argelia", "bets": {"Roco": "1|2-0", "Fer": "1|3-1", "Cubelos": "1|2-0", "Nachi": "1|2-0", "Quique": "X|1-1", "Gonzalo Diaz": "1|2-0", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-0", "Pablo": "X|1-1", "Álvaro Rico": "1|2-1", "Abo": "X|0-0", "Angel": "1|3-1", "Tito": "1|4-1", "Nico Muñoz": "1|2-0", "Sergio": "1|2-0", "Pozancos": "X|1-1", "Alberto Castillo": "1|3-1", "Rober": "1|3-1", "Goncho": "1|2-1", "Urreison": "X|1-1", "Juan Dionis": "X|1-1", "Juanmi": "1|3-0", "El Oráculo": "1|3-0"}}, {"fase": "J1", "partido": "Austria-Jordania", "bets": {"Roco": "1|1-0", "Fer": "1|2-0", "Cubelos": "1|2-0", "Nachi": "1|2-1", "Quique": "1|2-0", "Gonzalo Diaz": "1|2-0", "Gonzalo Goncer": "1|3-0", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|3-0", "Abo": "1|1-0", "Angel": "1|2-0", "Tito": "1|2-0", "Nico Muñoz": "1|3-1", "Sergio": "X|1-1", "Pozancos": "1|2-1", "Alberto Castillo": "X|1-1", "Rober": "1|1-0", "Goncho": "1|2-0", "Urreison": "1|2-1", "Juan Dionis": "1|3-0", "Juanmi": "1|2-0", "El Oráculo": "1|2-0"}}, {"fase": "K1", "partido": "Portugal-RD Congo", "bets": {"Roco": "1|2-0", "Fer": "1|3-0", "Cubelos": "1|2-0", "Nachi": "1|3-1", "Quique": "1|3-0", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|3-0", "Pablo Estevez": "1|3-0", "Pablo": "1|6-0", "Álvaro Rico": "1|4-1", "Abo": "1|1-0", "Angel": "1|2-0", "Tito": "1|4-0", "Nico Muñoz": "1|3-0", "Sergio": "1|1-0", "Pozancos": "1|2-0", "Alberto Castillo": "1|3-0", "Rober": "1|2-0", "Goncho": "1|3-0", "Urreison": "1|2-0", "Juan Dionis": "1|4-1", "Juanmi": "1|4-0", "El Oráculo": "1|2-0"}}, {"fase": "K1", "partido": "Uzbekistán-Colombia", "bets": {"Roco": "2|0-2", "Fer": "2|1-3", "Cubelos": "2|0-2", "Nachi": "2|1-2", "Quique": "2|0-2", "Gonzalo Diaz": "2|0-1", "Gonzalo Goncer": "2|0-2", "Pablo Estevez": "2|0-2", "Pablo": "2|0-4", "Álvaro Rico": "2|0-3", "Abo": "2|0-2", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "2|1-3", "Sergio": "2|0-2", "Pozancos": "2|0-2", "Alberto Castillo": "2|0-3", "Rober": "2|0-2", "Goncho": "2|0-2", "Urreison": "2|1-2", "Juan Dionis": "2|0-3", "Juanmi": "2|0-3", "El Oráculo": "2|0-1"}}, {"fase": "L1", "partido": "Inglaterra-Croacia", "bets": {"Roco": "1|2-1", "Fer": "X|1-1", "Cubelos": "1|2-0", "Nachi": "1|2-0", "Quique": "X|2-2", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-1", "Pablo": "1|2-0", "Álvaro Rico": "1|2-1", "Abo": "1|2-0", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "1|1-0", "Sergio": "2|1-2", "Pozancos": "1|1-0", "Alberto Castillo": "1|2-1", "Rober": "1|1-0", "Goncho": "1|2-1", "Urreison": "X|2-2", "Juan Dionis": "1|2-1", "Juanmi": "1|3-0", "El Oráculo": "1|2-0"}}, {"fase": "L1", "partido": "Ghana-Panamá", "bets": {"Roco": "1|2-1", "Fer": "1|3-1", "Cubelos": "X|1-1", "Nachi": "1|2-1", "Quique": "2|0-1", "Gonzalo Diaz": "1|2-0", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "1|2-0", "Pablo": "1|2-1", "Álvaro Rico": "1|1-0", "Abo": "1|1-0", "Angel": "1|2-0", "Tito": "1|2-0", "Nico Muñoz": "1|2-0", "Sergio": "1|2-0", "Pozancos": "1|2-0", "Alberto Castillo": "X|1-1", "Rober": "X|1-1", "Goncho": "1|2-1", "Urreison": "1|3-0", "Juan Dionis": "1|2-1", "Juanmi": "1|2-0", "El Oráculo": "1|1-0"}}, {"fase": "A2", "partido": "República Checa-Sudáfrica", "bets": {"Roco": "X|1-1", "Fer": "1|2-1", "Cubelos": "1|2-1", "Nachi": "2|0-2", "Quique": "2|0-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|2-0", "Abo": "X|0-0", "Angel": "1|2-0", "Tito": "1|3-0", "Nico Muñoz": "1|2-1", "Sergio": "1|1-0", "Pozancos": "1|1-0", "Alberto Castillo": "2|0-2", "Rober": "X|1-1", "Goncho": "1|3-1", "Urreison": "1|2-0", "Juan Dionis": "1|1-0", "Juanmi": "X|1-1", "El Oráculo": "X|1-1"}}, {"fase": "A2", "partido": "México-Corea del Sur", "bets": {"Roco": "1|2-1", "Fer": "1|2-1", "Cubelos": "X|1-1", "Nachi": "X|2-2", "Quique": "1|1-0", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "X|1-1", "Álvaro Rico": "X|1-1", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "1|2-1", "Nico Muñoz": "1|1-0", "Sergio": "1|2-1", "Pozancos": "X|1-1", "Alberto Castillo": "X|1-1", "Rober": "1|1-0", "Goncho": "1|2-1", "Urreison": "1|2-1", "Juan Dionis": "X|1-1", "Juanmi": "X|2-2", "El Oráculo": "X|1-1"}}, {"fase": "B2", "partido": "Suiza-Bosnia y Herzegovina", "bets": {"Roco": "1|1-0", "Fer": "X|1-1", "Cubelos": "1|2-1", "Nachi": "1|2-1", "Quique": "2|1-2", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-1", "Pablo": "1|2-1", "Álvaro Rico": "X|1-1", "Abo": "1|3-0", "Angel": "1|2-1", "Tito": "1|2-1", "Nico Muñoz": "1|2-1", "Sergio": "1|3-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|2-1", "Goncho": "1|2-0", "Urreison": "1|2-1", "Juan Dionis": "1|2-1", "Juanmi": "1|2-1", "El Oráculo": "1|2-1"}}, {"fase": "B2", "partido": "Canadá-Catar", "bets": {"Roco": "1|3-0", "Fer": "1|3-1", "Cubelos": "1|2-0", "Nachi": "1|3-0", "Quique": "1|2-1", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "1|3-1", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|2-0", "Abo": "1|2-0", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "1|2-1", "Sergio": "X|1-1", "Pozancos": "1|2-1", "Alberto Castillo": "1|3-0", "Rober": "1|1-0", "Goncho": "1|2-0", "Urreison": "X|1-1", "Juan Dionis": "1|2-0", "Juanmi": "1|2-0", "El Oráculo": "1|3-0"}}, {"fase": "C2", "partido": "Escocia-Marruecos", "bets": {"Roco": "2|0-1", "Fer": "2|1-2", "Cubelos": "X|1-1", "Nachi": "2|1-2", "Quique": "2|0-1", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-2", "Pablo Estevez": "2|0-1", "Pablo": "2|0-1", "Álvaro Rico": "2|1-3", "Abo": "2|0-2", "Angel": "X|1-1", "Tito": "2|1-2", "Nico Muñoz": "2|1-3", "Sergio": "2|1-3", "Pozancos": "2|1-2", "Alberto Castillo": "2|1-3", "Rober": "1|2-1", "Goncho": "2|1-2", "Urreison": "X|1-1", "Juan Dionis": "2|1-2", "Juanmi": "2|0-1", "El Oráculo": "1|2-1"}}, {"fase": "C2", "partido": "Brasil-Haití", "bets": {"Roco": "1|4-0", "Fer": "1|4-0", "Cubelos": "1|3-0", "Nachi": "1|4-0", "Quique": "1|3-0", "Gonzalo Diaz": "1|4-0", "Gonzalo Goncer": "1|5-0", "Pablo Estevez": "1|3-0", "Pablo": "1|6-0", "Álvaro Rico": "1|4-0", "Abo": "1|3-0", "Angel": "1|3-0", "Tito": "1|5-0", "Nico Muñoz": "1|4-0", "Sergio": "1|4-0", "Pozancos": "1|4-0", "Alberto Castillo": "1|4-0", "Rober": "1|4-1", "Goncho": "1|3-0", "Urreison": "1|3-0", "Juan Dionis": "1|5-0", "Juanmi": "1|4-0", "El Oráculo": "1|3-0"}}, {"fase": "D2", "partido": "Estados Unidos-Australia", "bets": {"Roco": "1|2-0", "Fer": "1|3-0", "Cubelos": "1|2-1", "Nachi": "X|1-1", "Quique": "1|1-0", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "1|2-1", "Pablo": "1|3-0", "Álvaro Rico": "1|2-1", "Abo": "X|1-1", "Angel": "1|2-1", "Tito": "1|3-2", "Nico Muñoz": "1|1-0", "Sergio": "1|1-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|1-0", "Goncho": "1|3-1", "Urreison": "X|2-2", "Juan Dionis": "1|2-1", "Juanmi": "1|2-0", "El Oráculo": "1|2-1"}}, {"fase": "D2", "partido": "Turquía-Paraguay", "bets": {"Roco": "X|1-1", "Fer": "1|3-1", "Cubelos": "1|2-0", "Nachi": "1|2-1", "Quique": "1|3-2", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "X|1-1", "Pablo Estevez": "1|2-1", "Pablo": "1|1-0", "Álvaro Rico": "1|2-1", "Abo": "X|2-2", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "X|1-1", "Sergio": "2|1-2", "Pozancos": "X|1-1", "Alberto Castillo": "X|1-1", "Rober": "2|1-3", "Goncho": "1|2-1", "Urreison": "X|1-1", "Juan Dionis": "1|2-1", "Juanmi": "1|2-1", "El Oráculo": "X|1-1"}}, {"fase": "E2", "partido": "Alemania-Costa de Marfil", "bets": {"Roco": "1|2-1", "Fer": "1|3-1", "Cubelos": "1|2-1", "Nachi": "1|3-0", "Quique": "X|1-1", "Gonzalo Diaz": "1|3-1", "Gonzalo Goncer": "1|3-0", "Pablo Estevez": "1|2-0", "Pablo": "1|2-0", "Álvaro Rico": "1|1-0", "Abo": "1|2-1", "Angel": "1|2-1", "Tito": "1|2-1", "Nico Muñoz": "1|2-1", "Sergio": "1|3-1", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|3-1", "Goncho": "1|2-0", "Urreison": "1|2-1", "Juan Dionis": "1|3-1", "Juanmi": "1|3-1", "El Oráculo": "1|2-0"}}, {"fase": "E2", "partido": "Ecuador-Curazao", "bets": {"Roco": "1|3-0", "Fer": "1|4-0", "Cubelos": "1|2-0", "Nachi": "1|2-0", "Quique": "1|2-0", "Gonzalo Diaz": "1|2-0", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|4-0", "Abo": "1|2-1", "Angel": "1|4-0", "Tito": "1|6-1", "Nico Muñoz": "1|3-0", "Sergio": "1|2-0", "Pozancos": "1|2-0", "Alberto Castillo": "1|3-0", "Rober": "1|2-0", "Goncho": "1|2-0", "Urreison": "1|2-1", "Juan Dionis": "1|3-1", "Juanmi": "1|2-0", "El Oráculo": "1|2-1"}}, {"fase": "F2", "partido": "Países Bajos-Suecia", "bets": {"Roco": "1|1-0", "Fer": "X|1-1", "Cubelos": "1|2-0", "Nachi": "1|2-0", "Quique": "1|3-1", "Gonzalo Diaz": "1|1-0", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "2|0-2", "Pablo": "X|2-2", "Álvaro Rico": "1|2-1", "Abo": "1|2-0", "Angel": "1|2-1", "Tito": "1|3-0", "Nico Muñoz": "1|2-1", "Sergio": "X|2-2", "Pozancos": "1|2-0", "Alberto Castillo": "1|2-1", "Rober": "1|3-2", "Goncho": "1|2-0", "Urreison": "1|2-1", "Juan Dionis": "1|2-1", "Juanmi": "1|3-1", "El Oráculo": "X|1-1"}}, {"fase": "F2", "partido": "Túnez-Japón", "bets": {"Roco": "2|0-1", "Fer": "2|1-2", "Cubelos": "2|0-1", "Nachi": "X|1-1", "Quique": "2|1-2", "Gonzalo Diaz": "2|0-1", "Gonzalo Goncer": "2|1-2", "Pablo Estevez": "1|2-0", "Pablo": "2|1-2", "Álvaro Rico": "2|0-2", "Abo": "2|0-1", "Angel": "2|0-2", "Tito": "X|1-1", "Nico Muñoz": "X|1-1", "Sergio": "X|1-1", "Pozancos": "2|1-2", "Alberto Castillo": "2|1-2", "Rober": "X|1-1", "Goncho": "2|0-2", "Urreison": "2|1-2", "Juan Dionis": "2|1-2", "Juanmi": "2|1-3", "El Oráculo": "X|1-1"}}, {"fase": "G2", "partido": "Bélgica-Irán", "bets": {"Roco": "1|1-0", "Fer": "1|3-1", "Cubelos": "1|2-1", "Nachi": "X|1-1", "Quique": "1|3-0", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|3-1", "Pablo Estevez": "2|0-1", "Pablo": "1|4-0", "Álvaro Rico": "1|2-0", "Abo": "X|1-1", "Angel": "1|2-1", "Tito": "1|3-0", "Nico Muñoz": "1|4-1", "Sergio": "1|2-0", "Pozancos": "1|2-0", "Alberto Castillo": "1|2-1", "Rober": "1|3-0", "Goncho": "1|2-1", "Urreison": "1|4-1", "Juan Dionis": "1|5-0", "Juanmi": "X|1-1", "El Oráculo": "X|1-1"}}, {"fase": "G2", "partido": "Nueva Zelanda-Egipto", "bets": {"Roco": "2|0-1", "Fer": "2|0-2", "Cubelos": "2|0-1", "Nachi": "2|0-2", "Quique": "2|0-3", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|0-3", "Pablo Estevez": "1|2-0", "Pablo": "2|0-3", "Álvaro Rico": "2|0-3", "Abo": "2|0-2", "Angel": "X|0-0", "Tito": "2|0-2", "Nico Muñoz": "2|1-3", "Sergio": "2|1-2", "Pozancos": "2|0-1", "Alberto Castillo": "2|1-2", "Rober": "2|0-1", "Goncho": "2|0-2", "Urreison": "1|2-1", "Juan Dionis": "2|0-3", "Juanmi": "X|0-0", "El Oráculo": "X|1-1"}}, {"fase": "H2", "partido": "España-Arabia Saudita", "bets": {"Roco": "1|2-0", "Fer": "1|3-0", "Cubelos": "1|2-0", "Nachi": "1|3-1", "Quique": "1|1-0", "Gonzalo Diaz": "1|3-0", "Gonzalo Goncer": "1|4-0", "Pablo Estevez": "1|2-0", "Pablo": "1|4-0", "Álvaro Rico": "1|3-0", "Abo": "1|2-1", "Angel": "1|3-0", "Tito": "1|5-0", "Nico Muñoz": "1|3-1", "Sergio": "1|3-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|3-1", "Goncho": "1|3-0", "Urreison": "1|4-1", "Juan Dionis": "1|4-0", "Juanmi": "1|4-0", "El Oráculo": "1|2-0"}}, {"fase": "H2", "partido": "Uruguay-Cabo Verde", "bets": {"Roco": "1|2-0", "Fer": "1|4-0", "Cubelos": "1|2-0", "Nachi": "1|4-1", "Quique": "1|2-0", "Gonzalo Diaz": "1|3-0", "Gonzalo Goncer": "1|3-0", "Pablo Estevez": "1|3-0", "Pablo": "1|3-0", "Álvaro Rico": "1|2-0", "Abo": "1|3-0", "Angel": "2|0-2", "Tito": "1|2-0", "Nico Muñoz": "1|3-1", "Sergio": "1|2-1", "Pozancos": "1|1-0", "Alberto Castillo": "1|3-1", "Rober": "1|2-1", "Goncho": "1|2-0", "Urreison": "1|2-0", "Juan Dionis": "1|3-1", "Juanmi": "1|2-0", "El Oráculo": "1|2-0"}}, {"fase": "I2", "partido": "Francia-Irak", "bets": {"Roco": "1|4-0", "Fer": "1|4-0", "Cubelos": "1|3-0", "Nachi": "1|4-0", "Quique": "1|3-0", "Gonzalo Diaz": "1|3-0", "Gonzalo Goncer": "1|4-0", "Pablo Estevez": "X|1-1", "Pablo": "1|5-0", "Álvaro Rico": "1|3-1", "Abo": "1|3-0", "Angel": "1|4-0", "Tito": "1|4-1", "Nico Muñoz": "1|4-0", "Sergio": "1|3-0", "Pozancos": "1|3-0", "Alberto Castillo": "1|3-1", "Rober": "1|2-0", "Goncho": "1|3-0", "Urreison": "1|3-0", "Juan Dionis": "1|5-0", "Juanmi": "1|4-0", "El Oráculo": "1|3-0"}}, {"fase": "I2", "partido": "Noruega-Senegal", "bets": {"Roco": "X|1-1", "Fer": "X|1-1", "Cubelos": "1|2-1", "Nachi": "1|2-1", "Quique": "X|1-1", "Gonzalo Diaz": "X|2-2", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|3-0", "Pablo": "1|2-1", "Álvaro Rico": "2|1-2", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|2-2", "Nico Muñoz": "X|1-1", "Sergio": "2|1-2", "Pozancos": "1|1-0", "Alberto Castillo": "X|2-2", "Rober": "2|2-3", "Goncho": "X|1-1", "Urreison": "X|2-2", "Juan Dionis": "X|2-2", "Juanmi": "1|2-1", "El Oráculo": "X|1-1"}}, {"fase": "J2", "partido": "Argentina-Austria", "bets": {"Roco": "1|2-1", "Fer": "1|2-0", "Cubelos": "1|2-1", "Nachi": "1|1-0", "Quique": "1|3-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-0", "Pablo": "1|2-0", "Álvaro Rico": "1|2-0", "Abo": "1|2-1", "Angel": "1|2-1", "Tito": "1|2-1", "Nico Muñoz": "1|1-0", "Sergio": "1|2-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-0", "Rober": "1|1-0", "Goncho": "1|2-0", "Urreison": "1|1-0", "Juan Dionis": "1|2-0", "Juanmi": "1|2-1", "El Oráculo": "1|1-0"}}, {"fase": "J2", "partido": "Jordania-Argelia", "bets": {"Roco": "2|0-1", "Fer": "2|1-2", "Cubelos": "X|1-1", "Nachi": "2|1-2", "Quique": "2|0-1", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-2", "Pablo Estevez": "2|0-2", "Pablo": "2|0-3", "Álvaro Rico": "2|0-2", "Abo": "2|0-3", "Angel": "2|0-2", "Tito": "2|0-2", "Nico Muñoz": "2|1-2", "Sergio": "2|0-2", "Pozancos": "2|1-2", "Alberto Castillo": "2|1-2", "Rober": "2|0-1", "Goncho": "2|1-2", "Urreison": "2|1-2", "Juan Dionis": "2|1-3", "Juanmi": "2|0-2", "El Oráculo": "X|1-1"}}, {"fase": "K2", "partido": "Portugal-Uzbekistán", "bets": {"Roco": "1|3-0", "Fer": "1|4-0", "Cubelos": "1|2-0", "Nachi": "1|3-0", "Quique": "1|4-0", "Gonzalo Diaz": "1|3-0", "Gonzalo Goncer": "1|3-0", "Pablo Estevez": "1|2-0", "Pablo": "1|5-0", "Álvaro Rico": "1|4-0", "Abo": "1|2-0", "Angel": "1|3-0", "Tito": "1|5-1", "Nico Muñoz": "1|2-0", "Sergio": "1|2-0", "Pozancos": "1|3-0", "Alberto Castillo": "1|3-0", "Rober": "1|3-1", "Goncho": "1|2-0", "Urreison": "1|3-1", "Juan Dionis": "1|5-0", "Juanmi": "1|2-0", "El Oráculo": "1|2-1"}}, {"fase": "K2", "partido": "Colombia-RD Congo", "bets": {"Roco": "1|2-0", "Fer": "1|2-0", "Cubelos": "1|2-0", "Nachi": "1|2-1", "Quique": "1|2-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|3-0", "Abo": "X|0-0", "Angel": "1|2-0", "Tito": "1|3-0", "Nico Muñoz": "1|3-1", "Sergio": "1|2-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|2-1", "Goncho": "1|2-0", "Urreison": "1|4-1", "Juan Dionis": "1|3-1", "Juanmi": "X|1-1", "El Oráculo": "1|2-1"}}, {"fase": "L2", "partido": "Inglaterra-Ghana", "bets": {"Roco": "1|3-1", "Fer": "1|2-0", "Cubelos": "1|2-0", "Nachi": "1|4-1", "Quique": "1|2-0", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "2|0-2", "Pablo": "1|2-1", "Álvaro Rico": "1|2-0", "Abo": "1|2-1", "Angel": "1|2-1", "Tito": "1|2-0", "Nico Muñoz": "1|2-1", "Sergio": "1|2-1", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|3-1", "Goncho": "1|3-0", "Urreison": "1|3-2", "Juan Dionis": "1|2-0", "Juanmi": "2|1-2", "El Oráculo": "1|2-0"}}, {"fase": "L2", "partido": "Panamá-Croacia", "bets": {"Roco": "2|0-2", "Fer": "2|0-2", "Cubelos": "2|0-2", "Nachi": "2|1-2", "Quique": "2|1-2", "Gonzalo Diaz": "2|0-2", "Gonzalo Goncer": "2|0-3", "Pablo Estevez": "1|2-0", "Pablo": "2|0-1", "Álvaro Rico": "2|0-2", "Abo": "2|0-3", "Angel": "2|0-2", "Tito": "2|1-3", "Nico Muñoz": "2|1-3", "Sergio": "2|0-1", "Pozancos": "2|0-2", "Alberto Castillo": "2|1-2", "Rober": "2|0-1", "Goncho": "2|0-2", "Urreison": "2|0-2", "Juan Dionis": "2|0-3", "Juanmi": "2|0-3", "El Oráculo": "X|1-1"}}, {"fase": "A3", "partido": "República Checa-México", "bets": {"Roco": "2|0-3", "Fer": "X|1-1", "Cubelos": "2|0-2", "Nachi": "2|1-2", "Quique": "2|1-3", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "X|1-1", "Pablo Estevez": "2|1-2", "Pablo": "2|1-2", "Álvaro Rico": "2|0-1", "Abo": "X|0-0", "Angel": "2|0-1", "Tito": "X|1-1", "Nico Muñoz": "X|1-1", "Sergio": "2|0-2", "Pozancos": "2|0-1", "Alberto Castillo": "2|1-2", "Rober": "2|1-2", "Goncho": "2|1-2", "Urreison": "X|1-1", "Juan Dionis": "X|1-1", "Juanmi": "2|0-2", "El Oráculo": "2|0-2"}}, {"fase": "A3", "partido": "Sudáfrica-Corea del Sur", "bets": {"Roco": "2|0-2", "Fer": "2|1-3", "Cubelos": "2|1-2", "Nachi": "2|1-2", "Quique": "2|0-2", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|0-1", "Pablo Estevez": "2|0-2", "Pablo": "2|1-2", "Álvaro Rico": "2|1-2", "Abo": "2|0-2", "Angel": "2|1-2", "Tito": "2|0-2", "Nico Muñoz": "2|0-1", "Sergio": "X|1-1", "Pozancos": "2|1-2", "Alberto Castillo": "2|1-2", "Rober": "2|1-2", "Goncho": "2|1-2", "Urreison": "2|0-3", "Juan Dionis": "2|1-2", "Juanmi": "2|1-2", "El Oráculo": "2|1-2"}}, {"fase": "B3", "partido": "Suiza-Canadá", "bets": {"Roco": "X|1-1", "Fer": "1|2-1", "Cubelos": "X|1-1", "Nachi": "X|1-1", "Quique": "1|2-1", "Gonzalo Diaz": "1|2-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "X|1-1", "Álvaro Rico": "X|1-1", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|1-1", "Nico Muñoz": "X|1-1", "Sergio": "1|2-0", "Pozancos": "X|1-1", "Alberto Castillo": "2|1-2", "Rober": "1|3-0", "Goncho": "1|2-1", "Urreison": "1|2-0", "Juan Dionis": "1|2-1", "Juanmi": "X|2-2", "El Oráculo": "X|1-1"}}, {"fase": "B3", "partido": "Bosnia y Herzegovina-Catar", "bets": {"Roco": "1|2-0", "Fer": "1|3-1", "Cubelos": "1|2-1", "Nachi": "1|2-0", "Quique": "1|2-0", "Gonzalo Diaz": "1|1-0", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|3-0", "Abo": "X|1-1", "Angel": "1|1-0", "Tito": "1|2-0", "Nico Muñoz": "1|2-1", "Sergio": "2|0-1", "Pozancos": "1|2-1", "Alberto Castillo": "1|1-0", "Rober": "1|3-0", "Goncho": "1|2-1", "Urreison": "1|1-0", "Juan Dionis": "1|2-0", "Juanmi": "1|2-0", "El Oráculo": "2|1-2"}}, {"fase": "C3", "partido": "Escocia-Brasil", "bets": {"Roco": "2|1-3", "Fer": "2|1-3", "Cubelos": "2|0-2", "Nachi": "2|0-2", "Quique": "2|0-3", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-2", "Pablo Estevez": "2|0-2", "Pablo": "2|0-2", "Álvaro Rico": "2|1-3", "Abo": "2|0-2", "Angel": "2|1-2", "Tito": "2|1-4", "Nico Muñoz": "2|1-2", "Sergio": "2|0-1", "Pozancos": "X|1-1", "Alberto Castillo": "2|0-3", "Rober": "2|1-2", "Goncho": "2|0-3", "Urreison": "2|1-2", "Juan Dionis": "2|1-2", "Juanmi": "X|1-1", "El Oráculo": "2|0-2"}}, {"fase": "C3", "partido": "Marruecos-Haití", "bets": {"Roco": "1|3-0", "Fer": "1|4-0", "Cubelos": "1|2-0", "Nachi": "1|3-0", "Quique": "1|2-0", "Gonzalo Diaz": "1|3-0", "Gonzalo Goncer": "1|3-0", "Pablo Estevez": "1|2-0", "Pablo": "1|3-0", "Álvaro Rico": "1|4-1", "Abo": "1|4-0", "Angel": "1|2-0", "Tito": "1|3-0", "Nico Muñoz": "1|3-0", "Sergio": "1|2-0", "Pozancos": "1|2-0", "Alberto Castillo": "1|3-0", "Rober": "1|2-1", "Goncho": "1|3-0", "Urreison": "1|2-0", "Juan Dionis": "1|3-0", "Juanmi": "1|2-0", "El Oráculo": "X|1-1"}}, {"fase": "D3", "partido": "Turquía-Estados Unidos", "bets": {"Roco": "2|1-2", "Fer": "1|1-0", "Cubelos": "2|1-2", "Nachi": "X|2-2", "Quique": "X|1-1", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "X|1-1", "Álvaro Rico": "1|2-1", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|1-1", "Nico Muñoz": "X|1-1", "Sergio": "2|1-2", "Pozancos": "1|2-1", "Alberto Castillo": "X|2-2", "Rober": "1|1-0", "Goncho": "X|1-1", "Urreison": "1|2-1", "Juan Dionis": "X|1-1", "Juanmi": "X|2-2", "El Oráculo": "2|1-2"}}, {"fase": "D3", "partido": "Paraguay-Australia", "bets": {"Roco": "X|0-0", "Fer": "1|3-0", "Cubelos": "X|1-1", "Nachi": "2|1-2", "Quique": "1|3-0", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "1|2-0", "Álvaro Rico": "1|1-0", "Abo": "X|0-0", "Angel": "1|2-0", "Tito": "1|3-1", "Nico Muñoz": "1|2-1", "Sergio": "1|2-0", "Pozancos": "1|1-0", "Alberto Castillo": "2|0-2", "Rober": "1|2-0", "Goncho": "X|1-1", "Urreison": "X|1-1", "Juan Dionis": "1|3-1", "Juanmi": "X|1-1", "El Oráculo": "X|1-1"}}, {"fase": "E3", "partido": "Curazao-Costa de Marfil", "bets": {"Roco": "2|0-2", "Fer": "2|0-4", "Cubelos": "2|0-2", "Nachi": "2|0-3", "Quique": "2|0-2", "Gonzalo Diaz": "2|0-3", "Gonzalo Goncer": "2|0-3", "Pablo Estevez": "2|1-2", "Pablo": "2|0-3", "Álvaro Rico": "2|0-3", "Abo": "2|0-1", "Angel": "2|0-2", "Tito": "2|1-3", "Nico Muñoz": "2|0-3", "Sergio": "2|0-2", "Pozancos": "2|0-2", "Alberto Castillo": "2|0-3", "Rober": "2|0-1", "Goncho": "2|0-2", "Urreison": "2|0-2", "Juan Dionis": "2|1-2", "Juanmi": "2|0-1", "El Oráculo": "2|0-1"}}, {"fase": "E3", "partido": "Ecuador-Alemania", "bets": {"Roco": "2|1-2", "Fer": "2|1-2", "Cubelos": "2|1-2", "Nachi": "2|1-3", "Quique": "X|2-2", "Gonzalo Diaz": "2|1-3", "Gonzalo Goncer": "2|0-3", "Pablo Estevez": "2|0-2", "Pablo": "2|0-1", "Álvaro Rico": "2|1-2", "Abo": "2|0-2", "Angel": "X|1-1", "Tito": "X|3-3", "Nico Muñoz": "2|1-2", "Sergio": "2|2-3", "Pozancos": "X|1-1", "Alberto Castillo": "2|1-3", "Rober": "2|1-3", "Goncho": "2|1-2", "Urreison": "2|1-3", "Juan Dionis": "2|0-1", "Juanmi": "2|1-3", "El Oráculo": "X|1-1"}}, {"fase": "F3", "partido": "Japón-Suecia", "bets": {"Roco": "X|1-1", "Fer": "X|1-1", "Cubelos": "1|2-1", "Nachi": "2|1-2", "Quique": "X|1-1", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "X|1-1", "Pablo Estevez": "2|0-2", "Pablo": "2|1-2", "Álvaro Rico": "X|2-2", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "1|2-1", "Nico Muñoz": "2|1-2", "Sergio": "2|1-2", "Pozancos": "2|0-1", "Alberto Castillo": "1|2-1", "Rober": "2|0-2", "Goncho": "1|2-1", "Urreison": "1|3-1", "Juan Dionis": "X|1-1", "Juanmi": "X|2-2", "El Oráculo": "1|2-1"}}, {"fase": "F3", "partido": "Túnez-Países Bajos", "bets": {"Roco": "2|1-3", "Fer": "2|1-2", "Cubelos": "2|0-2", "Nachi": "2|0-3", "Quique": "2|1-2", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|0-2", "Pablo Estevez": "X|1-1", "Pablo": "2|0-3", "Álvaro Rico": "2|0-4", "Abo": "2|0-2", "Angel": "2|0-2", "Tito": "2|1-3", "Nico Muñoz": "2|1-3", "Sergio": "2|1-2", "Pozancos": "2|0-2", "Alberto Castillo": "2|1-3", "Rober": "2|0-3", "Goncho": "2|0-3", "Urreison": "2|1-2", "Juan Dionis": "2|0-2", "Juanmi": "2|0-1", "El Oráculo": "2|0-2"}}, {"fase": "G3", "partido": "Egipto-Irán", "bets": {"Roco": "X|1-1", "Fer": "X|1-1", "Cubelos": "X|1-1", "Nachi": "1|2-1", "Quique": "1|2-1", "Gonzalo Diaz": "X|2-2", "Gonzalo Goncer": "1|3-1", "Pablo Estevez": "2|0-3", "Pablo": "1|2-0", "Álvaro Rico": "X|1-1", "Abo": "X|0-0", "Angel": "1|1-0", "Tito": "1|2-1", "Nico Muñoz": "X|1-1", "Sergio": "1|2-0", "Pozancos": "1|2-1", "Alberto Castillo": "1|2-1", "Rober": "1|2-0", "Goncho": "X|1-1", "Urreison": "1|2-1", "Juan Dionis": "1|2-1", "Juanmi": "X|1-1", "El Oráculo": "2|1-2"}}, {"fase": "G3", "partido": "Nueva Zelanda-Bélgica", "bets": {"Roco": "2|0-3", "Fer": "2|0-3", "Cubelos": "2|0-3", "Nachi": "2|0-3", "Quique": "2|0-2", "Gonzalo Diaz": "2|0-2", "Gonzalo Goncer": "2|0-4", "Pablo Estevez": "X|1-1", "Pablo": "2|0-3", "Álvaro Rico": "2|0-2", "Abo": "2|0-3", "Angel": "2|0-2", "Tito": "2|1-3", "Nico Muñoz": "2|1-4", "Sergio": "2|0-3", "Pozancos": "2|0-3", "Alberto Castillo": "2|1-3", "Rober": "2|1-3", "Goncho": "2|0-3", "Urreison": "2|1-3", "Juan Dionis": "2|0-3", "Juanmi": "2|0-3", "El Oráculo": "2|0-3"}}, {"fase": "H3", "partido": "Cabo Verde-Arabia Saudita", "bets": {"Roco": "X|0-0", "Fer": "2|1-2", "Cubelos": "X|1-1", "Nachi": "2|1-2", "Quique": "2|0-1", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-2", "Pablo Estevez": "2|1-2", "Pablo": "2|0-2", "Álvaro Rico": "2|0-1", "Abo": "X|1-1", "Angel": "X|1-1", "Tito": "X|1-1", "Nico Muñoz": "2|1-2", "Sergio": "1|2-1", "Pozancos": "2|0-1", "Alberto Castillo": "2|0-2", "Rober": "X|1-1", "Goncho": "X|1-1", "Urreison": "X|2-2", "Juan Dionis": "X|1-1", "Juanmi": "X|0-0", "El Oráculo": "X|1-1"}}, {"fase": "H3", "partido": "Uruguay-España", "bets": {"Roco": "X|1-1", "Fer": "2|1-2", "Cubelos": "2|0-2", "Nachi": "X|1-1", "Quique": "X|1-1", "Gonzalo Diaz": "X|2-2", "Gonzalo Goncer": "2|2-3", "Pablo Estevez": "2|0-1", "Pablo": "2|1-3", "Álvaro Rico": "X|1-1", "Abo": "2|1-3", "Angel": "2|1-2", "Tito": "2|1-3", "Nico Muñoz": "X|1-1", "Sergio": "2|2-3", "Pozancos": "2|0-1", "Alberto Castillo": "2|1-2", "Rober": "X|2-2", "Goncho": "2|1-2", "Urreison": "2|1-2", "Juan Dionis": "2|1-2", "Juanmi": "2|1-3", "El Oráculo": "2|0-1"}}, {"fase": "I3", "partido": "Noruega-Francia", "bets": {"Roco": "2|1-2", "Fer": "X|1-1", "Cubelos": "2|1-2", "Nachi": "2|1-2", "Quique": "X|2-2", "Gonzalo Diaz": "2|2-3", "Gonzalo Goncer": "2|1-2", "Pablo Estevez": "2|1-2", "Pablo": "2|1-2", "Álvaro Rico": "2|1-2", "Abo": "2|1-3", "Angel": "2|1-3", "Tito": "2|1-2", "Nico Muñoz": "2|1-2", "Sergio": "2|1-3", "Pozancos": "2|1-2", "Alberto Castillo": "2|1-2", "Rober": "2|0-1", "Goncho": "2|1-2", "Urreison": "X|1-1", "Juan Dionis": "2|1-3", "Juanmi": "1|3-1", "El Oráculo": "2|1-2"}}, {"fase": "I3", "partido": "Senegal-Irak", "bets": {"Roco": "1|2-0", "Fer": "1|3-0", "Cubelos": "1|2-0", "Nachi": "1|2-0", "Quique": "1|2-0", "Gonzalo Diaz": "1|3-1", "Gonzalo Goncer": "1|2-0", "Pablo Estevez": "1|2-0", "Pablo": "1|2-0", "Álvaro Rico": "1|2-0", "Abo": "1|2-0", "Angel": "X|1-1", "Tito": "1|2-0", "Nico Muñoz": "1|1-0", "Sergio": "1|1-0", "Pozancos": "1|1-0", "Alberto Castillo": "1|2-1", "Rober": "1|2-1", "Goncho": "1|2-0", "Urreison": "1|2-0", "Juan Dionis": "1|4-0", "Juanmi": "1|2-0", "El Oráculo": "X|1-1"}}, {"fase": "J3", "partido": "Argelia-Austria", "bets": {"Roco": "X|1-1", "Fer": "X|1-1", "Cubelos": "X|1-1", "Nachi": "2|1-2", "Quique": "1|2-1", "Gonzalo Diaz": "X|1-1", "Gonzalo Goncer": "2|1-3", "Pablo Estevez": "1|2-1", "Pablo": "1|2-1", "Álvaro Rico": "X|1-1", "Abo": "X|0-0", "Angel": "X|1-1", "Tito": "2|1-2", "Nico Muñoz": "X|1-1", "Sergio": "X|1-1", "Pozancos": "X|1-1", "Alberto Castillo": "X|1-1", "Rober": "X|1-1", "Goncho": "X|1-1", "Urreison": "X|2-2", "Juan Dionis": "X|1-1", "Juanmi": "X|1-1", "El Oráculo": "X|1-1"}}, {"fase": "J3", "partido": "Jordania-Argentina", "bets": {"Roco": "2|0-3", "Fer": "2|0-3", "Cubelos": "2|0-3", "Nachi": "2|0-3", "Quique": "2|1-2", "Gonzalo Diaz": "2|0-3", "Gonzalo Goncer": "2|0-4", "Pablo Estevez": "2|0-3", "Pablo": "2|0-5", "Álvaro Rico": "2|0-4", "Abo": "2|1-3", "Angel": "2|0-2", "Tito": "2|0-4", "Nico Muñoz": "2|1-3", "Sergio": "2|0-3", "Pozancos": "2|0-2", "Alberto Castillo": "2|1-3", "Rober": "2|0-2", "Goncho": "2|0-3", "Urreison": "2|0-4", "Juan Dionis": "2|0-4", "Juanmi": "2|0-3", "El Oráculo": "2|0-2"}}, {"fase": "K3", "partido": "Colombia-Portugal", "bets": {"Roco": "X|2-2", "Fer": "2|1-2", "Cubelos": "2|1-2", "Nachi": "2|1-2", "Quique": "2|1-2", "Gonzalo Diaz": "2|1-2", "Gonzalo Goncer": "2|1-3", "Pablo Estevez": "X|1-1", "Pablo": "X|2-2", "Álvaro Rico": "X|1-1", "Abo": "X|1-1", "Angel": "2|1-2", "Tito": "2|2-3", "Nico Muñoz": "2|1-2", "Sergio": "2|1-3", "Pozancos": "2|0-1", "Alberto Castillo": "2|1-2", "Rober": "2|0-1", "Goncho": "2|1-2", "Urreison": "2|1-2", "Juan Dionis": "2|1-2", "Juanmi": "X|0-0", "El Oráculo": "2|1-2"}}, {"fase": "K3", "partido": "RD Congo-Uzbekistán", "bets": {"Roco": "X|1-1", "Fer": "1|1-0", "Cubelos": "X|1-1", "Nachi": "X|1-1", "Quique": "X|0-0", "Gonzalo Diaz": "1|2-0", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "X|1-1", "Álvaro Rico": "1|1-0", "Abo": "X|0-0", "Angel": "X|0-0", "Tito": "X|1-1", "Nico Muñoz": "X|1-1", "Sergio": "1|2-1", "Pozancos": "1|1-0", "Alberto Castillo": "1|2-0", "Rober": "X|0-0", "Goncho": "X|1-1", "Urreison": "1|1-0", "Juan Dionis": "1|3-1", "Juanmi": "1|1-0", "El Oráculo": "X|1-1"}}, {"fase": "L3", "partido": "Panamá-Inglaterra", "bets": {"Roco": "2|0-2", "Fer": "2|1-4", "Cubelos": "2|0-3", "Nachi": "2|1-4", "Quique": "X|1-1", "Gonzalo Diaz": "2|0-2", "Gonzalo Goncer": "2|0-5", "Pablo Estevez": "2|0-3", "Pablo": "2|0-3", "Álvaro Rico": "2|0-2", "Abo": "2|1-3", "Angel": "2|0-2", "Tito": "2|1-3", "Nico Muñoz": "2|0-3", "Sergio": "2|0-2", "Pozancos": "2|0-3", "Alberto Castillo": "2|0-2", "Rober": "2|1-2", "Goncho": "2|0-3", "Urreison": "2|0-3", "Juan Dionis": "2|0-5", "Juanmi": "2|1-2", "El Oráculo": "2|0-2"}}, {"fase": "L3", "partido": "Croacia-Ghana", "bets": {"Roco": "1|1-0", "Fer": "X|1-1", "Cubelos": "1|2-1", "Nachi": "1|2-1", "Quique": "X|1-1", "Gonzalo Diaz": "X|2-2", "Gonzalo Goncer": "1|2-1", "Pablo Estevez": "X|1-1", "Pablo": "1|1-0", "Álvaro Rico": "1|1-0", "Abo": "X|1-1", "Angel": "1|1-0", "Tito": "1|2-1", "Nico Muñoz": "X|1-1", "Sergio": "X|1-1", "Pozancos": "1|2-1", "Alberto Castillo": "X|1-1", "Rober": "1|2-0", "Goncho": "X|1-1", "Urreison": "2|1-2", "Juan Dionis": "X|1-1", "Juanmi": "X|2-2", "El Oráculo": "1|2-1"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-1", "bets": {"Roco": "Corea del Sur", "Fer": "República Checa", "Cubelos": "Corea del Sur", "Nachi": "Corea del Sur", "Quique": "Corea del Sur", "Gonzalo Diaz": "República Checa", "Gonzalo Goncer": "Corea del Sur", "Pablo Estevez": "Corea del Sur", "Pablo": "República Checa", "Álvaro Rico": "Corea del Sur", "Abo": "Corea del Sur", "Angel": "Corea del Sur", "Tito": "República Checa", "Nico Muñoz": "República Checa", "Sergio": "República Checa", "Pozancos": "Corea del Sur", "Alberto Castillo": "Corea del Sur", "Rober": "Corea del Sur", "Goncho": "República Checa", "Urreison": "Corea del Sur", "Juan Dionis": "Corea del Sur", "Juanmi": "Corea del Sur", "El Oráculo": "Corea del Sur"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-2", "bets": {"Roco": "Brasil", "Fer": "Brasil", "Cubelos": "Brasil", "Nachi": "Brasil", "Quique": "Marruecos", "Gonzalo Diaz": "Brasil", "Gonzalo Goncer": "Brasil", "Pablo Estevez": "Brasil", "Pablo": "Brasil", "Álvaro Rico": "Marruecos", "Abo": "Marruecos", "Angel": "Brasil", "Tito": "Brasil", "Nico Muñoz": "Brasil", "Sergio": "Brasil", "Pozancos": "Brasil", "Alberto Castillo": "Marruecos", "Rober": "Brasil", "Goncho": "Brasil", "Urreison": "Marruecos", "Juan Dionis": "Brasil", "Juanmi": "Marruecos", "El Oráculo": "Brasil"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-3", "bets": {"Roco": "Alemania", "Fer": "Alemania", "Cubelos": "Alemania", "Nachi": "Alemania", "Quique": "Alemania", "Gonzalo Diaz": "Alemania", "Gonzalo Goncer": "Alemania", "Pablo Estevez": "Alemania", "Pablo": "Alemania", "Álvaro Rico": "Alemania", "Abo": "Alemania", "Angel": "Alemania", "Tito": "Ecuador", "Nico Muñoz": "Alemania", "Sergio": "Alemania", "Pozancos": "Alemania", "Alberto Castillo": "Alemania", "Rober": "Alemania", "Goncho": "Alemania", "Urreison": "Alemania", "Juan Dionis": "Alemania", "Juanmi": "Alemania", "El Oráculo": "Alemania"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-4", "bets": {"Roco": "Países Bajos", "Fer": "Países Bajos", "Cubelos": "Países Bajos", "Nachi": "Países Bajos", "Quique": "Países Bajos", "Gonzalo Diaz": "Países Bajos", "Gonzalo Goncer": "Países Bajos", "Pablo Estevez": "Suecia", "Pablo": "Países Bajos", "Álvaro Rico": "Países Bajos", "Abo": "Países Bajos", "Angel": "Países Bajos", "Tito": "Países Bajos", "Nico Muñoz": "Países Bajos", "Sergio": "Suecia", "Pozancos": "Países Bajos", "Alberto Castillo": "Países Bajos", "Rober": "Países Bajos", "Goncho": "Países Bajos", "Urreison": "Japón", "Juan Dionis": "Países Bajos", "Juanmi": "Países Bajos", "El Oráculo": "Países Bajos"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-5", "bets": {"Roco": "Ecuador", "Fer": "Ecuador", "Cubelos": "Ecuador", "Nachi": "Costa de Marfil", "Quique": "Ecuador", "Gonzalo Diaz": "Costa de Marfil", "Gonzalo Goncer": "Costa de Marfil", "Pablo Estevez": "Ecuador", "Pablo": "Ecuador", "Álvaro Rico": "Ecuador", "Abo": "Costa de Marfil", "Angel": "Ecuador", "Tito": "Alemania", "Nico Muñoz": "Costa de Marfil", "Sergio": "Costa de Marfil", "Pozancos": "Ecuador", "Alberto Castillo": "Costa de Marfil", "Rober": "Ecuador", "Goncho": "Ecuador", "Urreison": "Costa de Marfil", "Juan Dionis": "Ecuador", "Juanmi": "Ecuador", "El Oráculo": "Ecuador"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-6", "bets": {"Roco": "Francia", "Fer": "Francia", "Cubelos": "Francia", "Nachi": "Francia", "Quique": "Francia", "Gonzalo Diaz": "Francia", "Gonzalo Goncer": "Francia", "Pablo Estevez": "Francia", "Pablo": "Francia", "Álvaro Rico": "Francia", "Abo": "Francia", "Angel": "Francia", "Tito": "Francia", "Nico Muñoz": "Francia", "Sergio": "Francia", "Pozancos": "Francia", "Alberto Castillo": "Francia", "Rober": "Francia", "Goncho": "Francia", "Urreison": "Francia", "Juan Dionis": "Francia", "Juanmi": "Noruega", "El Oráculo": "Francia"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-7", "bets": {"Roco": "México", "Fer": "México", "Cubelos": "México", "Nachi": "México", "Quique": "México", "Gonzalo Diaz": "México", "Gonzalo Goncer": "México", "Pablo Estevez": "México", "Pablo": "México", "Álvaro Rico": "México", "Abo": "México", "Angel": "México", "Tito": "México", "Nico Muñoz": "México", "Sergio": "México", "Pozancos": "México", "Alberto Castillo": "México", "Rober": "México", "Goncho": "México", "Urreison": "México", "Juan Dionis": "México", "Juanmi": "México", "El Oráculo": "México"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-8", "bets": {"Roco": "Inglaterra", "Fer": "Inglaterra", "Cubelos": "Inglaterra", "Nachi": "Inglaterra", "Quique": "Inglaterra", "Gonzalo Diaz": "Inglaterra", "Gonzalo Goncer": "Inglaterra", "Pablo Estevez": "Ghana", "Pablo": "Inglaterra", "Álvaro Rico": "Inglaterra", "Abo": "Inglaterra", "Angel": "Inglaterra", "Tito": "Inglaterra", "Nico Muñoz": "Inglaterra", "Sergio": "Croacia", "Pozancos": "Inglaterra", "Alberto Castillo": "Inglaterra", "Rober": "Inglaterra", "Goncho": "Inglaterra", "Urreison": "Inglaterra", "Juan Dionis": "Inglaterra", "Juanmi": "Ghana", "El Oráculo": "Inglaterra"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-9", "bets": {"Roco": "Bélgica", "Fer": "Bélgica", "Cubelos": "Bélgica", "Nachi": "Bélgica", "Quique": "Bélgica", "Gonzalo Diaz": "Bélgica", "Gonzalo Goncer": "Bélgica", "Pablo Estevez": "Irán", "Pablo": "Bélgica", "Álvaro Rico": "Egipto", "Abo": "Bélgica", "Angel": "Bélgica", "Tito": "Bélgica", "Nico Muñoz": "Bélgica", "Sergio": "Bélgica", "Pozancos": "Bélgica", "Alberto Castillo": "Bélgica", "Rober": "Bélgica", "Goncho": "Bélgica", "Urreison": "Bélgica", "Juan Dionis": "Bélgica", "Juanmi": "Bélgica", "El Oráculo": "Bélgica"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-10", "bets": {"Roco": "Estados Unidos", "Fer": "Turquía", "Cubelos": "Estados Unidos", "Nachi": "Estados Unidos", "Quique": "Turquía", "Gonzalo Diaz": "Turquía", "Gonzalo Goncer": "Turquía", "Pablo Estevez": "Turquía", "Pablo": "Estados Unidos", "Álvaro Rico": "Turquía", "Abo": "Estados Unidos", "Angel": "Estados Unidos", "Tito": "Estados Unidos", "Nico Muñoz": "Estados Unidos", "Sergio": "Estados Unidos", "Pozancos": "Turquía", "Alberto Castillo": "Estados Unidos", "Rober": "Paraguay", "Goncho": "Estados Unidos", "Urreison": "Turquía", "Juan Dionis": "Turquía", "Juanmi": "Turquía", "El Oráculo": "Estados Unidos"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-11", "bets": {"Roco": "España", "Fer": "España", "Cubelos": "España", "Nachi": "España", "Quique": "España", "Gonzalo Diaz": "España", "Gonzalo Goncer": "España", "Pablo Estevez": "España", "Pablo": "España", "Álvaro Rico": "España", "Abo": "España", "Angel": "España", "Tito": "España", "Nico Muñoz": "España", "Sergio": "España", "Pozancos": "España", "Alberto Castillo": "España", "Rober": "España", "Goncho": "España", "Urreison": "España", "Juan Dionis": "España", "Juanmi": "España", "El Oráculo": "España"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-12", "bets": {"Roco": "Colombia", "Fer": "Colombia", "Cubelos": "Colombia", "Nachi": "Colombia", "Quique": "Colombia", "Gonzalo Diaz": "Colombia", "Gonzalo Goncer": "Colombia", "Pablo Estevez": "Colombia", "Pablo": "Colombia", "Álvaro Rico": "Colombia", "Abo": "Colombia", "Angel": "Colombia", "Tito": "Colombia", "Nico Muñoz": "Colombia", "Sergio": "Colombia", "Pozancos": "Colombia", "Alberto Castillo": "Colombia", "Rober": "Colombia", "Goncho": "Colombia", "Urreison": "Colombia", "Juan Dionis": "Colombia", "Juanmi": "Colombia", "El Oráculo": "Colombia"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-13", "bets": {"Roco": "Canadá", "Fer": "Suiza", "Cubelos": "Suiza", "Nachi": "Suiza", "Quique": "Suiza", "Gonzalo Diaz": "Suiza", "Gonzalo Goncer": "Suiza", "Pablo Estevez": "Suiza", "Pablo": "Suiza", "Álvaro Rico": "Bosnia y Herzegovina", "Abo": "Suiza", "Angel": "Suiza", "Tito": "Suiza", "Nico Muñoz": "Suiza", "Sergio": "Suiza", "Pozancos": "Suiza", "Alberto Castillo": "Canadá", "Rober": "Suiza", "Goncho": "Suiza", "Urreison": "Suiza", "Juan Dionis": "Suiza", "Juanmi": "Suiza", "El Oráculo": "Canadá"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-14", "bets": {"Roco": "Turquía", "Fer": "Estados Unidos", "Cubelos": "Turquía", "Nachi": "Turquía", "Quique": "Estados Unidos", "Gonzalo Diaz": "Estados Unidos", "Gonzalo Goncer": "Estados Unidos", "Pablo Estevez": "Estados Unidos", "Pablo": "Turquía", "Álvaro Rico": "Estados Unidos", "Abo": "Turquía", "Angel": "Turquía", "Tito": "Turquía", "Nico Muñoz": "Turquía", "Sergio": "Paraguay", "Pozancos": "Paraguay", "Alberto Castillo": "Australia", "Rober": "Turquía", "Goncho": "Turquía", "Urreison": "Estados Unidos", "Juan Dionis": "Estados Unidos", "Juanmi": "Estados Unidos", "El Oráculo": "Turquía"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-15", "bets": {"Roco": "Argentina", "Fer": "Argentina", "Cubelos": "Argentina", "Nachi": "Argentina", "Quique": "Argentina", "Gonzalo Diaz": "Argentina", "Gonzalo Goncer": "Argentina", "Pablo Estevez": "Argentina", "Pablo": "Argentina", "Álvaro Rico": "Argentina", "Abo": "Argentina", "Angel": "Argentina", "Tito": "Argentina", "Nico Muñoz": "Argentina", "Sergio": "Argentina", "Pozancos": "Argentina", "Alberto Castillo": "Argentina", "Rober": "Argentina", "Goncho": "Argentina", "Urreison": "Argentina", "Juan Dionis": "Argentina", "Juanmi": "Argentina", "El Oráculo": "Argentina"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-16", "bets": {"Roco": "Portugal", "Fer": "Portugal", "Cubelos": "Portugal", "Nachi": "Portugal", "Quique": "Portugal", "Gonzalo Diaz": "Portugal", "Gonzalo Goncer": "Portugal", "Pablo Estevez": "Portugal", "Pablo": "Portugal", "Álvaro Rico": "Portugal", "Abo": "Portugal", "Angel": "Portugal", "Tito": "Portugal", "Nico Muñoz": "Portugal", "Sergio": "Portugal", "Pozancos": "Portugal", "Alberto Castillo": "Portugal", "Rober": "Portugal", "Goncho": "Portugal", "Urreison": "Portugal", "Juan Dionis": "Portugal", "Juanmi": "Portugal", "El Oráculo": "Portugal"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-17", "bets": {"Roco": "Suiza", "Fer": "Bosnia y Herzegovina", "Cubelos": "Canadá", "Nachi": "Canadá", "Quique": "Bosnia y Herzegovina", "Gonzalo Diaz": "Canadá", "Gonzalo Goncer": "Canadá", "Pablo Estevez": "Canadá", "Pablo": "Canadá", "Álvaro Rico": "Suiza", "Abo": "Canadá", "Angel": "Canadá", "Tito": "Canadá", "Nico Muñoz": "Canadá", "Sergio": "Catar", "Pozancos": "Canadá", "Alberto Castillo": "Suiza", "Rober": "Bosnia y Herzegovina", "Goncho": "Canadá", "Urreison": "Bosnia y Herzegovina", "Juan Dionis": "Canadá", "Juanmi": "Canadá", "El Oráculo": "Suiza"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-18", "bets": {"Roco": "Japón", "Fer": "Suecia", "Cubelos": "Japón", "Nachi": "Suecia", "Quique": "Japón", "Gonzalo Diaz": "Japón", "Gonzalo Goncer": "Japón", "Pablo Estevez": "Túnez", "Pablo": "Suecia", "Álvaro Rico": "Japón", "Abo": "Japón", "Angel": "Japón", "Tito": "Japón", "Nico Muñoz": "Suecia", "Sergio": "Países Bajos", "Pozancos": "Suecia", "Alberto Castillo": "Japón", "Rober": "Suecia", "Goncho": "Japón", "Urreison": "Países Bajos", "Juan Dionis": "Japón", "Juanmi": "Suecia", "El Oráculo": "Japón"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-19", "bets": {"Roco": "Escocia", "Fer": "Paraguay", "Cubelos": "Escocia", "Nachi": "Escocia", "Quique": "Escocia", "Gonzalo Diaz": "Escocia", "Gonzalo Goncer": "Paraguay", "Pablo Estevez": "Escocia", "Pablo": "Paraguay", "Álvaro Rico": "Escocia", "Abo": "Australia", "Angel": "Paraguay", "Tito": "Escocia", "Nico Muñoz": "Paraguay", "Sergio": "Escocia", "Pozancos": "Escocia", "Alberto Castillo": "Escocia", "Rober": "Marruecos", "Goncho": "Escocia", "Urreison": "Escocia", "Juan Dionis": "Escocia", "Juanmi": "Escocia", "El Oráculo": "Paraguay"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-20", "bets": {"Roco": "Marruecos", "Fer": "Marruecos", "Cubelos": "Marruecos", "Nachi": "Marruecos", "Quique": "Brasil", "Gonzalo Diaz": "Marruecos", "Gonzalo Goncer": "Marruecos", "Pablo Estevez": "Marruecos", "Pablo": "Marruecos", "Álvaro Rico": "Brasil", "Abo": "Brasil", "Angel": "Escocia", "Tito": "Marruecos", "Nico Muñoz": "Marruecos", "Sergio": "Marruecos", "Pozancos": "Marruecos", "Alberto Castillo": "Brasil", "Rober": "Escocia", "Goncho": "Marruecos", "Urreison": "Brasil", "Juan Dionis": "Marruecos", "Juanmi": "Brasil", "El Oráculo": "Escocia"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-21", "bets": {"Roco": "Noruega", "Fer": "Noruega", "Cubelos": "Noruega", "Nachi": "Noruega", "Quique": "Noruega", "Gonzalo Diaz": "Noruega", "Gonzalo Goncer": "Noruega", "Pablo Estevez": "Noruega", "Pablo": "Noruega", "Álvaro Rico": "Senegal", "Abo": "Senegal", "Angel": "Noruega", "Tito": "Noruega", "Nico Muñoz": "Noruega", "Sergio": "Senegal", "Pozancos": "Noruega", "Alberto Castillo": "Noruega", "Rober": "Senegal", "Goncho": "Noruega", "Urreison": "Noruega", "Juan Dionis": "Noruega", "Juanmi": "Francia", "El Oráculo": "Noruega"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-22", "bets": {"Roco": "Suecia", "Fer": "Japón", "Cubelos": "Australia", "Nachi": "Australia", "Quique": "Paraguay", "Gonzalo Diaz": "Egipto", "Gonzalo Goncer": "Suecia", "Pablo Estevez": "Países Bajos", "Pablo": "Japón", "Álvaro Rico": "Suecia", "Abo": "Suecia", "Angel": "Suecia", "Tito": "Paraguay", "Nico Muñoz": "Arabia Saudita", "Sergio": "Turquía", "Pozancos": "Estados Unidos", "Alberto Castillo": "Suecia", "Rober": "Estados Unidos", "Goncho": "Irán", "Urreison": "Egipto", "Juan Dionis": "Paraguay", "Juanmi": "Japón", "El Oráculo": "Suecia"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-23", "bets": {"Roco": "Costa de Marfil", "Fer": "Costa de Marfil", "Cubelos": "Costa de Marfil", "Nachi": "Arabia Saudita", "Quique": "Costa de Marfil", "Gonzalo Diaz": "Ecuador", "Gonzalo Goncer": "Escocia", "Pablo Estevez": "Arabia Saudita", "Pablo": "Escocia", "Álvaro Rico": "Costa de Marfil", "Abo": "Ecuador", "Angel": "Marruecos", "Tito": "Costa de Marfil", "Nico Muñoz": "Ecuador", "Sergio": "Ecuador", "Pozancos": "Arabia Saudita", "Alberto Castillo": "Arabia Saudita", "Rober": "Costa de Marfil", "Goncho": "Costa de Marfil", "Urreison": "Ecuador", "Juan Dionis": "Costa de Marfil", "Juanmi": "Costa de Marfil", "El Oráculo": "Costa de Marfil"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-24", "bets": {"Roco": "Senegal", "Fer": "Senegal", "Cubelos": "Argelia", "Nachi": "Senegal", "Quique": "Senegal", "Gonzalo Diaz": "RD Congo", "Gonzalo Goncer": "Ecuador", "Pablo Estevez": "Austria", "Pablo": "Costa de Marfil", "Álvaro Rico": "Argelia", "Abo": "Noruega", "Angel": "Costa de Marfil", "Tito": "Senegal", "Nico Muñoz": "Senegal", "Sergio": "RD Congo", "Pozancos": "Costa de Marfil", "Alberto Castillo": "RD Congo", "Rober": "Noruega", "Goncho": "Senegal", "Urreison": "RD Congo", "Juan Dionis": "Senegal", "Juanmi": "RD Congo", "El Oráculo": "Senegal"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-25", "bets": {"Roco": "Argelia", "Fer": "Corea del Sur", "Cubelos": "República Checa", "Nachi": "Sudáfrica", "Quique": "Arabia Saudita", "Gonzalo Diaz": "Corea del Sur", "Gonzalo Goncer": "República Checa", "Pablo Estevez": "República Checa", "Pablo": "Corea del Sur", "Álvaro Rico": "República Checa", "Abo": "República Checa", "Angel": "República Checa", "Tito": "Corea del Sur", "Nico Muñoz": "Corea del Sur", "Sergio": "Cabo Verde", "Pozancos": "República Checa", "Alberto Castillo": "Sudáfrica", "Rober": "Argelia", "Goncho": "Corea del Sur", "Urreison": "República Checa", "Juan Dionis": "República Checa", "Juanmi": "Senegal", "El Oráculo": "República Checa"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-26", "bets": {"Roco": "Bosnia y Herzegovina", "Fer": "Canadá", "Cubelos": "Bosnia y Herzegovina", "Nachi": "Bosnia y Herzegovina", "Quique": "Canadá", "Gonzalo Diaz": "Senegal", "Gonzalo Goncer": "Bosnia y Herzegovina", "Pablo Estevez": "Bosnia y Herzegovina", "Pablo": "Bosnia y Herzegovina", "Álvaro Rico": "Canadá", "Abo": "Austria", "Angel": "Argelia", "Tito": "Bosnia y Herzegovina", "Nico Muñoz": "Argelia", "Sergio": "Noruega", "Pozancos": "Bosnia y Herzegovina", "Alberto Castillo": "Bosnia y Herzegovina", "Rober": "Canadá", "Goncho": "Bosnia y Herzegovina", "Urreison": "Senegal", "Juan Dionis": "Bosnia y Herzegovina", "Juanmi": "Bosnia y Herzegovina", "El Oráculo": "Catar"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-27", "bets": {"Roco": "Austria", "Fer": "Austria", "Cubelos": "Austria", "Nachi": "Austria", "Quique": "Argelia", "Gonzalo Diaz": "Austria", "Gonzalo Goncer": "Austria", "Pablo Estevez": "Argelia", "Pablo": "Argelia", "Álvaro Rico": "Austria", "Abo": "Argelia", "Angel": "Austria", "Tito": "Austria", "Nico Muñoz": "Austria", "Sergio": "Argelia", "Pozancos": "Argelia", "Alberto Castillo": "Argelia", "Rober": "Austria", "Goncho": "Argelia", "Urreison": "Argelia", "Juan Dionis": "Argelia", "Juanmi": "Austria", "El Oráculo": "Austria"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-28", "bets": {"Roco": "Croacia", "Fer": "Croacia", "Cubelos": "Croacia", "Nachi": "Croacia", "Quique": "Croacia", "Gonzalo Diaz": "Croacia", "Gonzalo Goncer": "Croacia", "Pablo Estevez": "Inglaterra", "Pablo": "Croacia", "Álvaro Rico": "Croacia", "Abo": "Croacia", "Angel": "Croacia", "Tito": "Croacia", "Nico Muñoz": "Croacia", "Sergio": "Inglaterra", "Pozancos": "Croacia", "Alberto Castillo": "Croacia", "Rober": "Croacia", "Goncho": "Croacia", "Urreison": "Ghana", "Juan Dionis": "Croacia", "Juanmi": "Inglaterra", "El Oráculo": "Croacia"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-29", "bets": {"Roco": "Egipto", "Fer": "Argelia", "Cubelos": "Egipto", "Nachi": "Argelia", "Quique": "Austria", "Gonzalo Diaz": "Argelia", "Gonzalo Goncer": "Argelia", "Pablo Estevez": "Nueva Zelanda", "Pablo": "Austria", "Álvaro Rico": "Irán", "Abo": "Irán", "Angel": "Nueva Zelanda", "Tito": "Argelia", "Nico Muñoz": "Irán", "Sergio": "Austria", "Pozancos": "Austria", "Alberto Castillo": "Ecuador", "Rober": "Irán", "Goncho": "Austria", "Urreison": "Austria", "Juan Dionis": "Austria", "Juanmi": "Argelia", "El Oráculo": "Argelia"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-30", "bets": {"Roco": "Irán", "Fer": "Egipto", "Cubelos": "Irán", "Nachi": "Egipto", "Quique": "Egipto", "Gonzalo Diaz": "Irán", "Gonzalo Goncer": "Egipto", "Pablo Estevez": "Bélgica", "Pablo": "Egipto", "Álvaro Rico": "Bélgica", "Abo": "Egipto", "Angel": "Egipto", "Tito": "Egipto", "Nico Muñoz": "Egipto", "Sergio": "Egipto", "Pozancos": "Egipto", "Alberto Castillo": "Egipto", "Rober": "Egipto", "Goncho": "Egipto", "Urreison": "Nueva Zelanda", "Juan Dionis": "Egipto", "Juanmi": "Irán", "El Oráculo": "Irán"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-31", "bets": {"Roco": "Uruguay", "Fer": "Uruguay", "Cubelos": "Uruguay", "Nachi": "Uruguay", "Quique": "Uruguay", "Gonzalo Diaz": "Uruguay", "Gonzalo Goncer": "Uruguay", "Pablo Estevez": "Uruguay", "Pablo": "Uruguay", "Álvaro Rico": "Uruguay", "Abo": "Uruguay", "Angel": "Cabo Verde", "Tito": "Uruguay", "Nico Muñoz": "Uruguay", "Sergio": "Uruguay", "Pozancos": "Uruguay", "Alberto Castillo": "Uruguay", "Rober": "Uruguay", "Goncho": "Uruguay", "Urreison": "Uruguay", "Juan Dionis": "Uruguay", "Juanmi": "Uruguay", "El Oráculo": "Uruguay"}}, {"fase": "1/16", "partido": "Dieciseisavofinalista-32", "bets": {"Roco": "Ghana", "Fer": "Ghana", "Cubelos": "Senegal", "Nachi": "Ecuador", "Quique": "Panamá", "Gonzalo Diaz": "Ghana", "Gonzalo Goncer": "Ghana", "Pablo Estevez": "Costa de Marfil", "Pablo": "Ghana", "Álvaro Rico": "Noruega", "Abo": "Ghana", "Angel": "Ghana", "Tito": "Ghana", "Nico Muñoz": "Ghana", "Sergio": "Ghana", "Pozancos": "Ghana", "Alberto Castillo": "Senegal", "Rober": "Panamá", "Goncho": "Ghana", "Urreison": "Croacia", "Juan Dionis": "Ghana", "Juanmi": "Croacia", "El Oráculo": "Ghana"}}, {"fase": "1/16", "partido": "2A-2B", "bets": {"Roco": "Corea del Sur-Suiza·X|1-1", "Fer": "República Checa-Bosnia y Herzegovina·2|0-1", "Cubelos": "Corea del Sur-Canadá·1|2-1", "Nachi": "Corea del Sur-Canadá·1|2-1", "Quique": "Corea del Sur-Bosnia y Herzegovina·1|2-1", "Gonzalo Diaz": "República Checa-Canadá·1|2-1", "Gonzalo Goncer": "Corea del Sur-Canadá·2|1-2", "Pablo Estevez": "Corea del Sur-Canadá·1|2-1", "Pablo": "República Checa-Canadá·2|0-1", "Álvaro Rico": "Corea del Sur-Suiza·2|0-1", "Abo": "Corea del Sur-Canadá·2|0-1", "Angel": "Corea del Sur-Canadá·X|1-1", "Tito": "República Checa-Canadá·1|2-1", "Nico Muñoz": "República Checa-Canadá·X|1-1", "Sergio": "República Checa-Catar·1|2-0", "Pozancos": "Corea del Sur-Canadá·1|2-1", "Alberto Castillo": "Corea del Sur-Suiza·1|2-1", "Rober": "Corea del Sur-Bosnia y Herzegovina·1|1-0", "Goncho": "República Checa-Canadá·2|1-2", "Urreison": "Corea del Sur-Bosnia y Herzegovina·1|2-0", "Juan Dionis": "Corea del Sur-Canadá·X|1-1", "Juanmi": "Corea del Sur-Canadá·1|3-1", "El Oráculo": "Corea del Sur-Suiza·2|1-2"}}, {"fase": "1/16", "partido": "1C-2F", "bets": {"Roco": "Brasil-Japón·1|2-1", "Fer": "Brasil-Suecia·1|3-1", "Cubelos": "Brasil-Japón·1|2-0", "Nachi": "Brasil-Suecia·1|3-0", "Quique": "Marruecos-Japón·1|2-1", "Gonzalo Diaz": "Brasil-Japón·1|3-1", "Gonzalo Goncer": "Brasil-Japón·1|3-1", "Pablo Estevez": "Brasil-Túnez·1|3-0", "Pablo": "Brasil-Suecia·1|2-1", "Álvaro Rico": "Marruecos-Japón·1|2-1", "Abo": "Marruecos-Japón·1|2-1", "Angel": "Brasil-Japón·1|3-2", "Tito": "Brasil-Japón·1|3-1", "Nico Muñoz": "Brasil-Suecia·1|2-0", "Sergio": "Brasil-Países Bajos·1|2-1", "Pozancos": "Brasil-Suecia·1|2-0", "Alberto Castillo": "Marruecos-Japón·1|2-1", "Rober": "Brasil-Suecia·1|2-0", "Goncho": "Brasil-Japón·1|2-1", "Urreison": "Marruecos-Países Bajos·1|3-2", "Juan Dionis": "Brasil-Japón·1|4-1", "Juanmi": "Marruecos-Suecia·1|2-0", "El Oráculo": "Brasil-Japón·1|3-1"}}, {"fase": "1/16", "partido": "1E-3ABCDF", "bets": {"Roco": "Alemania-Escocia·1|3-0", "Fer": "Alemania-Paraguay·1|2-0", "Cubelos": "Alemania-Escocia·1|2-0", "Nachi": "Alemania-Escocia·1|3-1", "Quique": "Alemania-Escocia·1|3-0", "Gonzalo Diaz": "Alemania-Escocia·1|3-1", "Gonzalo Goncer": "Alemania-Paraguay·1|3-1", "Pablo Estevez": "Alemania-Escocia·1|2-1", "Pablo": "Alemania-Paraguay·1|3-0", "Álvaro Rico": "Alemania-Escocia·1|2-0", "Abo": "Alemania-Australia·1|3-0", "Angel": "Alemania-Paraguay·1|4-0", "Tito": "Ecuador-Escocia·1|2-1", "Nico Muñoz": "Alemania-Paraguay·1|3-1", "Sergio": "Alemania-Escocia·1|2-0", "Pozancos": "Alemania-Escocia·1|2-0", "Alberto Castillo": "Alemania-Escocia·1|3-1", "Rober": "Alemania-Marruecos·1|2-1", "Goncho": "Alemania-Escocia·1|2-0", "Urreison": "Alemania-Escocia·1|4-1", "Juan Dionis": "Alemania-Escocia·1|3-0", "Juanmi": "Alemania-Escocia·1|3-1", "El Oráculo": "Alemania-Paraguay·1|2-0"}}, {"fase": "1/16", "partido": "1F-2C", "bets": {"Roco": "Países Bajos-Marruecos·2|0-1", "Fer": "Países Bajos-Marruecos·2|0-1", "Cubelos": "Países Bajos-Marruecos·1|2-1", "Nachi": "Países Bajos-Marruecos·2|1-2", "Quique": "Países Bajos-Brasil·X|2-2", "Gonzalo Diaz": "Países Bajos-Marruecos·X|2-2", "Gonzalo Goncer": "Países Bajos-Marruecos·X|2-2", "Pablo Estevez": "Suecia-Marruecos·2|0-2", "Pablo": "Países Bajos-Marruecos·1|2-1", "Álvaro Rico": "Países Bajos-Brasil·2|0-2", "Abo": "Países Bajos-Brasil·X|1-1", "Angel": "Países Bajos-Escocia·1|1-0", "Tito": "Países Bajos-Marruecos·2|1-2", "Nico Muñoz": "Países Bajos-Marruecos·2|1-2", "Sergio": "Suecia-Marruecos·2|2-3", "Pozancos": "Países Bajos-Marruecos·1|2-1", "Alberto Castillo": "Países Bajos-Brasil·2|1-2", "Rober": "Países Bajos-Escocia·1|2-0", "Goncho": "Países Bajos-Marruecos·2|0-1", "Urreison": "Japón-Brasil·1|2-1", "Juan Dionis": "Países Bajos-Marruecos·X|1-1", "Juanmi": "Países Bajos-Brasil·1|2-1", "El Oráculo": "Países Bajos-Escocia·1|2-1"}}, {"fase": "1/16", "partido": "2E-2I", "bets": {"Roco": "Ecuador-Noruega·1|2-1", "Fer": "Ecuador-Noruega·1|2-1", "Cubelos": "Ecuador-Noruega·2|1-2", "Nachi": "Costa de Marfil-Noruega·2|1-2", "Quique": "Ecuador-Noruega·2|1-2", "Gonzalo Diaz": "Costa de Marfil-Noruega·2|1-3", "Gonzalo Goncer": "Costa de Marfil-Noruega·2|1-3", "Pablo Estevez": "Ecuador-Noruega·1|3-0", "Pablo": "Ecuador-Noruega·X|1-1", "Álvaro Rico": "Ecuador-Senegal·X|1-1", "Abo": "Costa de Marfil-Senegal·X|0-0", "Angel": "Ecuador-Noruega·2|1-2", "Tito": "Alemania-Noruega·1|3-2", "Nico Muñoz": "Costa de Marfil-Noruega·X|1-1", "Sergio": "Costa de Marfil-Senegal·2|1-2", "Pozancos": "Ecuador-Noruega·2|0-1", "Alberto Castillo": "Costa de Marfil-Noruega·2|1-2", "Rober": "Ecuador-Senegal·2|0-1", "Goncho": "Ecuador-Noruega·1|1-0", "Urreison": "Costa de Marfil-Noruega·2|1-2", "Juan Dionis": "Ecuador-Noruega·1|2-1", "Juanmi": "Ecuador-Francia·2|1-3", "El Oráculo": "Ecuador-Noruega·1|2-1"}}, {"fase": "1/16", "partido": "1I-3CDFGH", "bets": {"Roco": "Francia-Suecia·1|3-0", "Fer": "Francia-Japón·1|2-0", "Cubelos": "Francia-Australia·1|2-0", "Nachi": "Francia-Australia·1|2-0", "Quique": "Francia-Paraguay·1|3-1", "Gonzalo Diaz": "Francia-Egipto·1|4-1", "Gonzalo Goncer": "Francia-Suecia·1|3-1", "Pablo Estevez": "Francia-Países Bajos·1|3-2", "Pablo": "Francia-Japón·1|3-0", "Álvaro Rico": "Francia-Suecia·1|3-1", "Abo": "Francia-Suecia·1|2-0", "Angel": "Francia-Suecia·1|2-1", "Tito": "Francia-Paraguay·1|3-1", "Nico Muñoz": "Francia-Arabia Saudita·1|4-0", "Sergio": "Francia-Turquía·1|2-0", "Pozancos": "Francia-Estados Unidos·1|3-0", "Alberto Castillo": "Francia-Suecia·1|2-1", "Rober": "Francia-Estados Unidos·1|2-0", "Goncho": "Francia-Irán·1|2-0", "Urreison": "Francia-Egipto·1|3-1", "Juan Dionis": "Francia-Paraguay·1|3-0", "Juanmi": "Noruega-Japón·1|3-0", "El Oráculo": "Francia-Suecia·1|2-0"}}, {"fase": "1/16", "partido": "1A-3CEFHI", "bets": {"Roco": "México-Costa de Marfil·1|2-1", "Fer": "México-Costa de Marfil·1|2-1", "Cubelos": "México-Costa de Marfil·1|2-0", "Nachi": "México-Arabia Saudita·1|1-0", "Quique": "México-Costa de Marfil·1|3-2", "Gonzalo Diaz": "México-Ecuador·1|2-1", "Gonzalo Goncer": "México-Escocia·2|1-2", "Pablo Estevez": "México-Arabia Saudita·1|3-0", "Pablo": "México-Escocia·X|1-1", "Álvaro Rico": "México-Costa de Marfil·X|0-0", "Abo": "México-Ecuador·1|1-0", "Angel": "México-Marruecos·2|1-2", "Tito": "México-Costa de Marfil·1|2-1", "Nico Muñoz": "México-Ecuador·1|1-0", "Sergio": "México-Ecuador·2|1-2", "Pozancos": "México-Arabia Saudita·1|2-1", "Alberto Castillo": "México-Arabia Saudita·1|2-1", "Rober": "México-Costa de Marfil·1|2-1", "Goncho": "México-Costa de Marfil·1|2-1", "Urreison": "México-Ecuador·1|1-0", "Juan Dionis": "México-Costa de Marfil·1|2-1", "Juanmi": "México-Costa de Marfil·X|1-1", "El Oráculo": "México-Costa de Marfil·1|2-0"}}, {"fase": "1/16", "partido": "1L-3EHIJK", "bets": {"Roco": "Inglaterra-Senegal·1|3-1", "Fer": "Inglaterra-Senegal·1|3-1", "Cubelos": "Inglaterra-Argelia·1|2-0", "Nachi": "Inglaterra-Senegal·1|3-1", "Quique": "Inglaterra-Senegal·1|2-0", "Gonzalo Diaz": "Inglaterra-RD Congo·1|2-0", "Gonzalo Goncer": "Inglaterra-Ecuador·1|4-0", "Pablo Estevez": "Ghana-Austria·1|3-0", "Pablo": "Inglaterra-Costa de Marfil·1|4-0", "Álvaro Rico": "Inglaterra-Argelia·1|2-0", "Abo": "Inglaterra-Noruega·1|2-1", "Angel": "Inglaterra-Costa de Marfil·1|3-1", "Tito": "Inglaterra-Senegal·1|3-1", "Nico Muñoz": "Inglaterra-Senegal·1|2-0", "Sergio": "Croacia-RD Congo·1|2-1", "Pozancos": "Inglaterra-Costa de Marfil·1|1-0", "Alberto Castillo": "Inglaterra-RD Congo·1|3-1", "Rober": "Inglaterra-Noruega·1|2-0", "Goncho": "Inglaterra-Senegal·1|2-1", "Urreison": "Inglaterra-RD Congo·1|2-0", "Juan Dionis": "Inglaterra-Senegal·1|3-1", "Juanmi": "Ghana-RD Congo·1|2-0", "El Oráculo": "Inglaterra-Senegal·1|2-1"}}, {"fase": "1/16", "partido": "1G-3AEHIJ", "bets": {"Roco": "Bélgica-Argelia·1|2-0", "Fer": "Bélgica-Corea del Sur·1|2-1", "Cubelos": "Bélgica-República Checa·1|2-0", "Nachi": "Bélgica-Sudáfrica·1|3-0", "Quique": "Bélgica-Arabia Saudita·1|3-0", "Gonzalo Diaz": "Bélgica-Corea del Sur·1|3-1", "Gonzalo Goncer": "Bélgica-República Checa·1|3-1", "Pablo Estevez": "Irán-República Checa·1|3-1", "Pablo": "Bélgica-Corea del Sur·1|3-0", "Álvaro Rico": "Egipto-República Checa·1|1-0", "Abo": "Bélgica-República Checa·1|1-0", "Angel": "Bélgica-República Checa·1|2-1", "Tito": "Bélgica-Corea del Sur·1|1-0", "Nico Muñoz": "Bélgica-Corea del Sur·1|2-1", "Sergio": "Bélgica-Cabo Verde·1|2-0", "Pozancos": "Bélgica-República Checa·1|2-0", "Alberto Castillo": "Bélgica-Sudáfrica·1|2-1", "Rober": "Bélgica-Argelia·1|1-0", "Goncho": "Bélgica-Corea del Sur·1|2-1", "Urreison": "Bélgica-República Checa·1|2-1", "Juan Dionis": "Bélgica-República Checa·1|2-1", "Juanmi": "Bélgica-Senegal·1|3-1", "El Oráculo": "Bélgica-República Checa·1|2-0"}}, {"fase": "1/16", "partido": "1D-3BEFIJ", "bets": {"Roco": "Estados Unidos-Bosnia y Herzegovina·1|3-0", "Fer": "Turquía-Canadá·1|2-1", "Cubelos": "Estados Unidos-Bosnia y Herzegovina·1|2-0", "Nachi": "Estados Unidos-Bosnia y Herzegovina·X|2-2", "Quique": "Turquía-Canadá·X|1-1", "Gonzalo Diaz": "Turquía-Senegal·2|2-3", "Gonzalo Goncer": "Turquía-Bosnia y Herzegovina·1|2-1", "Pablo Estevez": "Turquía-Bosnia y Herzegovina·1|3-0", "Pablo": "Estados Unidos-Bosnia y Herzegovina·1|2-1", "Álvaro Rico": "Turquía-Canadá·1|2-0", "Abo": "Estados Unidos-Austria·1|1-0", "Angel": "Estados Unidos-Argelia·1|2-1", "Tito": "Estados Unidos-Bosnia y Herzegovina·1|1-0", "Nico Muñoz": "Estados Unidos-Argelia·1|1-0", "Sergio": "Estados Unidos-Noruega·2|1-2", "Pozancos": "Turquía-Bosnia y Herzegovina·1|2-1", "Alberto Castillo": "Estados Unidos-Bosnia y Herzegovina·1|2-1", "Rober": "Paraguay-Canadá·1|3-1", "Goncho": "Estados Unidos-Bosnia y Herzegovina·1|2-0", "Urreison": "Turquía-Senegal·2|1-2", "Juan Dionis": "Turquía-Bosnia y Herzegovina·1|3-0", "Juanmi": "Turquía-Bosnia y Herzegovina·1|3-1", "El Oráculo": "Estados Unidos-Catar·1|1-0"}}, {"fase": "1/16", "partido": "1H-2J", "bets": {"Roco": "España-Austria·1|2-1", "Fer": "España-Austria·1|3-1", "Cubelos": "España-Austria·1|2-0", "Nachi": "España-Austria·1|2-1", "Quique": "España-Argelia·1|3-0", "Gonzalo Diaz": "España-Austria·1|3-1", "Gonzalo Goncer": "España-Austria·1|2-1", "Pablo Estevez": "España-Argelia·1|2-1", "Pablo": "España-Argelia·1|3-1", "Álvaro Rico": "España-Austria·1|2-0", "Abo": "España-Argelia·1|3-1", "Angel": "España-Austria·1|3-1", "Tito": "España-Austria·1|2-0", "Nico Muñoz": "España-Austria·1|3-1", "Sergio": "España-Argelia·1|2-0", "Pozancos": "España-Argelia·1|2-1", "Alberto Castillo": "España-Argelia·1|3-1", "Rober": "España-Austria·1|2-1", "Goncho": "España-Argelia·1|2-0", "Urreison": "España-Argelia·1|2-0", "Juan Dionis": "España-Argelia·1|3-1", "Juanmi": "España-Austria·1|3-0", "El Oráculo": "España-Austria·1|3-1"}}, {"fase": "1/16", "partido": "2K-2L", "bets": {"Roco": "Colombia-Croacia·1|2-1", "Fer": "Colombia-Croacia·1|2-1", "Cubelos": "Colombia-Croacia·1|2-1", "Nachi": "Colombia-Croacia·X|1-1", "Quique": "Colombia-Croacia·1|1-0", "Gonzalo Diaz": "Colombia-Croacia·2|1-2", "Gonzalo Goncer": "Colombia-Croacia·2|1-2", "Pablo Estevez": "Colombia-Inglaterra·1|3-0", "Pablo": "Colombia-Croacia·1|2-0", "Álvaro Rico": "Colombia-Croacia·1|1-0", "Abo": "Colombia-Croacia·2|0-2", "Angel": "Colombia-Croacia·2|1-2", "Tito": "Colombia-Croacia·2|1-2", "Nico Muñoz": "Colombia-Croacia·1|2-1", "Sergio": "Colombia-Inglaterra·2|2-3", "Pozancos": "Colombia-Croacia·1|2-1", "Alberto Castillo": "Colombia-Croacia·2|1-2", "Rober": "Colombia-Croacia·2|1-2", "Goncho": "Colombia-Croacia·1|2-1", "Urreison": "Colombia-Ghana·X|1-1", "Juan Dionis": "Colombia-Croacia·X|1-1", "Juanmi": "Colombia-Inglaterra·X|1-1", "El Oráculo": "Colombia-Croacia·1|2-1"}}, {"fase": "1/16", "partido": "1B-3EFGIJ", "bets": {"Roco": "Canadá-Egipto·1|1-0", "Fer": "Suiza-Argelia·X|1-1", "Cubelos": "Suiza-Egipto·1|2-0", "Nachi": "Suiza-Argelia·2|0-1", "Quique": "Suiza-Austria·1|1-0", "Gonzalo Diaz": "Suiza-Argelia·1|2-1", "Gonzalo Goncer": "Suiza-Argelia·1|2-0", "Pablo Estevez": "Suiza-Nueva Zelanda·1|3-1", "Pablo": "Suiza-Austria·1|2-0", "Álvaro Rico": "Bosnia y Herzegovina-Irán·1|2-0", "Abo": "Suiza-Irán·X|0-0", "Angel": "Suiza-Nueva Zelanda·1|1-0", "Tito": "Suiza-Argelia·1|1-0", "Nico Muñoz": "Suiza-Irán·1|2-0", "Sergio": "Suiza-Austria·1|1-0", "Pozancos": "Suiza-Austria·1|1-0", "Alberto Castillo": "Canadá-Ecuador·1|2-1", "Rober": "Suiza-Irán·1|2-0", "Goncho": "Suiza-Austria·1|1-0", "Urreison": "Suiza-Austria·X|1-1", "Juan Dionis": "Suiza-Austria·1|2-1", "Juanmi": "Suiza-Argelia·1|2-0", "El Oráculo": "Canadá-Argelia·1|2-1"}}, {"fase": "1/16", "partido": "2D-2G", "bets": {"Roco": "Turquía-Irán·X|0-0", "Fer": "Estados Unidos-Egipto·2|0-1", "Cubelos": "Turquía-Irán·1|2-1", "Nachi": "Turquía-Egipto·1|1-0", "Quique": "Estados Unidos-Egipto·X|1-1", "Gonzalo Diaz": "Estados Unidos-Irán·1|2-1", "Gonzalo Goncer": "Estados Unidos-Egipto·2|1-2", "Pablo Estevez": "Estados Unidos-Bélgica·1|2-0", "Pablo": "Turquía-Egipto·2|1-2", "Álvaro Rico": "Estados Unidos-Bélgica·2|0-1", "Abo": "Turquía-Egipto·1|1-0", "Angel": "Turquía-Egipto·1|2-0", "Tito": "Turquía-Egipto·1|1-0", "Nico Muñoz": "Turquía-Egipto·2|1-2", "Sergio": "Paraguay-Egipto·2|0-1", "Pozancos": "Paraguay-Egipto·1|2-1", "Alberto Castillo": "Australia-Egipto·2|1-2", "Rober": "Turquía-Egipto·1|2-1", "Goncho": "Turquía-Egipto·2|0-1", "Urreison": "Estados Unidos-Nueva Zelanda·1|1-0", "Juan Dionis": "Estados Unidos-Egipto·1|3-2", "Juanmi": "Estados Unidos-Irán·1|3-1", "El Oráculo": "Turquía-Irán·2|1-2"}}, {"fase": "1/16", "partido": "1J-2H", "bets": {"Roco": "Argentina-Uruguay·1|1-0", "Fer": "Argentina-Uruguay·1|2-1", "Cubelos": "Argentina-Uruguay·1|2-0", "Nachi": "Argentina-Uruguay·X|2-2", "Quique": "Argentina-Uruguay·2|1-2", "Gonzalo Diaz": "Argentina-Uruguay·X|2-2", "Gonzalo Goncer": "Argentina-Uruguay·1|3-1", "Pablo Estevez": "Argentina-Uruguay·1|3-0", "Pablo": "Argentina-Uruguay·2|1-2", "Álvaro Rico": "Argentina-Uruguay·1|2-0", "Abo": "Argentina-Uruguay·1|2-1", "Angel": "Argentina-Cabo Verde·1|2-1", "Tito": "Argentina-Uruguay·1|3-1", "Nico Muñoz": "Argentina-Uruguay·1|2-1", "Sergio": "Argentina-Uruguay·1|2-1", "Pozancos": "Argentina-Uruguay·1|1-0", "Alberto Castillo": "Argentina-Uruguay·1|2-1", "Rober": "Argentina-Uruguay·1|2-1", "Goncho": "Argentina-Uruguay·1|2-1", "Urreison": "Argentina-Uruguay·1|2-1", "Juan Dionis": "Argentina-Uruguay·X|1-1", "Juanmi": "Argentina-Uruguay·1|2-1", "El Oráculo": "Argentina-Uruguay·1|2-1"}}, {"fase": "1/16", "partido": "1K-3DEIJL", "bets": {"Roco": "Portugal-Ghana·1|2-0", "Fer": "Portugal-Ghana·1|3-1", "Cubelos": "Portugal-Senegal·1|2-0", "Nachi": "Portugal-Ecuador·1|3-2", "Quique": "Portugal-Panamá·1|3-0", "Gonzalo Diaz": "Portugal-Ghana·1|3-2", "Gonzalo Goncer": "Portugal-Ghana·1|3-1", "Pablo Estevez": "Portugal-Costa de Marfil·1|3-1", "Pablo": "Portugal-Ghana·1|4-0", "Álvaro Rico": "Portugal-Noruega·1|3-1", "Abo": "Portugal-Ghana·1|2-0", "Angel": "Portugal-Ghana·1|2-1", "Tito": "Portugal-Ghana·1|2-1", "Nico Muñoz": "Portugal-Ghana·1|2-0", "Sergio": "Portugal-Ghana·1|2-1", "Pozancos": "Portugal-Ghana·1|2-0", "Alberto Castillo": "Portugal-Senegal·1|2-1", "Rober": "Portugal-Panamá·1|3-0", "Goncho": "Portugal-Ghana·1|2-1", "Urreison": "Portugal-Croacia·1|1-0", "Juan Dionis": "Portugal-Ghana·1|3-1", "Juanmi": "Portugal-Croacia·1|3-1", "El Oráculo": "Portugal-Ghana·1|2-0"}}, {"fase": "1/8", "partido": "Octavofinalista-1", "bets": {"Roco": "Suiza", "Fer": "Bosnia y Herzegovina", "Cubelos": "Corea del Sur", "Nachi": "Corea del Sur", "Quique": "Corea del Sur", "Gonzalo Diaz": "República Checa", "Gonzalo Goncer": "Canadá", "Pablo Estevez": "Corea del Sur", "Pablo": "Canadá", "Álvaro Rico": "Suiza", "Abo": "Canadá", "Angel": "Corea del Sur", "Tito": "República Checa", "Nico Muñoz": "Canadá", "Sergio": "República Checa", "Pozancos": "Corea del Sur", "Alberto Castillo": "Corea del Sur", "Rober": "Corea del Sur", "Goncho": "Canadá", "Urreison": "Corea del Sur", "Juan Dionis": "Corea del Sur", "Juanmi": "Corea del Sur", "El Oráculo": "Suiza"}}, {"fase": "1/8", "partido": "Octavofinalista-2", "bets": {"Roco": "Alemania", "Fer": "Alemania", "Cubelos": "Alemania", "Nachi": "Alemania", "Quique": "Alemania", "Gonzalo Diaz": "Alemania", "Gonzalo Goncer": "Alemania", "Pablo Estevez": "Alemania", "Pablo": "Alemania", "Álvaro Rico": "Alemania", "Abo": "Alemania", "Angel": "Alemania", "Tito": "Ecuador", "Nico Muñoz": "Alemania", "Sergio": "Alemania", "Pozancos": "Alemania", "Alberto Castillo": "Alemania", "Rober": "Alemania", "Goncho": "Alemania", "Urreison": "Alemania", "Juan Dionis": "Alemania", "Juanmi": "Alemania", "El Oráculo": "Alemania"}}, {"fase": "1/8", "partido": "Octavofinalista-3", "bets": {"Roco": "Brasil", "Fer": "Brasil", "Cubelos": "Brasil", "Nachi": "Brasil", "Quique": "Marruecos", "Gonzalo Diaz": "Brasil", "Gonzalo Goncer": "Brasil", "Pablo Estevez": "Brasil", "Pablo": "Brasil", "Álvaro Rico": "Marruecos", "Abo": "Marruecos", "Angel": "Brasil", "Tito": "Brasil", "Nico Muñoz": "Brasil", "Sergio": "Brasil", "Pozancos": "Brasil", "Alberto Castillo": "Marruecos", "Rober": "Brasil", "Goncho": "Brasil", "Urreison": "Marruecos", "Juan Dionis": "Brasil", "Juanmi": "Marruecos", "El Oráculo": "Brasil"}}, {"fase": "1/8", "partido": "Octavofinalista-4", "bets": {"Roco": "México", "Fer": "México", "Cubelos": "México", "Nachi": "México", "Quique": "México", "Gonzalo Diaz": "México", "Gonzalo Goncer": "Escocia", "Pablo Estevez": "México", "Pablo": "Escocia", "Álvaro Rico": "México", "Abo": "México", "Angel": "Marruecos", "Tito": "México", "Nico Muñoz": "México", "Sergio": "Ecuador", "Pozancos": "México", "Alberto Castillo": "México", "Rober": "México", "Goncho": "México", "Urreison": "México", "Juan Dionis": "México", "Juanmi": "México", "El Oráculo": "México"}}, {"fase": "1/8", "partido": "Octavofinalista-5", "bets": {"Roco": "Colombia", "Fer": "Colombia", "Cubelos": "Colombia", "Nachi": "Colombia", "Quique": "Colombia", "Gonzalo Diaz": "Croacia", "Gonzalo Goncer": "Croacia", "Pablo Estevez": "Colombia", "Pablo": "Colombia", "Álvaro Rico": "Colombia", "Abo": "Croacia", "Angel": "Croacia", "Tito": "Croacia", "Nico Muñoz": "Colombia", "Sergio": "Inglaterra", "Pozancos": "Colombia", "Alberto Castillo": "Croacia", "Rober": "Croacia", "Goncho": "Colombia", "Urreison": "Ghana", "Juan Dionis": "Croacia", "Juanmi": "Colombia", "El Oráculo": "Colombia"}}, {"fase": "1/8", "partido": "Octavofinalista-6", "bets": {"Roco": "Estados Unidos", "Fer": "Turquía", "Cubelos": "Estados Unidos", "Nachi": "Estados Unidos", "Quique": "Turquía", "Gonzalo Diaz": "Senegal", "Gonzalo Goncer": "Turquía", "Pablo Estevez": "Turquía", "Pablo": "Estados Unidos", "Álvaro Rico": "Turquía", "Abo": "Estados Unidos", "Angel": "Estados Unidos", "Tito": "Estados Unidos", "Nico Muñoz": "Estados Unidos", "Sergio": "Noruega", "Pozancos": "Turquía", "Alberto Castillo": "Estados Unidos", "Rober": "Paraguay", "Goncho": "Estados Unidos", "Urreison": "Senegal", "Juan Dionis": "Turquía", "Juanmi": "Turquía", "El Oráculo": "Estados Unidos"}}, {"fase": "1/8", "partido": "Octavofinalista-7", "bets": {"Roco": "Argentina", "Fer": "Argentina", "Cubelos": "Argentina", "Nachi": "Argentina", "Quique": "Uruguay", "Gonzalo Diaz": "Argentina", "Gonzalo Goncer": "Argentina", "Pablo Estevez": "Argentina", "Pablo": "Uruguay", "Álvaro Rico": "Argentina", "Abo": "Argentina", "Angel": "Argentina", "Tito": "Argentina", "Nico Muñoz": "Argentina", "Sergio": "Argentina", "Pozancos": "Argentina", "Alberto Castillo": "Argentina", "Rober": "Argentina", "Goncho": "Argentina", "Urreison": "Argentina", "Juan Dionis": "Uruguay", "Juanmi": "Argentina", "El Oráculo": "Argentina"}}, {"fase": "1/8", "partido": "Octavofinalista-8", "bets": {"Roco": "Canadá", "Fer": "Suiza", "Cubelos": "Suiza", "Nachi": "Argelia", "Quique": "Suiza", "Gonzalo Diaz": "Suiza", "Gonzalo Goncer": "Suiza", "Pablo Estevez": "Suiza", "Pablo": "Suiza", "Álvaro Rico": "Bosnia y Herzegovina", "Abo": "Suiza", "Angel": "Suiza", "Tito": "Suiza", "Nico Muñoz": "Suiza", "Sergio": "Suiza", "Pozancos": "Suiza", "Alberto Castillo": "Canadá", "Rober": "Suiza", "Goncho": "Suiza", "Urreison": "Suiza", "Juan Dionis": "Suiza", "Juanmi": "Suiza", "El Oráculo": "Canadá"}}, {"fase": "1/8", "partido": "Octavofinalista-9", "bets": {"Roco": "Marruecos", "Fer": "Marruecos", "Cubelos": "Países Bajos", "Nachi": "Marruecos", "Quique": "Brasil", "Gonzalo Diaz": "Países Bajos", "Gonzalo Goncer": "Países Bajos", "Pablo Estevez": "Marruecos", "Pablo": "Países Bajos", "Álvaro Rico": "Brasil", "Abo": "Países Bajos", "Angel": "Países Bajos", "Tito": "Marruecos", "Nico Muñoz": "Marruecos", "Sergio": "Marruecos", "Pozancos": "Países Bajos", "Alberto Castillo": "Brasil", "Rober": "Países Bajos", "Goncho": "Marruecos", "Urreison": "Japón", "Juan Dionis": "Países Bajos", "Juanmi": "Países Bajos", "El Oráculo": "Países Bajos"}}, {"fase": "1/8", "partido": "Octavofinalista-10", "bets": {"Roco": "Francia", "Fer": "Francia", "Cubelos": "Francia", "Nachi": "Francia", "Quique": "Francia", "Gonzalo Diaz": "Francia", "Gonzalo Goncer": "Francia", "Pablo Estevez": "Francia", "Pablo": "Francia", "Álvaro Rico": "Francia", "Abo": "Francia", "Angel": "Francia", "Tito": "Francia", "Nico Muñoz": "Francia", "Sergio": "Francia", "Pozancos": "Francia", "Alberto Castillo": "Francia", "Rober": "Francia", "Goncho": "Francia", "Urreison": "Francia", "Juan Dionis": "Francia", "Juanmi": "Noruega", "El Oráculo": "Francia"}}, {"fase": "1/8", "partido": "Octavofinalista-11", "bets": {"Roco": "Ecuador", "Fer": "Ecuador", "Cubelos": "Noruega", "Nachi": "Noruega", "Quique": "Noruega", "Gonzalo Diaz": "Noruega", "Gonzalo Goncer": "Noruega", "Pablo Estevez": "Ecuador", "Pablo": "Ecuador", "Álvaro Rico": "Senegal", "Abo": "Senegal", "Angel": "Noruega", "Tito": "Alemania", "Nico Muñoz": "Noruega", "Sergio": "Senegal", "Pozancos": "Noruega", "Alberto Castillo": "Noruega", "Rober": "Senegal", "Goncho": "Ecuador", "Urreison": "Noruega", "Juan Dionis": "Ecuador", "Juanmi": "Francia", "El Oráculo": "Ecuador"}}, {"fase": "1/8", "partido": "Octavofinalista-12", "bets": {"Roco": "Inglaterra", "Fer": "Inglaterra", "Cubelos": "Inglaterra", "Nachi": "Inglaterra", "Quique": "Inglaterra", "Gonzalo Diaz": "Inglaterra", "Gonzalo Goncer": "Inglaterra", "Pablo Estevez": "Ghana", "Pablo": "Inglaterra", "Álvaro Rico": "Inglaterra", "Abo": "Inglaterra", "Angel": "Inglaterra", "Tito": "Inglaterra", "Nico Muñoz": "Inglaterra", "Sergio": "Croacia", "Pozancos": "Inglaterra", "Alberto Castillo": "Inglaterra", "Rober": "Inglaterra", "Goncho": "Inglaterra", "Urreison": "Inglaterra", "Juan Dionis": "Inglaterra", "Juanmi": "Ghana", "El Oráculo": "Inglaterra"}}, {"fase": "1/8", "partido": "Octavofinalista-13", "bets": {"Roco": "España", "Fer": "España", "Cubelos": "España", "Nachi": "España", "Quique": "España", "Gonzalo Diaz": "España", "Gonzalo Goncer": "España", "Pablo Estevez": "España", "Pablo": "España", "Álvaro Rico": "España", "Abo": "España", "Angel": "España", "Tito": "España", "Nico Muñoz": "España", "Sergio": "España", "Pozancos": "España", "Alberto Castillo": "España", "Rober": "España", "Goncho": "España", "Urreison": "España", "Juan Dionis": "España", "Juanmi": "España", "El Oráculo": "España"}}, {"fase": "1/8", "partido": "Octavofinalista-14", "bets": {"Roco": "Bélgica", "Fer": "Bélgica", "Cubelos": "Bélgica", "Nachi": "Bélgica", "Quique": "Bélgica", "Gonzalo Diaz": "Bélgica", "Gonzalo Goncer": "Bélgica", "Pablo Estevez": "Irán", "Pablo": "Bélgica", "Álvaro Rico": "Egipto", "Abo": "Bélgica", "Angel": "Bélgica", "Tito": "Bélgica", "Nico Muñoz": "Bélgica", "Sergio": "Bélgica", "Pozancos": "Bélgica", "Alberto Castillo": "Bélgica", "Rober": "Bélgica", "Goncho": "Bélgica", "Urreison": "Bélgica", "Juan Dionis": "Bélgica", "Juanmi": "Bélgica", "El Oráculo": "Bélgica"}}, {"fase": "1/8", "partido": "Octavofinalista-15", "bets": {"Roco": "Turquía", "Fer": "Egipto", "Cubelos": "Turquía", "Nachi": "Turquía", "Quique": "Estados Unidos", "Gonzalo Diaz": "Estados Unidos", "Gonzalo Goncer": "Egipto", "Pablo Estevez": "Estados Unidos", "Pablo": "Egipto", "Álvaro Rico": "Bélgica", "Abo": "Turquía", "Angel": "Turquía", "Tito": "Turquía", "Nico Muñoz": "Egipto", "Sergio": "Egipto", "Pozancos": "Paraguay", "Alberto Castillo": "Egipto", "Rober": "Turquía", "Goncho": "Egipto", "Urreison": "Estados Unidos", "Juan Dionis": "Estados Unidos", "Juanmi": "Estados Unidos", "El Oráculo": "Irán"}}, {"fase": "1/8", "partido": "Octavofinalista-16", "bets": {"Roco": "Portugal", "Fer": "Portugal", "Cubelos": "Portugal", "Nachi": "Portugal", "Quique": "Portugal", "Gonzalo Diaz": "Portugal", "Gonzalo Goncer": "Portugal", "Pablo Estevez": "Portugal", "Pablo": "Portugal", "Álvaro Rico": "Portugal", "Abo": "Portugal", "Angel": "Portugal", "Tito": "Portugal", "Nico Muñoz": "Portugal", "Sergio": "Portugal", "Pozancos": "Portugal", "Alberto Castillo": "Portugal", "Rober": "Portugal", "Goncho": "Portugal", "Urreison": "Portugal", "Juan Dionis": "Portugal", "Juanmi": "Portugal", "El Oráculo": "Portugal"}}]};
+
+const PARTICIPANTS = DATA.participants;
+const MATCHES = DATA.matches;
+
+// Separate match types
+const GROUP_FASES = new Set();
+MATCHES.forEach(m => {
+  if (!['1/16','1/8'].includes(m.fase) && !m.partido.includes('finalista')) {
+    GROUP_FASES.add(m.fase);
+  }
+});
+
+// Build unique groups (A, B, C...)
+const groups = {};
+MATCHES.forEach(m => {
+  if (GROUP_FASES.has(m.fase)) {
+    const grp = m.fase[0];  // Letter
+    if (!groups[grp]) groups[grp] = [];
+    // Add match if not already there (by partido)
+    if (!groups[grp].find(x => x.partido === m.partido)) {
+      groups[grp].push(m);
+    }
+  }
+});
+
+// Knockout matches (actual matches, not qualifier picks)
+const REAL_MATCHES_16 = [["Sudáfrica", "Canadá", "0-1", null], ["Brasil", "Japón", "2-1", null], ["Alemania", "Paraguay", "1-1", "3-4"], ["Países Bajos", "Marruecos", "1-1", "2-3"], ["Costa de Marfil", "Noruega", "1-2", null], ["Francia", "Suecia", "3-0", null], ["México", "Ecuador", "2-0", null], ["Inglaterra", "RD Congo", "2-1", null], ["Bélgica", "Senegal", "3-2", null], ["Estados Unidos", "Bosnia y Herzegovina", "2-0", null], ["España", "Austria", "3-0", null], ["Portugal", "Croacia", "2-1", null], ["Suiza", "Argelia", "2-0", null], ["Australia", "Egipto", "1-1", "2-4"], ["Argentina", "Cabo Verde", "3-2", null], ["Colombia", "Ghana", "1-0", null]];
+
+// Octavos matches for today/tomorrow display
+const OCTAVOS_TODAY_MATCHES = [{"fase": "1/8", "partido": "Canadá-Marruecos", "bets": {"Roco": "Suiza-Marruecos·X|1-1", "Fer": "Bosnia y Herzegovina-Marruecos·2|0-2", "Cubelos": "Corea del Sur-Países Bajos·2|0-2", "Nachi": "Corea del Sur-Marruecos·2|0-1", "Quique": "Corea del Sur-Brasil·2|1-3", "Gonzalo Diaz": "República Checa-Países Bajos·2|1-2", "Gonzalo Goncer": "Canadá-Países Bajos·2|1-3", "Pablo Estevez": "Corea del Sur-Marruecos·2|0-2", "Pablo": "Canadá-Países Bajos·2|1-3", "Álvaro Rico": "Suiza-Brasil·2|1-2", "Abo": "Canadá-Países Bajos·X|1-1", "Angel": "Corea del Sur-Países Bajos·2|1-2", "Tito": "República Checa-Marruecos·2|1-2", "Nico Muñoz": "Canadá-Marruecos·2|1-2", "Sergio": "República Checa-Marruecos·2|1-2", "Pozancos": "Corea del Sur-Países Bajos·2|0-2", "Alberto Castillo": "Corea del Sur-Brasil·2|1-2", "Rober": "Corea del Sur-Países Bajos·2|1-2", "Goncho": "Canadá-Marruecos·2|0-2", "Urreison": "Corea del Sur-Japón·2|0-2", "Juan Dionis": "Corea del Sur-Países Bajos·2|1-2", "Juanmi": "Corea del Sur-Países Bajos·X|0-0", "El Oráculo": "Suiza-Países Bajos·2|1-2"}}, {"fase": "1/8", "partido": "Paraguay-Francia", "bets": {"Roco": "Alemania-Francia·2|1-2", "Fer": "Alemania-Francia·2|1-3", "Cubelos": "Alemania-Francia·2|0-2", "Nachi": "Alemania-Francia·2|1-2", "Quique": "Alemania-Francia·2|1-3", "Gonzalo Diaz": "Alemania-Francia·X|2-2", "Gonzalo Goncer": "Alemania-Francia·2|1-3", "Pablo Estevez": "Alemania-Francia·2|1-3", "Pablo": "Alemania-Francia·2|1-2", "Álvaro Rico": "Alemania-Francia·X|0-0", "Abo": "Alemania-Francia·2|2-3", "Angel": "Alemania-Francia·2|2-3", "Tito": "Ecuador-Francia·2|1-3", "Nico Muñoz": "Alemania-Francia·2|1-3", "Sergio": "Alemania-Francia·1|3-1", "Pozancos": "Alemania-Francia·2|1-2", "Alberto Castillo": "Alemania-Francia·2|1-2", "Rober": "Alemania-Francia·X|2-2", "Goncho": "Alemania-Francia·2|1-2", "Urreison": "Alemania-Francia·2|1-3", "Juan Dionis": "Alemania-Francia·2|1-2", "Juanmi": "Alemania-Noruega·X|2-2", "El Oráculo": "Alemania-Francia·2|1-2"}}, {"fase": "1/8", "partido": "Brasil-Noruega", "bets": {"Roco": "Brasil-Ecuador·1|2-0", "Fer": "Brasil-Ecuador·1|2-1", "Cubelos": "Brasil-Noruega·1|2-0", "Nachi": "Brasil-Noruega·1|2-1", "Quique": "Marruecos-Noruega·2|1-2", "Gonzalo Diaz": "Brasil-Noruega·1|2-1", "Gonzalo Goncer": "Brasil-Noruega·1|2-1", "Pablo Estevez": "Brasil-Ecuador·1|3-1", "Pablo": "Brasil-Ecuador·1|2-1", "Álvaro Rico": "Marruecos-Senegal·1|2-0", "Abo": "Marruecos-Senegal·1|2-1", "Angel": "Brasil-Noruega·1|3-1", "Tito": "Brasil-Alemania·1|2-1", "Nico Muñoz": "Brasil-Noruega·1|2-0", "Sergio": "Brasil-Senegal·1|2-1", "Pozancos": "Brasil-Noruega·1|1-0", "Alberto Castillo": "Marruecos-Noruega·1|2-1", "Rober": "Brasil-Senegal·1|2-0", "Goncho": "Brasil-Ecuador·1|2-0", "Urreison": "Marruecos-Noruega·1|2-0", "Juan Dionis": "Brasil-Ecuador·1|2-1", "Juanmi": "Marruecos-Francia·X|2-2", "El Oráculo": "Brasil-Ecuador·1|2-1"}}, {"fase": "1/8", "partido": "México-Inglaterra", "bets": {"Roco": "México-Inglaterra·2|1-2", "Fer": "México-Inglaterra·2|0-2", "Cubelos": "México-Inglaterra·2|0-2", "Nachi": "México-Inglaterra·2|1-2", "Quique": "México-Inglaterra·1|1-0", "Gonzalo Diaz": "México-Inglaterra·2|1-2", "Gonzalo Goncer": "Escocia-Inglaterra·2|1-2", "Pablo Estevez": "México-Ghana·2|0-2", "Pablo": "Escocia-Inglaterra·2|0-2", "Álvaro Rico": "México-Inglaterra·2|0-1", "Abo": "México-Inglaterra·2|0-2", "Angel": "Marruecos-Inglaterra·1|2-1", "Tito": "México-Inglaterra·2|1-3", "Nico Muñoz": "México-Inglaterra·2|1-2", "Sergio": "Ecuador-Croacia·2|1-2", "Pozancos": "México-Inglaterra·2|1-2", "Alberto Castillo": "México-Inglaterra·2|1-2", "Rober": "México-Inglaterra·2|1-2", "Goncho": "México-Inglaterra·2|1-2", "Urreison": "México-Inglaterra·2|1-2", "Juan Dionis": "México-Inglaterra·2|1-3", "Juanmi": "México-Ghana·1|3-1", "El Oráculo": "México-Inglaterra·2|1-2"}}, {"fase": "1/8", "partido": "Portugal-España", "bets": {"Roco": "Colombia-España·2|0-1", "Fer": "Colombia-España·2|1-2", "Cubelos": "Colombia-España·2|0-2", "Nachi": "Colombia-España·2|0-3", "Quique": "Colombia-España·2|0-1", "Gonzalo Diaz": "Croacia-España·2|1-3", "Gonzalo Goncer": "Croacia-España·2|1-3", "Pablo Estevez": "Colombia-España·2|0-2", "Pablo": "Colombia-España·2|1-2", "Álvaro Rico": "Colombia-España·2|0-1", "Abo": "Croacia-España·X|2-2", "Angel": "Croacia-España·2|1-3", "Tito": "Croacia-España·2|2-3", "Nico Muñoz": "Colombia-España·2|1-3", "Sergio": "Inglaterra-España·2|2-3", "Pozancos": "Colombia-España·2|1-2", "Alberto Castillo": "Croacia-España·2|1-2", "Rober": "Croacia-España·2|0-1", "Goncho": "Colombia-España·2|0-2", "Urreison": "Ghana-España·2|0-1", "Juan Dionis": "Croacia-España·2|1-3", "Juanmi": "Colombia-España·2|0-3", "El Oráculo": "Colombia-España·2|0-1"}}, {"fase": "1/8", "partido": "Estados Unidos-Bélgica", "bets": {"Roco": "Estados Unidos-Bélgica·1|2-0", "Fer": "Turquía-Bélgica·1|2-1", "Cubelos": "Estados Unidos-Bélgica·2|1-2", "Nachi": "Estados Unidos-Bélgica·2|2-3", "Quique": "Turquía-Bélgica·1|2-0", "Gonzalo Diaz": "Senegal-Bélgica·1|2-1", "Gonzalo Goncer": "Turquía-Bélgica·X|1-1", "Pablo Estevez": "Turquía-Irán·2|1-3", "Pablo": "Estados Unidos-Bélgica·2|1-3", "Álvaro Rico": "Turquía-Egipto·X|1-1", "Abo": "Estados Unidos-Bélgica·2|0-1", "Angel": "Estados Unidos-Bélgica·2|1-2", "Tito": "Estados Unidos-Bélgica·2|0-1", "Nico Muñoz": "Estados Unidos-Bélgica·2|1-2", "Sergio": "Noruega-Bélgica·2|1-2", "Pozancos": "Turquía-Bélgica·2|0-1", "Alberto Castillo": "Estados Unidos-Bélgica·2|1-2", "Rober": "Paraguay-Bélgica·2|0-1", "Goncho": "Estados Unidos-Bélgica·1|1-0", "Urreison": "Senegal-Bélgica·1|2-0", "Juan Dionis": "Turquía-Bélgica·X|1-1", "Juanmi": "Turquía-Bélgica·1|2-1", "El Oráculo": "Estados Unidos-Bélgica·2|1-3"}}, {"fase": "1/8", "partido": "Argentina-Egipto", "bets": {"Roco": "Argentina-Turquía·1|3-0", "Fer": "Argentina-Egipto·1|2-1", "Cubelos": "Argentina-Turquía·1|2-0", "Nachi": "Argentina-Turquía·1|2-1", "Quique": "Uruguay-Estados Unidos·2|0-1", "Gonzalo Diaz": "Argentina-Estados Unidos·1|3-1", "Gonzalo Goncer": "Argentina-Egipto·1|2-0", "Pablo Estevez": "Argentina-Estados Unidos·1|2-0", "Pablo": "Uruguay-Egipto·1|2-1", "Álvaro Rico": "Argentina-Bélgica·1|3-1", "Abo": "Argentina-Turquía·1|2-1", "Angel": "Argentina-Turquía·1|2-1", "Tito": "Argentina-Turquía·1|3-1", "Nico Muñoz": "Argentina-Egipto·X|1-1", "Sergio": "Argentina-Egipto·1|2-0", "Pozancos": "Argentina-Paraguay·1|1-0", "Alberto Castillo": "Argentina-Egipto·1|2-1", "Rober": "Argentina-Turquía·1|2-0", "Goncho": "Argentina-Egipto·1|2-0", "Urreison": "Argentina-Estados Unidos·1|1-0", "Juan Dionis": "Uruguay-Estados Unidos·1|2-1", "Juanmi": "Argentina-Estados Unidos·1|3-0", "El Oráculo": "Argentina-Irán·1|2-0"}}, {"fase": "1/8", "partido": "Suiza-Colombia", "bets": {"Roco": "Canadá-Portugal·2|1-2", "Fer": "Suiza-Portugal·2|0-2", "Cubelos": "Suiza-Portugal·2|0-2", "Nachi": "Argelia-Portugal·2|1-2", "Quique": "Suiza-Portugal·2|1-3", "Gonzalo Diaz": "Suiza-Portugal·2|1-2", "Gonzalo Goncer": "Suiza-Portugal·2|1-2", "Pablo Estevez": "Suiza-Portugal·2|1-3", "Pablo": "Suiza-Portugal·2|0-2", "Álvaro Rico": "Bosnia y Herzegovina-Portugal·X|1-1", "Abo": "Suiza-Portugal·X|0-0", "Angel": "Suiza-Portugal·2|1-2", "Tito": "Suiza-Portugal·2|1-3", "Nico Muñoz": "Suiza-Portugal·2|1-2", "Sergio": "Suiza-Portugal·2|1-2", "Pozancos": "Suiza-Portugal·2|1-3", "Alberto Castillo": "Canadá-Portugal·2|1-2", "Rober": "Suiza-Portugal·2|1-2", "Goncho": "Suiza-Portugal·2|0-2", "Urreison": "Suiza-Portugal·2|0-2", "Juan Dionis": "Suiza-Portugal·2|0-2", "Juanmi": "Suiza-Portugal·X|1-1", "El Oráculo": "Canadá-Portugal·2|1-2"}}];
+
+const OCTAVOS_BETS = [{"Roco": "Suiza-Marruecos·X|1-1", "Fer": "Bosnia y Herzegovina-Marruecos·2|0-2", "Cubelos": "Corea del Sur-Países Bajos·2|0-2", "Nachi": "Corea del Sur-Marruecos·2|0-1", "Quique": "Corea del Sur-Brasil·2|1-3", "Gonzalo Diaz": "República Checa-Países Bajos·2|1-2", "Gonzalo Goncer": "Canadá-Países Bajos·2|1-3", "Pablo Estevez": "Corea del Sur-Marruecos·2|0-2", "Pablo": "Canadá-Países Bajos·2|1-3", "Álvaro Rico": "Suiza-Brasil·2|1-2", "Abo": "Canadá-Países Bajos·X|1-1", "Angel": "Corea del Sur-Países Bajos·2|1-2", "Tito": "República Checa-Marruecos·2|1-2", "Nico Muñoz": "Canadá-Marruecos·2|1-2", "Sergio": "República Checa-Marruecos·2|1-2", "Pozancos": "Corea del Sur-Países Bajos·2|0-2", "Alberto Castillo": "Corea del Sur-Brasil·2|1-2", "Rober": "Corea del Sur-Países Bajos·2|1-2", "Goncho": "Canadá-Marruecos·2|0-2", "Urreison": "Corea del Sur-Japón·2|0-2", "Juan Dionis": "Corea del Sur-Países Bajos·2|1-2", "Juanmi": "Corea del Sur-Países Bajos·X|0-0", "El Oráculo": "Suiza-Países Bajos·2|1-2"}, {"Roco": "Alemania-Francia·2|1-2", "Fer": "Alemania-Francia·2|1-3", "Cubelos": "Alemania-Francia·2|0-2", "Nachi": "Alemania-Francia·2|1-2", "Quique": "Alemania-Francia·2|1-3", "Gonzalo Diaz": "Alemania-Francia·X|2-2", "Gonzalo Goncer": "Alemania-Francia·2|1-3", "Pablo Estevez": "Alemania-Francia·2|1-3", "Pablo": "Alemania-Francia·2|1-2", "Álvaro Rico": "Alemania-Francia·X|0-0", "Abo": "Alemania-Francia·2|2-3", "Angel": "Alemania-Francia·2|2-3", "Tito": "Ecuador-Francia·2|1-3", "Nico Muñoz": "Alemania-Francia·2|1-3", "Sergio": "Alemania-Francia·1|3-1", "Pozancos": "Alemania-Francia·2|1-2", "Alberto Castillo": "Alemania-Francia·2|1-2", "Rober": "Alemania-Francia·X|2-2", "Goncho": "Alemania-Francia·2|1-2", "Urreison": "Alemania-Francia·2|1-3", "Juan Dionis": "Alemania-Francia·2|1-2", "Juanmi": "Alemania-Noruega·X|2-2", "El Oráculo": "Alemania-Francia·2|1-2"}, {"Roco": "Brasil-Ecuador·1|2-0", "Fer": "Brasil-Ecuador·1|2-1", "Cubelos": "Brasil-Noruega·1|2-0", "Nachi": "Brasil-Noruega·1|2-1", "Quique": "Marruecos-Noruega·2|1-2", "Gonzalo Diaz": "Brasil-Noruega·1|2-1", "Gonzalo Goncer": "Brasil-Noruega·1|2-1", "Pablo Estevez": "Brasil-Ecuador·1|3-1", "Pablo": "Brasil-Ecuador·1|2-1", "Álvaro Rico": "Marruecos-Senegal·1|2-0", "Abo": "Marruecos-Senegal·1|2-1", "Angel": "Brasil-Noruega·1|3-1", "Tito": "Brasil-Alemania·1|2-1", "Nico Muñoz": "Brasil-Noruega·1|2-0", "Sergio": "Brasil-Senegal·1|2-1", "Pozancos": "Brasil-Noruega·1|1-0", "Alberto Castillo": "Marruecos-Noruega·1|2-1", "Rober": "Brasil-Senegal·1|2-0", "Goncho": "Brasil-Ecuador·1|2-0", "Urreison": "Marruecos-Noruega·1|2-0", "Juan Dionis": "Brasil-Ecuador·1|2-1", "Juanmi": "Marruecos-Francia·X|2-2", "El Oráculo": "Brasil-Ecuador·1|2-1"}, {"Roco": "México-Inglaterra·2|1-2", "Fer": "México-Inglaterra·2|0-2", "Cubelos": "México-Inglaterra·2|0-2", "Nachi": "México-Inglaterra·2|1-2", "Quique": "México-Inglaterra·1|1-0", "Gonzalo Diaz": "México-Inglaterra·2|1-2", "Gonzalo Goncer": "Escocia-Inglaterra·2|1-2", "Pablo Estevez": "México-Ghana·2|0-2", "Pablo": "Escocia-Inglaterra·2|0-2", "Álvaro Rico": "México-Inglaterra·2|0-1", "Abo": "México-Inglaterra·2|0-2", "Angel": "Marruecos-Inglaterra·1|2-1", "Tito": "México-Inglaterra·2|1-3", "Nico Muñoz": "México-Inglaterra·2|1-2", "Sergio": "Ecuador-Croacia·2|1-2", "Pozancos": "México-Inglaterra·2|1-2", "Alberto Castillo": "México-Inglaterra·2|1-2", "Rober": "México-Inglaterra·2|1-2", "Goncho": "México-Inglaterra·2|1-2", "Urreison": "México-Inglaterra·2|1-2", "Juan Dionis": "México-Inglaterra·2|1-3", "Juanmi": "México-Ghana·1|3-1", "El Oráculo": "México-Inglaterra·2|1-2"}, {"Roco": "Colombia-España·2|0-1", "Fer": "Colombia-España·2|1-2", "Cubelos": "Colombia-España·2|0-2", "Nachi": "Colombia-España·2|0-3", "Quique": "Colombia-España·2|0-1", "Gonzalo Diaz": "Croacia-España·2|1-3", "Gonzalo Goncer": "Croacia-España·2|1-3", "Pablo Estevez": "Colombia-España·2|0-2", "Pablo": "Colombia-España·2|1-2", "Álvaro Rico": "Colombia-España·2|0-1", "Abo": "Croacia-España·X|2-2", "Angel": "Croacia-España·2|1-3", "Tito": "Croacia-España·2|2-3", "Nico Muñoz": "Colombia-España·2|1-3", "Sergio": "Inglaterra-España·2|2-3", "Pozancos": "Colombia-España·2|1-2", "Alberto Castillo": "Croacia-España·2|1-2", "Rober": "Croacia-España·2|0-1", "Goncho": "Colombia-España·2|0-2", "Urreison": "Ghana-España·2|0-1", "Juan Dionis": "Croacia-España·2|1-3", "Juanmi": "Colombia-España·2|0-3", "El Oráculo": "Colombia-España·2|0-1"}, {"Roco": "Estados Unidos-Bélgica·1|2-0", "Fer": "Turquía-Bélgica·1|2-1", "Cubelos": "Estados Unidos-Bélgica·2|1-2", "Nachi": "Estados Unidos-Bélgica·2|2-3", "Quique": "Turquía-Bélgica·1|2-0", "Gonzalo Diaz": "Senegal-Bélgica·1|2-1", "Gonzalo Goncer": "Turquía-Bélgica·X|1-1", "Pablo Estevez": "Turquía-Irán·2|1-3", "Pablo": "Estados Unidos-Bélgica·2|1-3", "Álvaro Rico": "Turquía-Egipto·X|1-1", "Abo": "Estados Unidos-Bélgica·2|0-1", "Angel": "Estados Unidos-Bélgica·2|1-2", "Tito": "Estados Unidos-Bélgica·2|0-1", "Nico Muñoz": "Estados Unidos-Bélgica·2|1-2", "Sergio": "Noruega-Bélgica·2|1-2", "Pozancos": "Turquía-Bélgica·2|0-1", "Alberto Castillo": "Estados Unidos-Bélgica·2|1-2", "Rober": "Paraguay-Bélgica·2|0-1", "Goncho": "Estados Unidos-Bélgica·1|1-0", "Urreison": "Senegal-Bélgica·1|2-0", "Juan Dionis": "Turquía-Bélgica·X|1-1", "Juanmi": "Turquía-Bélgica·1|2-1", "El Oráculo": "Estados Unidos-Bélgica·2|1-3"}, {"Roco": "Argentina-Turquía·1|3-0", "Fer": "Argentina-Egipto·1|2-1", "Cubelos": "Argentina-Turquía·1|2-0", "Nachi": "Argentina-Turquía·1|2-1", "Quique": "Uruguay-Estados Unidos·2|0-1", "Gonzalo Diaz": "Argentina-Estados Unidos·1|3-1", "Gonzalo Goncer": "Argentina-Egipto·1|2-0", "Pablo Estevez": "Argentina-Estados Unidos·1|2-0", "Pablo": "Uruguay-Egipto·1|2-1", "Álvaro Rico": "Argentina-Bélgica·1|3-1", "Abo": "Argentina-Turquía·1|2-1", "Angel": "Argentina-Turquía·1|2-1", "Tito": "Argentina-Turquía·1|3-1", "Nico Muñoz": "Argentina-Egipto·X|1-1", "Sergio": "Argentina-Egipto·1|2-0", "Pozancos": "Argentina-Paraguay·1|1-0", "Alberto Castillo": "Argentina-Egipto·1|2-1", "Rober": "Argentina-Turquía·1|2-0", "Goncho": "Argentina-Egipto·1|2-0", "Urreison": "Argentina-Estados Unidos·1|1-0", "Juan Dionis": "Uruguay-Estados Unidos·1|2-1", "Juanmi": "Argentina-Estados Unidos·1|3-0", "El Oráculo": "Argentina-Irán·1|2-0"}, {"Roco": "Canadá-Portugal·2|1-2", "Fer": "Suiza-Portugal·2|0-2", "Cubelos": "Suiza-Portugal·2|0-2", "Nachi": "Argelia-Portugal·2|1-2", "Quique": "Suiza-Portugal·2|1-3", "Gonzalo Diaz": "Suiza-Portugal·2|1-2", "Gonzalo Goncer": "Suiza-Portugal·2|1-2", "Pablo Estevez": "Suiza-Portugal·2|1-3", "Pablo": "Suiza-Portugal·2|0-2", "Álvaro Rico": "Bosnia y Herzegovina-Portugal·X|1-1", "Abo": "Suiza-Portugal·X|0-0", "Angel": "Suiza-Portugal·2|1-2", "Tito": "Suiza-Portugal·2|1-3", "Nico Muñoz": "Suiza-Portugal·2|1-2", "Sergio": "Suiza-Portugal·2|1-2", "Pozancos": "Suiza-Portugal·2|1-3", "Alberto Castillo": "Canadá-Portugal·2|1-2", "Rober": "Suiza-Portugal·2|1-2", "Goncho": "Suiza-Portugal·2|0-2", "Urreison": "Suiza-Portugal·2|0-2", "Juan Dionis": "Suiza-Portugal·2|0-2", "Juanmi": "Suiza-Portugal·X|1-1", "El Oráculo": "Canadá-Portugal·2|1-2"}];
+const REAL_MATCHES_8 = [["Canadá", "Marruecos", null, null, "4 jul", "19:00"], ["Paraguay", "Francia", null, null, "4 jul", "23:00"], ["Brasil", "Noruega", null, null, "5 jul", "22:00"], ["México", "Inglaterra", null, null, "6 jul", "02:00"], ["Portugal", "España", null, null, "6 jul", "21:00"], ["Estados Unidos", "Bélgica", null, null, "7 jul", "02:00"], ["Argentina", "Egipto", null, null, "7 jul", "18:00"], ["Suiza", "Colombia", null, null, "7 jul", "22:00"]];
+
+const knockoutMatches1_16 = MATCHES.filter(m => m.fase === '1/16' && !m.partido.startsWith('Dieciseisavo'));
+const knockoutMatches1_8 = MATCHES.filter(m => m.fase === '1/8' && !m.partido.startsWith('Octavo'));
+// Qualifier picks
+const picks1_16 = MATCHES.filter(m => m.fase === '1/16' && m.partido.startsWith('Dieciseisavo'));
+const picks1_8 = MATCHES.filter(m => m.fase === '1/8' && m.partido.startsWith('Octavo'));
+
+// State
+let activePhase = 'today';
+let activeGroup = 'A';
+let searchTerm = '';
+let highlightedParticipant = '';
+
+// Phase filters
+function buildPhaseFilters() {
+  const pf = document.getElementById('phaseFilters');
+  pf.innerHTML = '';
+  const phases = [
+    { key: 'today', label: '📅 Partidos de Hoy' },
+    { key: 'tomorrow', label: '🗓️ Partidos de Mañana' },
+    { key: 'groups', label: '⚽ Fase de Grupos' },
+    { key: '1/16', label: '🔥 Dieciseisavos' },
+    { key: '1/8', label: '🏆 Octavos' },
+    { key: 'ranking', label: '🏅 Clasificación' },
+    { key: 'apuestas', label: '🎲 Apuestas Especiales' },
+  ];
+  phases.forEach(ph => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (activePhase === ph.key ? ' active' : '');
+    btn.textContent = ph.label;
+    btn.addEventListener('click', () => {
+      activePhase = ph.key;
+      render();
+    });
+    pf.appendChild(btn);
+  });
+}
+
+function dateKey(d) {
+  const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return `${d.getDate()} ${months[d.getMonth()]}`;
+}
+
+const FLAGS = {
+  'México': '🇲🇽', 'Sudáfrica': '🇿🇦', 'Corea del Sur': '🇰🇷', 'República Checa': '🇨🇿',
+  'Canadá': '🇨🇦', 'Bosnia y Herzegovina': '🇧🇦', 'Catar': '🇶🇦', 'Suiza': '🇨🇭',
+  'Brasil': '🇧🇷', 'Marruecos': '🇲🇦', 'Haití': '🇭🇹', 'Escocia': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+  'Estados Unidos': '🇺🇸', 'Paraguay': '🇵🇾', 'Australia': '🇦🇺', 'Turquía': '🇹🇷',
+  'Alemania': '🇩🇪', 'Curazao': '🇨🇼', 'Costa de Marfil': '🇨🇮', 'Ecuador': '🇪🇨',
+  'Países Bajos': '🇳🇱', 'Japón': '🇯🇵', 'Suecia': '🇸🇪', 'Túnez': '🇹🇳',
+  'Bélgica': '🇧🇪', 'Egipto': '🇪🇬', 'Irán': '🇮🇷', 'Nueva Zelanda': '🇳🇿',
+  'España': '🇪🇸', 'Cabo Verde': '🇨🇻', 'Arabia Saudita': '🇸🇦', 'Uruguay': '🇺🇾',
+  'Francia': '🇫🇷', 'Senegal': '🇸🇳', 'Irak': '🇮🇶', 'Noruega': '🇳🇴',
+  'Argentina': '🇦🇷', 'Argelia': '🇩🇿', 'Austria': '🇦🇹', 'Jordania': '🇯🇴',
+  'Portugal': '🇵🇹', 'RD Congo': '🇨🇩', 'Uzbekistán': '🇺🇿', 'Colombia': '🇨🇴',
+  'Inglaterra': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croacia': '🇭🇷', 'Ghana': '🇬🇭', 'Panamá': '🇵🇦',
+};
+function flag(team) { return FLAGS[team.trim()] || '🏳️'; }
+
+function sortByTime(matches) {
+  return matches.slice().sort((a, b) => {
+    const [ha, ma] = (SCHEDULE[a.partido]?.[1] || '99:99').split(':').map(Number);
+    const [hb, mb] = (SCHEDULE[b.partido]?.[1] || '99:99').split(':').map(Number);
+    const ta = ha < 10 ? ha + 24 : ha;
+    const tb = hb < 10 ? hb + 24 : hb;
+    return (ta * 60 + ma) - (tb * 60 + mb);
+  });
+}
+
+function renderToday() {
+  const now = new Date();
+  // Window: from 08:00 today to 05:00 next day
+  const windowStart = new Date(now);
+  windowStart.setHours(10, 0, 0, 0);
+  const windowEnd = new Date(now);
+  windowEnd.setDate(windowEnd.getDate() + 1);
+  windowEnd.setHours(7, 59, 0, 0);
+
+  if (now < windowStart) {
+    windowStart.setDate(windowStart.getDate() - 1);
+    windowEnd.setDate(windowEnd.getDate() - 1);
+  }
+
+  const startKey = dateKey(windowStart);
+  const endKey = dateKey(windowEnd);  // may be same or next day
+
+  // Find all group matches within window
+  const allMatches = [...MATCHES, ...OCTAVOS_TODAY_MATCHES];
+  const todayMatches = allMatches.filter(m => {
+    const sched = SCHEDULE[m.partido];
+    if (!sched) return false;
+    const [dayStr, hora] = [sched[0], sched[1]];
+    const [h, min] = hora.split(':').map(Number);
+    // Reconstruct match datetime (assume year 2026, June)
+    const monthMap = {ene:0,feb:1,mar:2,abr:3,may:4,jun:5,jul:6,ago:7,sep:8,oct:9,nov:10,dic:11};
+    const parts = dayStr.split(' ');
+    const matchDay = parseInt(parts[0]);
+    const matchMonth = monthMap[parts[1]] ?? 5;
+    const matchDate = new Date(2026, matchMonth, matchDay, h, min, 0);
+    return matchDate >= windowStart && matchDate < windowEnd;
+  });
+
+  const todayKey = dateKey(now < new Date(new Date().setHours(8,0,0,0)) 
+    ? new Date(now.getTime() - 86400000) : now);
+
+  if (todayMatches.length === 0) {
+    return `
+      <div class="today-empty">
+        <div class="today-empty-icon">📅</div>
+        <div class="today-empty-title">No hay partidos hoy</div>
+        <div class="today-empty-sub">Hoy es ${todayKey}. Los partidos del Mundial van del 11 de junio al 27 de junio.</div>
+      </div>`;
+  }
+
+  let html = `<div class="today-header-bar"><span class="today-date-big">📅 ${todayKey.toUpperCase()}</span><span class="today-count">${todayMatches.length} partido${todayMatches.length > 1 ? 's' : ''} hoy</span></div>`;
+
+  // --- LÍDERES DE LA JORNADA ---
+  const playedToday = todayMatches.filter(m => RESULTS_CACHE[m.partido]);
+  if (playedToday.length > 0) {
+    const dayScores = {};
+    PARTICIPANTS.forEach(p => dayScores[p] = { total: 0, sign: 0, exact: 0 });
+
+    playedToday.forEach(m => {
+      const actual = RESULTS_CACHE[m.partido];
+      const [g1, g2] = actual.split('-').map(Number);
+      const actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      PARTICIPANTS.forEach(p => {
+        const val = m.bets[p] || '';
+        if (!val || val === 'nan') return;
+        const b = parseBet(val);
+        if (!b || !b.sign) return;
+        if (b.sign === actualSign) {
+          dayScores[p].sign++;
+          dayScores[p].total += 1;
+          if (b.score === actual) {
+            dayScores[p].exact++;
+            dayScores[p].total += 2;
+          }
+        }
+      });
+    });
+
+    const top3 = PARTICIPANTS
+      .map(p => ({ name: p, ...dayScores[p] }))
+      .filter(p => p.total > 0)
+      .sort((a, b) => b.total - a.total || b.exact - a.exact)
+      .slice(0, 3);
+
+    // If tied for bronze, show names joined
+    if (top3.length === 3) {
+      const bronzePts = top3[2].total;
+      const bronzeEx = top3[2].exact;
+      const tiedNames = PARTICIPANTS
+        .map(p => ({ name: p, ...dayScores[p] }))
+        .filter(p => p.total === bronzePts && p.exact === bronzeEx)
+        .map(p => p.name);
+      if (tiedNames.length > 1) top3[2].name = tiedNames.join(' / ');
+    }
+
+    if (top3.length > 0) {
+      const medals = ['🥇', '🥈', '🥉'];
+      const cards = top3.map((p, i) => `
+        <div class="leader-card">
+          <div class="leader-medal">${medals[i]}</div>
+          <div class="leader-name">${p.name}</div>
+          <div class="leader-pts">${p.total} <span class="leader-pts-label">pts</span></div>
+        </div>`).join('');
+
+      html += `
+        <div class="leaders-section">
+          <div class="leaders-title">🏆 Líderes de la Jornada</div>
+          <div class="leaders-subtitle">${playedToday.length} partido${playedToday.length > 1 ? 's' : ''} finalizado${playedToday.length > 1 ? 's' : ''}</div>
+          <div class="leaders-grid">${cards}</div>
+        </div>`;
+    }
+  }
+
+  sortByTime(todayMatches).forEach(match => {
+    const sched = SCHEDULE[match.partido];
+    const [team1raw, team2raw] = match.partido.split('-');
+    const team1 = team1raw.trim();
+    const team2 = team2raw.trim();
+
+    // Aggregate bets: group by sign|score
+    // For knockout matches (fase 1/8), only include porredores who bet these exact teams
+    const byResult = {};
+    const isKnockout = match.fase === '1/8';
+    PARTICIPANTS.forEach(p => {
+      let val = match.bets[p] || '';
+      if (!val || val === 'nan') return;
+      if (val.includes('·')) {
+        // Knockout format: check if teams match real match
+        const [betTeams, betResult] = val.split('·');
+        const betT1 = betTeams.split('-')[0]?.trim();
+        const betT2 = betTeams.split('-').slice(1).join('-').trim();
+        const teamsMatch = (betT1 === team1 && betT2 === team2) || (betT1 === team2 && betT2 === team1);
+        if (!teamsMatch) return; // skip if different match
+        val = betResult || '';
+      } else if (isKnockout) {
+        return; // knockout without teams format, skip
+      }
+      if (!val) return;
+      if (!byResult[val]) byResult[val] = [];
+      byResult[val].push(p);
+    });
+
+    // Sort: 1 bets first, then X, then 2
+    const order = {'1': 0, 'X': 1, '2': 2};
+    const sorted = Object.entries(byResult).sort(([a], [b]) => {
+      const sa = a.split('|')[0]; const sb = b.split('|')[0];
+      return (order[sa] ?? 9) - (order[sb] ?? 9);
+    });
+
+    const resultCols = sorted.map(([bet, players]) => {
+      const [sign, score] = bet.split('|');
+      const signClass = `sign-${sign}`;
+      const label = sign === '1' ? team1 : sign === '2' ? team2 : 'Empate';
+      const avatars = players.map(p => `<span class="avatar" title="${p}">${p.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</span>`).join('');
+      const names = players.map(p => `<span class="bettor-name">${p}</span>`).join('');
+      return `
+        <div class="result-col">
+          <div class="result-top">
+            <span class="sign ${signClass}">${sign}</span>
+            <span class="result-score">${score || ''}</span>
+          </div>
+          <div class="result-label">${label}</div>
+          <div class="result-count">${players.length} porredor${players.length > 1 ? 'es' : ''}</div>
+          <div class="bettor-list">${names}</div>
+        </div>`;
+    }).join('');
+
+    html += `
+      <div class="today-match-card">
+        <div class="today-match-header">
+          <div class="today-match-teams">
+            <span class="team-name">${flag(team1)} ${team1}</span>
+            <span class="vs-badge">VS</span>
+            <span class="team-name">${team2} ${flag(team2)}</span>
+          </div>
+          <div class="today-match-meta">
+            <span class="today-time">🕐 ${sched[1]} (hora española)</span>
+            <span class="fase-tag">Grupo ${match.fase[0]}</span>
+          </div>
+        </div>
+        <div class="results-grid">${resultCols}</div>
+      </div>`;
+  });
+
+  return html;
+}
+
+function renderTomorrow() {
+  const now = new Date();
+
+  // Tomorrow's window = today's window shifted exactly +24h
+  const windowStart = new Date(now);
+  windowStart.setHours(10, 0, 0, 0);
+  if (now < windowStart) windowStart.setDate(windowStart.getDate() - 1);
+  // Shift +24h
+  windowStart.setDate(windowStart.getDate() + 1);
+  const windowEnd = new Date(windowStart);
+  windowEnd.setDate(windowEnd.getDate() + 1);
+  windowEnd.setHours(7, 59, 0, 0);
+
+  const monthMap = {ene:0,feb:1,mar:2,abr:3,may:4,jun:5,jul:6,ago:7,sep:8,oct:9,nov:10,dic:11};
+
+  const allMatchesTom = [...MATCHES, ...OCTAVOS_TODAY_MATCHES];
+  const tomorrowMatches = allMatchesTom.filter(m => {
+    const sched = SCHEDULE[m.partido];
+    if (!sched) return false;
+    const [dayStr, hora] = [sched[0], sched[1]];
+    const [h, min] = hora.split(':').map(Number);
+    const parts = dayStr.split(' ');
+    const matchDate = new Date(2026, monthMap[parts[1]] ?? 5, parseInt(parts[0]), h, min, 0);
+    return matchDate >= windowStart && matchDate < windowEnd;
+  });
+
+  const tomorrowKey = dateKey(windowStart);
+
+  if (tomorrowMatches.length === 0) {
+    return `
+      <div class="today-empty">
+        <div class="today-empty-icon">🗓️</div>
+        <div class="today-empty-title">No hay partidos mañana</div>
+        <div class="today-empty-sub">Mañana es ${tomorrowKey}. Los partidos del Mundial van del 11 de junio al 27 de junio.</div>
+      </div>`;
+  }
+
+  let html = `<div class="today-header-bar"><span class="today-date-big">🗓️ ${tomorrowKey.toUpperCase()}</span><span class="today-count">${tomorrowMatches.length} partido${tomorrowMatches.length > 1 ? 's' : ''} mañana</span></div>`;
+
+  sortByTime(tomorrowMatches).forEach(match => {
+    const sched = SCHEDULE[match.partido];
+    const [team1raw, team2raw] = match.partido.split('-');
+    const team1 = team1raw.trim();
+    const team2 = team2raw.trim();
+
+    const byResult = {};
+    const isKnockout = match.fase === '1/8';
+    PARTICIPANTS.forEach(p => {
+      let val = match.bets[p] || '';
+      if (!val || val === 'nan') return;
+      if (val.includes('·')) {
+        const [betTeams, betResult] = val.split('·');
+        const betT1 = betTeams.split('-')[0]?.trim();
+        const betT2 = betTeams.split('-').slice(1).join('-').trim();
+        const teamsMatch = (betT1 === team1 && betT2 === team2) || (betT1 === team2 && betT2 === team1);
+        if (!teamsMatch) return;
+        val = betResult || '';
+      } else if (isKnockout) {
+        return;
+      }
+      if (!val) return;
+      if (!byResult[val]) byResult[val] = [];
+      byResult[val].push(p);
+    });
+
+    const order = {'1': 0, 'X': 1, '2': 2};
+    const sorted = Object.entries(byResult).sort(([a], [b]) => {
+      const sa = a.split('|')[0]; const sb = b.split('|')[0];
+      return (order[sa] ?? 9) - (order[sb] ?? 9);
+    });
+
+    const resultCols = sorted.map(([bet, players]) => {
+      const [sign, score] = bet.split('|');
+      const label = sign === '1' ? team1 : sign === '2' ? team2 : 'Empate';
+      const names = players.map(p => `<span class="bettor-name">${p}</span>`).join('');
+      return `
+        <div class="result-col">
+          <div class="result-top">
+            <span class="sign sign-${sign}">${sign}</span>
+            <span class="result-score">${score || ''}</span>
+          </div>
+          <div class="result-label">${label}</div>
+          <div class="result-count">${players.length} porredor${players.length > 1 ? 'es' : ''}</div>
+          <div class="bettor-list">${names}</div>
+        </div>`;
+    }).join('');
+
+    html += `
+      <div class="today-match-card">
+        <div class="today-match-header">
+          <div class="today-match-teams">
+            <span class="team-name">${flag(team1)} ${team1}</span>
+            <span class="vs-badge">VS</span>
+            <span class="team-name">${team2} ${flag(team2)}</span>
+          </div>
+          <div class="today-match-meta">
+            <span class="today-time">🕐 ${sched[1]} (hora española)</span>
+            <span class="fase-tag">Grupo ${match.fase[0]}</span>
+          </div>
+        </div>
+        <div class="results-grid">${resultCols}</div>
+      </div>`;
+  });
+
+  return html;
+}
+
+// ---- RESULTS FETCHING ----
+// ⚠️ REEMPLAZA ESTA URL CON LA DE TU GOOGLE SHEETS (ver hoja "Instrucciones" del Excel)
+const GOOGLE_SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRB9NRTSJApmxkht02SMFleT6O6UPOJbWpWv0ti6glgSchFo7mhhAwnFfJuoE14EA/pub?output=csv';
+
+// Partido name normalization map (Excel short names → HTML partido names)
+const PARTIDO_MAP = {
+  'México - Sudáfrica': 'México-Sudáfrica',
+  'Corea del Sur - R. Checa': 'Corea del Sur-República Checa',
+  'R. Checa - Sudáfrica': 'República Checa-Sudáfrica',
+  'México - Corea del Sur': 'México-Corea del Sur',
+  'R. Checa - México': 'República Checa-México',
+  'Sudáfrica - Corea del Sur': 'Sudáfrica-Corea del Sur',
+  'Canadá - Bosnia': 'Canadá-Bosnia y Herzegovina',
+  'Catar - Suiza': 'Catar-Suiza',
+  'Suiza - Bosnia': 'Suiza-Bosnia y Herzegovina',
+  'Canadá - Catar': 'Canadá-Catar',
+  'Suiza - Canadá': 'Suiza-Canadá',
+  'Bosnia - Catar': 'Bosnia y Herzegovina-Catar',
+  'Brasil - Marruecos': 'Brasil-Marruecos',
+  'Haití - Escocia': 'Haití-Escocia',
+  'Brasil - Haití': 'Brasil-Haití',
+  'Escocia - Marruecos': 'Escocia-Marruecos',
+  'Escocia - Brasil': 'Escocia-Brasil',
+  'Marruecos - Haití': 'Marruecos-Haití',
+  'Estados Unidos - Paraguay': 'Estados Unidos-Paraguay',
+  'Australia - Turquía': 'Australia-Turquía',
+  'Turquía - Paraguay': 'Turquía-Paraguay',
+  'Estados Unidos - Australia': 'Estados Unidos-Australia',
+  'Turquía - Estados Unidos': 'Turquía-Estados Unidos',
+  'Paraguay - Australia': 'Paraguay-Australia',
+  'Alemania - Curazao': 'Alemania-Curazao',
+  'C. Marfil - Ecuador': 'Costa de Marfil-Ecuador',
+  'Alemania - C. Marfil': 'Alemania-Costa de Marfil',
+  'Ecuador - Curazao': 'Ecuador-Curazao',
+  'Ecuador - Alemania': 'Ecuador-Alemania',
+  'Curazao - C. Marfil': 'Curazao-Costa de Marfil',
+  'Países Bajos - Japón': 'Países Bajos-Japón',
+  'Suecia - Túnez': 'Suecia-Túnez',
+  'Países Bajos - Suecia': 'Países Bajos-Suecia',
+  'Túnez - Japón': 'Túnez-Japón',
+  'Túnez - Países Bajos': 'Túnez-Países Bajos',
+  'Japón - Suecia': 'Japón-Suecia',
+  'Bélgica - Egipto': 'Bélgica-Egipto',
+  'Irán - Nueva Zelanda': 'Irán-Nueva Zelanda',
+  'Bélgica - Irán': 'Bélgica-Irán',
+  'Nueva Zelanda - Egipto': 'Nueva Zelanda-Egipto',
+  'Nueva Zelanda - Bélgica': 'Nueva Zelanda-Bélgica',
+  'Egipto - Irán': 'Egipto-Irán',
+  'España - Cabo Verde': 'España-Cabo Verde',
+  'Arabia Saudita - Uruguay': 'Arabia Saudita-Uruguay',
+  'España - Arabia Saudita': 'España-Arabia Saudita',
+  'Uruguay - Cabo Verde': 'Uruguay-Cabo Verde',
+  'Uruguay - España': 'Uruguay-España',
+  'Cabo Verde - Arabia Saudita': 'Cabo Verde-Arabia Saudita',
+  'Francia - Senegal': 'Francia-Senegal',
+  'Irak - Noruega': 'Irak-Noruega',
+  'Francia - Irak': 'Francia-Irak',
+  'Noruega - Senegal': 'Noruega-Senegal',
+  'Noruega - Francia': 'Noruega-Francia',
+  'Senegal - Irak': 'Senegal-Irak',
+  'Argentina - Argelia': 'Argentina-Argelia',
+  'Austria - Jordania': 'Austria-Jordania',
+  'Argentina - Austria': 'Argentina-Austria',
+  'Jordania - Argelia': 'Jordania-Argelia',
+  'Jordania - Argentina': 'Jordania-Argentina',
+  'Argelia - Austria': 'Argelia-Austria',
+  'Portugal - RD Congo': 'Portugal-RD Congo',
+  'Uzbekistán - Colombia': 'Uzbekistán-Colombia',
+  'Portugal - Uzbekistán': 'Portugal-Uzbekistán',
+  'Colombia - RD Congo': 'Colombia-RD Congo',
+  'Colombia - Portugal': 'Colombia-Portugal',
+  'RD Congo - Uzbekistán': 'RD Congo-Uzbekistán',
+  'Inglaterra - Croacia': 'Inglaterra-Croacia',
+  'Ghana - Panamá': 'Ghana-Panamá',
+  'Inglaterra - Ghana': 'Inglaterra-Ghana',
+  'Panamá - Croacia': 'Panamá-Croacia',
+  'Panamá - Inglaterra': 'Panamá-Inglaterra',
+  'Croacia - Ghana': 'Croacia-Ghana',
+};
+
+// Fallback embedded results (se actualizan desde Google Sheets)
+// Resultados embebidos — tienen prioridad sobre Google Sheets
+const EMBEDDED_RESULTS = {
+  'México-Sudáfrica': '2-0',
+  'Corea del Sur-República Checa': '2-1',
+  'Canadá-Bosnia y Herzegovina': '1-1',
+  'Estados Unidos-Paraguay': '4-1',
+  'Catar-Suiza': '1-1',
+  'Brasil-Marruecos': '1-1',
+  'Haití-Escocia': '0-1',
+  'Australia-Turquía': '2-0',
+  'Alemania-Curazao': '7-1',
+  'Costa de Marfil-Ecuador': '1-0',
+  'Países Bajos-Japón': '2-2',
+  'Suecia-Túnez': '5-1',
+  'Bélgica-Egipto': '1-1',
+  'Irán-Nueva Zelanda': '2-2',
+  'España-Cabo Verde': '0-0',
+  'Arabia Saudita-Uruguay': '1-1',
+  'Francia-Senegal': '3-1',
+  'Irak-Noruega': '1-4',
+  'Argentina-Argelia': '3-0',
+  'Austria-Jordania': '3-1',
+  'España-Arabia Saudita': '4-0',
+  'Uzbekistán-Colombia': '1-3',
+  'Inglaterra-Croacia': '4-2',
+  'Ghana-Panamá': '3-0',
+  'República Checa-Sudáfrica': '1-1',
+};
+
+let RESULTS_CACHE = Object.assign({}, EMBEDDED_RESULTS);
+
+// Mapa de nombres football-data.org → nombres del HTML
+const FD_TEAM_MAP = {
+  'Mexico': 'México', 'South Africa': 'Sudáfrica', 'South Korea': 'Corea del Sur',
+  'Czech Republic': 'República Checa', 'Czechia': 'República Checa',
+  'Canada': 'Canadá', 'Bosnia and Herzegovina': 'Bosnia y Herzegovina',
+  'Bosnia & Herzegovina': 'Bosnia y Herzegovina', 'Bosnia-Herzegovina': 'Bosnia y Herzegovina',
+  'Qatar': 'Catar', 'Switzerland': 'Suiza', 'Brazil': 'Brasil', 'Morocco': 'Marruecos',
+  'Haiti': 'Haití', 'Scotland': 'Escocia', 'United States': 'Estados Unidos',
+  'USA': 'Estados Unidos', 'Paraguay': 'Paraguay', 'Australia': 'Australia',
+  'Turkey': 'Turquía', 'Türkiye': 'Turquía', 'Germany': 'Alemania',
+  'Curaçao': 'Curazao', 'Curacao': 'Curazao',
+  "Côte d'Ivoire": 'Costa de Marfil', 'Ivory Coast': 'Costa de Marfil',
+  'Ecuador': 'Ecuador', 'Netherlands': 'Países Bajos', 'Japan': 'Japón',
+  'Sweden': 'Suecia', 'Tunisia': 'Túnez', 'Belgium': 'Bélgica', 'Egypt': 'Egipto',
+  'Iran': 'Irán', 'New Zealand': 'Nueva Zelanda', 'Spain': 'España',
+  'Cape Verde': 'Cabo Verde', 'Saudi Arabia': 'Arabia Saudita', 'Uruguay': 'Uruguay',
+  'France': 'Francia', 'Senegal': 'Senegal', 'Iraq': 'Irak', 'Norway': 'Noruega',
+  'Argentina': 'Argentina', 'Algeria': 'Argelia', 'Austria': 'Austria',
+  'Jordan': 'Jordania', 'Portugal': 'Portugal', 'DR Congo': 'RD Congo',
+  'Democratic Republic of Congo': 'RD Congo',
+  'Uzbekistan': 'Uzbekistán', 'Colombia': 'Colombia', 'England': 'Inglaterra',
+  'Croatia': 'Croacia', 'Ghana': 'Ghana', 'Panama': 'Panamá',
+};
+
+async function loadResults() {
+  try {
+    const res = await fetch('/api/results');
+    if (!res.ok) return;
+    const data = await res.json();
+    (data.matches || []).forEach(m => {
+      const h = FD_TEAM_MAP[m.homeTeam.name] || m.homeTeam.name;
+      const a = FD_TEAM_MAP[m.awayTeam.name] || m.awayTeam.name;
+      const gh = m.score.fullTime.home;
+      const ga = m.score.fullTime.away;
+      if (gh === null || ga === null) return;
+      RESULTS_CACHE[`${h}-${a}`] = `${gh}-${ga}`;
+    });
+  } catch(e) {
+    console.warn('Results fetch failed:', e);
+  }
+}
+
+function isMatchPlayed(partido) {
+  return !!RESULTS_CACHE[partido];
+}
+
+function updateResultCells() {
+  document.querySelectorAll('[data-result-partido]').forEach(el => {
+    const partido = el.getAttribute('data-result-partido');
+    if (!isMatchPlayed(partido)) {
+      el.innerHTML = '<span class="score-pending">—</span>';
+      return;
+    }
+    const score = RESULTS_CACHE[partido];
+    el.innerHTML = score
+      ? `<span class="score-badge">${score}</span>`
+      : '<span class="score-pending">?</span>';
+  });
+}
+
+async function refreshResults() {
+  const btn = document.getElementById('refreshBtn');
+  if (btn) { btn.textContent = '⏳ Cargando...'; btn.disabled = true; }
+  await loadResults();
+  updateResultCells();
+  if (btn) {
+    btn.textContent = '✅ Actualizado';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = '🔄 Actualizar resultados'; }, 3000);
+  }
+}
+// ---- END RESULTS FETCHING ----
+// Posiciones reales de grupo (actualizar conforme termine cada grupo)
+// Formato: { '1A': 'México', '2A': 'Corea del Sur', ... }
+const GROUP_STANDINGS = {
+  '1A': 'México', '2A': 'Sudáfrica', '3A': 'Corea del Sur', '4A': 'República Checa',
+  '1B': 'Suiza', '2B': 'Canadá', '3B': 'Bosnia y Herzegovina', '4B': 'Catar',
+  '1C': 'Brasil', '2C': 'Marruecos', '3C': 'Escocia', '4C': 'Haití',
+  '1D': 'Estados Unidos', '2D': 'Australia', '3D': 'Paraguay', '4D': 'Turquía',
+  '1E': 'Alemania', '2E': 'Costa de Marfil', '3E': 'Ecuador', '4E': 'Curazao',
+  '1F': 'Países Bajos', '2F': 'Japón', '3F': 'Suecia', '4F': 'Túnez',
+  '1G': 'Bélgica', '2G': 'Egipto', '3G': 'Irán', '4G': 'Nueva Zelanda',
+  '1H': 'España', '2H': 'Cabo Verde', '3H': 'Uruguay', '4H': 'Arabia Saudita',
+  '1I': 'Francia', '2I': 'Noruega', '3I': 'Senegal', '4I': 'Irak',
+  '1J': 'Argentina', '2J': 'Austria', '3J': 'Argelia', '4J': 'Jordania',
+  '1K': 'Colombia', '2K': 'Portugal', '3K': 'RD Congo', '4K': 'Uzbekistán',
+  '1L': 'Inglaterra', '2L': 'Croacia', '3L': 'Ghana', '4L': 'Panamá',
+};
+
+// Resultados finales especiales (actualizar al terminar el torneo)
+const SPECIAL_RESULTS = {
+  campeon: null, subcampeon: null, tercero: null,
+  bota_oro: null, bota_plata: null, bota_bronce: null,
+  balon_oro: null, balon_plata: null, balon_bronce: null,
+};
+
+
+
+// ---- POSITION & SPECIAL BETS ----
+const POSITION_BETS = {"Roco": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Canadá", "2B": "Suiza", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Irán", "3G": "Egipto", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Fer": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Bosnia y Herzegovina", "3B": "Canadá", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Cubelos": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Australia", "4D": "Paraguay", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Irán", "3G": "Egipto", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Nachi": {"1A": "México", "2A": "Corea del Sur", "3A": "Sudáfrica", "4A": "República Checa", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Australia", "4D": "Paraguay", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Quique": {"1A": "México", "2A": "Corea del Sur", "3A": "Sudáfrica", "4A": "República Checa", "1B": "Suiza", "2B": "Bosnia y Herzegovina", "3B": "Canadá", "4B": "Catar", "1C": "Marruecos", "2C": "Brasil", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Panamá", "4L": "Ghana"}, "Gonzalo Diaz": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Australia", "4D": "Paraguay", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Irán", "3G": "Egipto", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Gonzalo Goncer": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Pablo Estevez": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Suecia", "2F": "Túnez", "3F": "Países Bajos", "4F": "Japón", "1G": "Irán", "2G": "Bélgica", "3G": "Nueva Zelanda", "4G": "Egipto", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Ghana", "2L": "Inglaterra", "3L": "Panamá", "4L": "Croacia"}, "Pablo": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Álvaro Rico": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Bosnia y Herzegovina", "2B": "Suiza", "3B": "Canadá", "4B": "Catar", "1C": "Marruecos", "2C": "Brasil", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Egipto", "2G": "Bélgica", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Senegal", "3I": "Noruega", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Abo": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Catar", "4B": "Bosnia y Herzegovina", "1C": "Marruecos", "2C": "Brasil", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Australia", "4D": "Paraguay", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Senegal", "3I": "Noruega", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Angel": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Escocia", "3C": "Marruecos", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Nueva Zelanda", "4G": "Irán", "1H": "España", "2H": "Cabo Verde", "3H": "Uruguay", "4H": "Arabia Saudita", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Tito": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Ecuador", "2E": "Alemania", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Nico Muñoz": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Sergio": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Catar", "3B": "Canadá", "4B": "Bosnia y Herzegovina", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Paraguay", "3D": "Turquía", "4D": "Australia", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Suecia", "2F": "Países Bajos", "3F": "Túnez", "4F": "Japón", "1G": "Bélgica", "2G": "Egipto", "3G": "Nueva Zelanda", "4G": "Irán", "1H": "España", "2H": "Uruguay", "3H": "Cabo Verde", "4H": "Arabia Saudita", "1I": "Francia", "2I": "Senegal", "3I": "Noruega", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Croacia", "2L": "Inglaterra", "3L": "Ghana", "4L": "Panamá"}, "Pozancos": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Paraguay", "3D": "Estados Unidos", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Alberto Castillo": {"1A": "México", "2A": "Corea del Sur", "3A": "Sudáfrica", "4A": "República Checa", "1B": "Canadá", "2B": "Suiza", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Marruecos", "2C": "Brasil", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Australia", "3D": "Turquía", "4D": "Paraguay", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Rober": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Bosnia y Herzegovina", "3B": "Canadá", "4B": "Catar", "1C": "Brasil", "2C": "Escocia", "3C": "Marruecos", "4C": "Haití", "1D": "Paraguay", "2D": "Turquía", "3D": "Estados Unidos", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Cabo Verde", "4H": "Arabia Saudita", "1I": "Francia", "2I": "Senegal", "3I": "Noruega", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Panamá", "4L": "Ghana"}, "Goncho": {"1A": "México", "2A": "República Checa", "3A": "Corea del Sur", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Cabo Verde", "4H": "Arabia Saudita", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Urreison": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Bosnia y Herzegovina", "3B": "Canadá", "4B": "Catar", "1C": "Marruecos", "2C": "Brasil", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Australia", "4D": "Paraguay", "1E": "Alemania", "2E": "Costa de Marfil", "3E": "Ecuador", "4E": "Curazao", "1F": "Japón", "2F": "Países Bajos", "3F": "Túnez", "4F": "Suecia", "1G": "Bélgica", "2G": "Nueva Zelanda", "3G": "Egipto", "4G": "Irán", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Ghana", "3L": "Croacia", "4L": "Panamá"}, "Juan Dionis": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Brasil", "2C": "Marruecos", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Egipto", "3G": "Irán", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Argelia", "3J": "Austria", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}, "Juanmi": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Suiza", "2B": "Canadá", "3B": "Bosnia y Herzegovina", "4B": "Catar", "1C": "Marruecos", "2C": "Brasil", "3C": "Escocia", "4C": "Haití", "1D": "Turquía", "2D": "Estados Unidos", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Suecia", "3F": "Japón", "4F": "Túnez", "1G": "Bélgica", "2G": "Irán", "3G": "Egipto", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Cabo Verde", "4H": "Arabia Saudita", "1I": "Noruega", "2I": "Francia", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "RD Congo", "4K": "Uzbekistán", "1L": "Ghana", "2L": "Inglaterra", "3L": "Croacia", "4L": "Panamá"}, "El Oráculo": {"1A": "México", "2A": "Corea del Sur", "3A": "República Checa", "4A": "Sudáfrica", "1B": "Canadá", "2B": "Suiza", "3B": "Catar", "4B": "Bosnia y Herzegovina", "1C": "Brasil", "2C": "Escocia", "3C": "Haití", "4C": "Marruecos", "1D": "Estados Unidos", "2D": "Turquía", "3D": "Paraguay", "4D": "Australia", "1E": "Alemania", "2E": "Ecuador", "3E": "Costa de Marfil", "4E": "Curazao", "1F": "Países Bajos", "2F": "Japón", "3F": "Suecia", "4F": "Túnez", "1G": "Bélgica", "2G": "Irán", "3G": "Egipto", "4G": "Nueva Zelanda", "1H": "España", "2H": "Uruguay", "3H": "Arabia Saudita", "4H": "Cabo Verde", "1I": "Francia", "2I": "Noruega", "3I": "Senegal", "4I": "Irak", "1J": "Argentina", "2J": "Austria", "3J": "Argelia", "4J": "Jordania", "1K": "Portugal", "2K": "Colombia", "3K": "Uzbekistán", "4K": "RD Congo", "1L": "Inglaterra", "2L": "Croacia", "3L": "Ghana", "4L": "Panamá"}};
+const SPECIAL_BETS = {"Roco": {"campeon": "Francia", "subcampeon": "Argentina", "tercero": "Brasil", "bota_oro": "Kylian Mbappé", "bota_plata": "Erling Haaland", "bota_bronce": "Vinicius Junior", "balon_oro": "Kylin Mbappé", "balon_plata": "Lamine Yamal", "balon_bronce": "Antoine Griezmann"}, "Fer": {"campeon": "Portugal", "subcampeon": "Francia", "tercero": "España", "bota_oro": "Mbappé", "bota_plata": "Cristiano Ronaldo", "bota_bronce": "Vinícius", "balon_oro": "Vitinha", "balon_plata": "Mbappé", "balon_bronce": "Lamine Yamal"}, "Cubelos": {"campeon": "Francia", "subcampeon": "Argentina", "tercero": "España", "bota_oro": "Kylian Mbappé", "bota_plata": "Harry Kane", "bota_bronce": "Julián Álvarez", "balon_oro": "Kylian Mbappé", "balon_plata": "Lamine Yamal", "balon_bronce": "Lionel Messi"}, "Nachi": {"campeon": "España", "subcampeon": "Brasil", "tercero": "Francia", "bota_oro": "Mbappe", "bota_plata": "Ferran Torres", "bota_bronce": "Lukaku", "balon_oro": "Lamine Yamal", "balon_plata": "Mbappe", "balon_bronce": "Olise"}, "Quique": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Francia", "bota_oro": "Cristiano Ronaldo", "bota_plata": "Ferrán", "bota_bronce": "Mbappé", "balon_oro": "Rodri", "balon_plata": "Cristiano Ronaldo", "balon_bronce": "Vitinha"}, "Gonzalo Diaz": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Francia", "bota_oro": "Mbappe", "bota_plata": "Ferran Torres", "bota_bronce": "Haaland", "balon_oro": "Lamine Yamal", "balon_plata": "Mbappe", "balon_bronce": "Rodri"}, "Gonzalo Goncer": {"campeon": "España", "subcampeon": "Inglaterra", "tercero": "Portugal", "bota_oro": "Kane", "bota_plata": "Mbappe", "bota_bronce": "Oiarzabal", "balon_oro": "Yamal", "balon_plata": "Kane", "balon_bronce": "Pedri"}, "Pablo Estevez": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Brasil", "bota_oro": "Michael Olise", "bota_plata": "Vinicius", "bota_bronce": "Mbappe", "balon_oro": "Michael Olise", "balon_plata": "Vinicius", "balon_bronce": "Mbappe"}, "Pablo": {"campeon": "Portugal", "subcampeon": "Francia", "tercero": "Inglaterra", "bota_oro": "Mbappe", "bota_plata": "Harry Kane", "bota_bronce": "Cristiano RONALDO", "balon_oro": "Vithina", "balon_plata": "Mbappe", "balon_bronce": "Pedri"}, "Álvaro Rico": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Francia", "bota_oro": "Kai Havertz", "bota_plata": "Mikel Oyarzabal", "bota_bronce": "Cristiano Ronaldo", "balon_oro": "Lamine Yamal", "balon_plata": "Pedri", "balon_bronce": "Cristiano Ronaldo"}, "Abo": {"campeon": "España", "subcampeon": "Argentina", "tercero": "Francia", "bota_oro": "Mbappé", "bota_plata": "Kane", "bota_bronce": "Ferrán Torres", "balon_oro": "Lamine Yamal", "balon_plata": "Mbappé", "balon_bronce": "Harry Kane"}, "Angel": {"campeon": "España", "subcampeon": "Argentina", "tercero": "Francia", "bota_oro": "messi", "bota_plata": "mbappe", "bota_bronce": "olisse", "balon_oro": "olisse", "balon_plata": "pedri", "balon_bronce": "modric"}, "Tito": {"campeon": "España", "subcampeon": "Brasil", "tercero": "Francia", "bota_oro": "C. Ronaldo", "bota_plata": "Olisse", "bota_bronce": "Mbappe", "balon_oro": "Pedri", "balon_plata": "Olisse", "balon_bronce": "Pedri"}, "Nico Muñoz": {"campeon": "Brasil", "subcampeon": "Francia", "tercero": "España", "bota_oro": "Mbappe", "bota_plata": "Rapinha", "bota_bronce": "Olise", "balon_oro": "Rapinha", "balon_plata": "Mbappe", "balon_bronce": "Pedri"}, "Sergio": {"campeon": "España", "subcampeon": "Argentina", "tercero": "Marruecos", "bota_oro": "LAMINE", "bota_plata": "HARRY KEANE", "bota_bronce": "KYLIAN MBAPPÉ", "balon_oro": "LAMINE YAMAL", "balon_plata": "HARRY KANE", "balon_bronce": "KYLIAN MBAPPÉ"}, "Pozancos": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Francia", "bota_oro": "Mbappe", "bota_plata": "Oyarzabal", "bota_bronce": "Dembele", "balon_oro": "Pedri", "balon_plata": "Mbappe", "balon_bronce": "Vitinha"}, "Alberto Castillo": {"campeon": "España", "subcampeon": "Inglaterra", "tercero": "Francia", "bota_oro": "Mbappe", "bota_plata": "Kane", "bota_bronce": "Julian Alvarez", "balon_oro": "Lamine Yamal", "balon_plata": "Pedri", "balon_bronce": "Mbappe"}, "Rober": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Francia", "bota_oro": "Cristiano Ronaldo", "bota_plata": "Lamine Yamal", "bota_bronce": "MbappE", "balon_oro": "Lamine Yamal", "balon_plata": "Michael Olise", "balon_bronce": "Mbappe"}, "Goncho": {"campeon": "Argentina", "subcampeon": "Francia", "tercero": "España", "bota_oro": "MBAPPÉ", "bota_plata": "OYARZABAL", "bota_bronce": "HARRY KANE", "balon_oro": "MESSI", "balon_plata": "PEDRI", "balon_bronce": "OLISE"}, "Urreison": {"campeon": "Francia", "subcampeon": "Inglaterra", "tercero": "Portugal", "bota_oro": "Dembele", "bota_plata": "Kane", "bota_bronce": "Mbappe", "balon_oro": "Dembele", "balon_plata": "Kane", "balon_bronce": "Mbappe"}, "Juan Dionis": {"campeon": "España", "subcampeon": "Portugal", "tercero": "Brasil", "bota_oro": "Mbappe", "bota_plata": "Endrick", "bota_bronce": "Oyarzabal", "balon_oro": "Lamine Yamal", "balon_plata": "Vitinha", "balon_bronce": "Rodri"}, "Juanmi": {"campeon": "España", "subcampeon": "Argentina", "tercero": "Noruega", "bota_oro": "Halland", "bota_plata": "Messi", "bota_bronce": "Oyarzabal", "balon_oro": "Pedri", "balon_plata": "Messi", "balon_bronce": "Halland"}, "El Oráculo": {"campeon": "España", "subcampeon": "Argentina", "tercero": "Francia", "bota_oro": "Lamine Yamal", "bota_plata": "Kylian Mbappé", "bota_bronce": "Julián Álvarez", "balon_oro": "Lamine Yamal", "balon_plata": "Pedri", "balon_bronce": "Lionel Messi"}};
+// Points per category
+const POINTS = {
+  sign: 1,        // 1X2 acertado fase grupos
+  exact: 2,       // resultado exacto (extra sobre sign)
+  pos1: 2, pos2: 2, pos3: 2, pos4: 2,  // posicion grupo
+  campeon: 25, subcampeon: 15, tercero: 8,
+  bota_oro: 10, bota_plata: 5, bota_bronce: 3,
+  balon_oro: 10, balon_plata: 5, balon_bronce: 3,
+};
+// ---- END POSITION & SPECIAL BETS ----
+
+function renderApuestas() {
+  const pList = PARTICIPANTS;
+
+  const specialKeys = [
+    { key: 'campeon',     label: '🏆 Campeón',         pts: 25 },
+    { key: 'subcampeon',  label: '🥈 Subcampeón',       pts: 15 },
+    { key: 'tercero',     label: '🥉 3er Puesto',        pts: 8  },
+    { key: 'bota_oro',    label: '👟🥇 Bota Oro',       pts: 10 },
+    { key: 'bota_plata',  label: '👟🥈 Bota Plata',     pts: 5  },
+    { key: 'bota_bronce', label: '👟🥉 Bota Bronce',    pts: 3  },
+    { key: 'balon_oro',   label: '⚽🥇 Balón Oro',      pts: 10 },
+    { key: 'balon_plata', label: '⚽🥈 Balón Plata',    pts: 5  },
+    { key: 'balon_bronce',label: '⚽🥉 Balón Bronce',   pts: 3  },
+  ];
+
+  // Build special bets as single compact table (rows = categories, cols = participants)
+  let html = '<div class="apuestas-section">';
+  html += '<div class="apuestas-section-title">🏆 Premios y Clasificación Final</div>';
+  html += '<div class="pos-table-wrap"><table class="pos-table"><thead><tr>';
+  html += '<th class="left">Categoría</th><th style="min-width:60px;color:var(--green)">Pts</th><th class="left" style="color:var(--gold)">Resultado</th>';
+  pList.forEach(p => html += `<th><span style="writing-mode:vertical-lr;transform:rotate(180deg);display:inline-block;white-space:nowrap;font-size:11px">${shortName(p)}</span></th>`);
+  html += '</tr></thead><tbody>';
+
+  specialKeys.forEach(({ key, label, pts }) => {
+    const actual = SPECIAL_RESULTS[key];
+    html += `<tr>`;
+    html += `<td class="left" style="font-weight:600;font-size:12px">${label}</td>`;
+    html += `<td style="font-weight:700;color:var(--green)">+${pts}</td>`;
+    html += `<td class="left" style="color:var(--gold);font-weight:600;font-size:12px">${actual || '<span style="color:var(--muted);font-weight:400">—</span>'}</td>`;
+    pList.forEach(p => {
+      const bet = (SPECIAL_BETS[p] || {})[key] || '—';
+      let style = 'font-size:11px';
+      if (actual) {
+        if (bet.toLowerCase().trim() === actual.toLowerCase().trim())
+          style = 'font-size:11px;font-weight:800;color:#fff';
+        else
+          style = 'font-size:11px;opacity:0.35';
+      }
+      html += `<td><span style="${style}">${bet}</span></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table></div></div>';
+
+  // Position bets per group - also compact tables
+  const groups = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+  html += '<div class="apuestas-section" style="margin-top:28px">';
+  html += '<div class="apuestas-section-title">📊 Posiciones de Grupo</div>';
+
+  groups.forEach(g => {
+    html += `<div style="margin-bottom:20px">`;
+    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:1px;margin-bottom:6px">GRUPO ${g}</div>`;
+    html += '<div class="pos-table-wrap"><table class="pos-table"><thead><tr>';
+    html += '<th class="left">Pos.</th><th class="left" style="color:var(--gold)">Real</th>';
+    pList.forEach(p => html += `<th>${shortName(p)}</th>`);
+    html += '</tr></thead><tbody>';
+
+    [1,2,3,4].forEach(pos => {
+      const slot = `${pos}${g}`;
+      const actual = GROUP_STANDINGS[slot];
+      const posLabel = pos === 1 ? '🥇 1º' : pos === 2 ? '🥈 2º' : pos === 3 ? '🥉 3º' : '4º';
+      html += `<tr><td class="left">${posLabel}</td>`;
+      html += `<td class="left" style="color:var(--gold);font-weight:600;font-size:12px">${actual || '—'}</td>`;
+      pList.forEach(p => {
+        const bet = (POSITION_BETS[p] || {})[slot] || '—';
+        let cls = '';
+        if (actual) cls = bet === actual ? 'correct' : 'wrong';
+        html += `<td><span class="pos-chip ${cls}">${bet}</span></td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div></div>';
+  });
+  html += '</div>';
+
+  return html;
+}
+
+function calcRanking() {
+  const groupMatches = MATCHES.filter(m => GROUP_FASES.has(m.fase));
+  const scores = {};
+  PARTICIPANTS.forEach(p => {
+    scores[p] = { total: 0, sign: 0, exact: 0, played: 0, pos: 0, special: 0 };
+  });
+
+  // 1) Resultados fase de grupos (1X2 + exacto)
+  groupMatches.forEach(m => {
+    const actual = RESULTS_CACHE[m.partido];
+    if (!actual) return;
+    const [g1, g2] = actual.split('-').map(Number);
+    const actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+    PARTICIPANTS.forEach(p => {
+      const val = m.bets[p] || '';
+      if (!val || val === 'nan') return;
+      const b = parseBet(val);
+      if (!b || !b.sign) return;
+      scores[p].played++;
+      if (b.sign === actualSign) {
+        scores[p].sign++;
+        scores[p].total += POINTS.sign;
+        if (b.score === actual) {
+          scores[p].exact++;
+          scores[p].total += POINTS.exact;
+        }
+      }
+    });
+  });
+
+  // 2) Resultados dieciseisavos (1X2 + exacto, misma lógica que grupos)
+  if (typeof REAL_MATCHES_16 !== 'undefined' && typeof knockoutMatches1_16 !== 'undefined') {
+    knockoutMatches1_16.forEach((m, idx) => {
+      const real = REAL_MATCHES_16[idx];
+      if (!real) return;
+      const [realT1, realT2, realScore, realPens] = real;
+      if (!realScore) return;
+
+      let actualSign;
+      if (realPens) {
+        const [p1, p2] = realPens.split('-').map(Number);
+        actualSign = p1 > p2 ? '1' : '2';
+      } else {
+        const [g1, g2] = realScore.split('-').map(Number);
+        actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      }
+
+      PARTICIPANTS.forEach(p => {
+        const val = m.bets[p] || '';
+        if (!val || val === 'nan') return;
+        const b = parseBet(val);
+        if (!b || !b.isMatch) return;
+
+        // Detect if teams are reversed
+        const betT1 = b.teams.split('-')[0]?.trim();
+        const betT2 = b.teams.split('-').slice(1).join('-').trim();
+        let effectiveSign = b.sign;
+        if (betT1 === realT2 || betT2 === realT1) {
+          effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+        }
+
+        if (effectiveSign === actualSign) {
+          scores[p].sign++;
+          scores[p].total += POINTS.sign;
+          if (b.score === realScore) {
+            scores[p].exact++;
+            scores[p].total += POINTS.exact;
+          }
+        }
+      });
+    });
+  }
+
+  // 3) Posiciones de grupo (se evalúan al terminar cada grupo)
+  // GROUP_STANDINGS: define las posiciones reales cuando se conozcan
+  if (typeof GROUP_STANDINGS !== 'undefined') {
+    PARTICIPANTS.forEach(p => {
+      const bets = POSITION_BETS[p] || {};
+      Object.entries(bets).forEach(([slot, team]) => {
+        const actual = GROUP_STANDINGS[slot];
+        if (!actual) return;
+        if (actual === team) {
+          const posNum = parseInt(slot[0]);
+          scores[p].pos++;
+          scores[p].total += POINTS['pos' + posNum] || 2;
+        }
+      });
+    });
+  }
+
+  // 3) Apuestas especiales (campeón, subcampeón, etc.)
+  if (typeof SPECIAL_RESULTS !== 'undefined') {
+    PARTICIPANTS.forEach(p => {
+      const bets = SPECIAL_BETS[p] || {};
+      Object.entries(SPECIAL_RESULTS).forEach(([key, actual]) => {
+        if (!actual) return;
+        const bet = bets[key];
+        if (!bet) return;
+        // Normalize for comparison (case insensitive, trim)
+        if (bet.trim().toLowerCase() === actual.trim().toLowerCase()) {
+          scores[p].special++;
+          scores[p].total += POINTS[key] || 0;
+        }
+      });
+    });
+  }
+
+  return scores;
+}
+
+function renderRanking() {
+  const scores = calcRanking();
+  const sorted = PARTICIPANTS
+    .map(p => ({ name: p, ...scores[p] }))
+    .sort((a, b) => b.total - a.total || b.exact - a.exact || b.sign - a.sign);
+
+  const playedMatches = MATCHES.filter(m => GROUP_FASES.has(m.fase) && RESULTS_CACHE[m.partido] && isMatchPlayed(m.partido)).length;
+
+  let html = `
+    <div class="ranking-legend">
+      <span>⚽ <b>Partidos jugados:</b> ${playedMatches} de 36</span>
+      <span>✅ <b>1X2:</b> +1 pto</span>
+      <span>🎯 <b>Exacto:</b> +2 extra</span>
+      <span>📊 <b>Posición grupo:</b> +2 ptos</span>
+      <span>🏆 <b>Campeón:</b> +25 ptos</span>
+    </div>
+    <div class="ranking-table-wrap">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th class="rank-pos">#</th>
+            <th class="left">Porredor</th>
+            <th>Total</th>
+            <th>1X2 ✅</th>
+            <th>Exactos 🎯</th>
+            <th>Posic. 📊</th>
+            <th>Especial 🏆</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+  sorted.forEach((p, i) => {
+    const pos = i + 1;
+    const posClass = pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : '';
+    const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : '';
+    html += `
+          <tr>
+            <td class="rank-pos ${posClass}">${medal || pos}</td>
+            <td class="rank-name">${p.name}</td>
+            <td class="rank-pts">${p.total}</td>
+            <td>${p.sign}</td>
+            <td>${p.exact}</td>
+            <td>${p.pos}</td>
+            <td>${p.special}</td>
+          </tr>`;
+  });
+
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+
+function buildStats() {
+  const sb = document.getElementById('statsBar');
+  const groupMatches = MATCHES.filter(m => GROUP_FASES.has(m.fase)).length;
+  sb.innerHTML = `
+    <div class="stat-card"><div class="val">${PARTICIPANTS.length}</div><div class="lbl">Porredores</div></div>
+    <div class="stat-card"><div class="val">${groupMatches}</div><div class="lbl">Partidos de grupos</div></div>
+    <div class="stat-card"><div class="val">${Object.keys(groups).length}</div><div class="lbl">Grupos</div></div>
+    <div class="stat-card"><div class="val">${knockoutMatches1_16.length + knockoutMatches1_8.length}</div><div class="lbl">Partidos eliminatorias</div></div>
+  `;
+}
+
+function parseBet(val) {
+  // Format: "1|2-1", "X|1-1", "2|0-2" or for knockout "TeamName·1|2-0" or just "TeamName"
+  if (!val || val === 'nan') return null;
+  if (val.includes('·')) {
+    const [teams, bet] = val.split('·');
+    const parts = bet.split('|');
+    return { isMatch: true, teams, sign: parts[0], score: parts[1] || '' };
+  }
+  if (val.includes('|')) {
+    const parts = val.split('|');
+    return { sign: parts[0], score: parts[1] || '' };
+  }
+  // Just a team name (qualifier picks)
+  return { team: val };
+}
+
+function getActualSign(partido) {
+  const score = RESULTS_CACHE[partido];
+  if (!score || !isMatchPlayed(partido)) return null;
+  const [g1, g2] = score.split('-').map(Number);
+  if (g1 > g2) return '1';
+  if (g1 < g2) return '2';
+  return 'X';
+}
+
+function renderBet(val, type, partido) {
+  const b = parseBet(val);
+  if (!b) return '<td></td>';
+  
+  if (b.team) {
+    return `<td><span class="pick" title="${b.team}">${b.team}</span></td>`;
+  }
+  if (b.isMatch) {
+    return `<td><div class="match-pick" title="${b.teams} ${b.sign}|${b.score}">${b.teams}<br><span class="sign sign-${b.sign}">${b.sign}</span> ${b.score}</div></td>`;
+  }
+  const actualSign = partido ? getActualSign(partido) : null;
+  const actualScore = partido ? RESULTS_CACHE[partido] : null;
+  const isExact = actualScore && isMatchPlayed(partido) && b.score === actualScore;
+  const isCorrect = actualSign && b.sign === actualSign;
+  const cls = isExact ? ' bet-exact' : isCorrect ? ' bet-correct' : '';
+  return `<td><div class="bet${cls}"><span class="sign sign-${b.sign}">${b.sign}</span><span class="score">${b.score}</span></div></td>`;
+}
+
+function shortName(p) {
+  const words = p.trim().split(/\s+/);
+  if (words.length >= 2 && words[0].length > 2 && words[1].length > 2) {
+    return words[0] + ' ' + words[1][0] + '.';
+  }
+  return p;
+}
+
+function buildTable(matches, title, faseLabel, isKnockout, isGroupMatch=false) {
+  const filtered = searchTerm
+    ? matches.filter(m => m.partido.toLowerCase().includes(searchTerm))
+    : matches;
+  
+  if (filtered.length === 0) return '';
+
+  const colClass = p => p === highlightedParticipant ? ' class="participant-header highlighted"' : ' class="participant-header"';
+  const tdClass = p => p === highlightedParticipant ? ' class="highlighted-col"' : '';
+
+  const headers = PARTICIPANTS.map(p => `<th${colClass(p)}><span>${shortName(p)}</span></th>`).join('');
+  const dateHeader = (isGroupMatch) ? '<th class="datetime-col">Fecha<br>Hora (ES)</th>' : '';
+  const resultHeader = (isGroupMatch) ? '<th class="result-col-header">Resultado</th>' : '';
+  
+  const rows = filtered.map(m => {
+    const bets = PARTICIPANTS.map(p => renderBet(m.bets[p] || '', isKnockout, isGroupMatch ? m.partido : null)).join('');
+    const sched = SCHEDULE[m.partido];
+    const dtCell = (isGroupMatch && sched)
+      ? `<td class="datetime-col"><span class="dt-date">${sched[0]}</span><span class="dt-time">${sched[1]}</span></td>`
+      : (isGroupMatch ? '<td class="datetime-col"><span class="dt-date">—</span></td>' : '');
+    const resultCell = isGroupMatch
+      ? `<td class="result-cell" data-result-partido="${m.partido}"><span class="score-loading">...</span></td>`
+      : '';
+    return `
+      <tr>
+        <td class="match-name">
+          <span class="teams">${m.partido}</span>
+          ${faseLabel ? `<span class="fase-tag">${m.fase}</span>` : ''}
+        </td>
+        ${dtCell}
+        ${resultCell}
+        ${bets}
+      </tr>`;
+  }).join('');
+
+  return `
+    <div class="phase-section">
+      ${title ? `<div class="phase-header"><span class="phase-label">${title}</span><span class="phase-count">${filtered.length} partidos</span></div>` : ''}
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="partido-col">Partido</th>
+              ${dateHeader}
+              ${resultHeader}
+              ${headers}
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function buildGroupTabs() {
+  const grpLetters = Object.keys(groups).sort();
+  let html = '<div class="tab-row">';
+  grpLetters.forEach(g => {
+    html += `<button class="filter-btn${activeGroup === g ? ' active' : ''}" onclick="setGroup('${g}')">${g}</button>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+window.setGroup = function(g) {
+  activeGroup = g;
+  render();
+};
+
+function buildTable16Real(matches) {
+  const headers = PARTICIPANTS.map(p => `<th class="participant-header"><span>${shortName(p)}</span></th>`).join('');
+
+  const rows = matches.map((m, idx) => {
+    const real = REAL_MATCHES_16[idx];
+    const [realT1, realT2, realScore, realPens] = real || [null, null, null, null];
+
+    // Determine actual sign from real score
+    let actualSign = null;
+    let actualScore = null;
+    if (realScore) {
+      const [g1, g2] = realScore.split('-').map(Number);
+      // If penalties, winner is determined by pens
+      if (realPens) {
+        const [p1, p2] = realPens.split('-').map(Number);
+        actualSign = p1 > p2 ? '1' : '2';
+      } else {
+        actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      }
+      actualScore = realScore;
+    }
+
+    const bets = PARTICIPANTS.map(p => {
+      const val = m.bets[p] || '';
+      const b = parseBet(val);
+      if (!b) return '<td></td>';
+
+      if (b.isMatch) {
+        // Check if bet teams match real teams (in either order)
+        const betT1 = b.teams.split('-')[0]?.trim();
+        const betT2 = b.teams.split('-').slice(1).join('-').trim();
+        const matchesReal = realT1 && (
+          (betT1 === realT1 && betT2 === realT2) ||
+          (betT1 === realT2 && betT2 === realT1)
+        );
+
+        let signClass = '';
+        let scoreStyle = '';
+        let betClass = '';
+        if (actualSign) {
+          // Compare only sign and score — teams may differ due to group position uncertainty
+          // But check if home/away are swapped vs real
+          let effectiveSign = b.sign;
+          if (realT1 && realT2 && betT1 && betT2) {
+            if (betT1 === realT2 || betT2 === realT1) {
+              // Teams seem reversed
+              effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+            }
+          }
+          const signCorrect = effectiveSign === actualSign;
+          const scoreCorrect = signCorrect && b.score === actualScore;
+          betClass = scoreCorrect ? 'bet-exact' : signCorrect ? 'bet-correct' : '';
+        }
+
+        return `<td><div class="bet ${betClass}">
+          <div style="font-size:10px;color:var(--muted);margin-bottom:2px">${b.teams}</div>
+          <span class="sign sign-${b.sign}">${b.sign}</span>
+          <span class="score">${b.score}</span>
+        </div></td>`;
+      }
+
+      return '<td></td>';
+    }).join('');
+
+    // Real match cell
+    let realMatchCell = '<td class="match-name">—</td>';
+    let realResultCell = '<td class="result-cell"><span class="score-pending">—</span></td>';
+    if (real && realT1) {
+      realMatchCell = `<td class="match-name" style="white-space:nowrap;font-size:12px">${flag(realT1)} ${realT1} - ${realT2} ${flag(realT2)}</td>`;
+      if (realScore) {
+        realResultCell = `<td class="result-cell">
+          <span class="score-badge">${realScore}</span>
+          ${realPens ? `<div style="font-size:10px;color:var(--gold)">pen. ${realPens}</div>` : ''}
+        </td>`;
+      } else {
+        realResultCell = `<td class="result-cell"><span style="color:var(--gold);font-size:11px">Pendiente</span></td>`;
+      }
+    }
+
+    return `<tr>
+      <td class="match-name"><span class="teams">${m.partido}</span><span class="fase-tag">${m.fase}</span></td>
+      ${realMatchCell}
+      ${realResultCell}
+      ${bets}
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="phase-section">
+      <div class="phase-header"><span class="phase-label">⚔️ Partidos de Dieciseisavos</span><span class="phase-count">${matches.length} partidos</span></div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="partido-col">Partido</th>
+              <th class="partido-col">Partido Real</th>
+              <th class="result-col-header">Resultado</th>
+              ${headers}
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+
+function buildTable8Real() {
+  const headers = PARTICIPANTS.map(p => `<th class="participant-header"><span>${shortName(p)}</span></th>`).join('');
+
+  const rows = REAL_MATCHES_8.map(([realT1, realT2, realScore, realPens, date, time], idx) => {
+    const bets_row = OCTAVOS_BETS[idx] || {};
+
+    let actualSign = null, actualScore = null;
+    if (realScore) {
+      if (realPens) {
+        const [p1, p2] = realPens.split('-').map(Number);
+        actualSign = p1 > p2 ? '1' : '2';
+      } else {
+        const [g1, g2] = realScore.split('-').map(Number);
+        actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      }
+      actualScore = realScore;
+    }
+
+    const betCells = PARTICIPANTS.map(p => {
+      const val = bets_row[p] || '';
+      const b = parseBet(val);
+      if (!b || !b.isMatch) return '<td></td>';
+
+      let effectiveSign = b.sign;
+      const betT1 = b.teams.split('-')[0]?.trim();
+      const betT2 = b.teams.split('-').slice(1).join('-').trim();
+      if (realT1 && realT2 && (betT1 === realT2 || betT2 === realT1)) {
+        effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+      }
+
+      let betClass = '';
+      if (actualSign) {
+        const signCorrect = effectiveSign === actualSign;
+        const scoreCorrect = signCorrect && b.score === actualScore;
+        betClass = scoreCorrect ? 'bet-exact' : signCorrect ? 'bet-correct' : '';
+      }
+
+      return `<td><div class="bet ${betClass}">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:2px">${b.teams}</div>
+        <span class="sign sign-${b.sign}">${b.sign}</span>
+        <span class="score">${b.score}</span>
+      </div></td>`;
+    }).join('');
+
+    // Real match cell
+    const matchStr = `${flag(realT1)} ${realT1} - ${realT2} ${flag(realT2)}`;
+    let resultStr;
+    if (realScore) {
+      resultStr = `<span class="score-badge">${realScore}</span>`;
+      if (realPens) resultStr += `<div style="font-size:10px;color:var(--gold)">pen. ${realPens}</div>`;
+    } else {
+      resultStr = `<span style="color:var(--gold);font-size:11px">🕐 ${time}</span>`;
+    }
+
+    return `<tr>
+      <td class="match-name" style="white-space:nowrap;font-size:12px">
+        ${matchStr}
+        <div style="font-size:10px;color:var(--muted);margin-top:2px">${date} ${time}</div>
+      </td>
+      <td class="result-cell">${resultStr}</td>
+      ${betCells}
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="phase-section">
+      <div class="phase-header"><span class="phase-label">🏆 Octavos de Final</span><span class="phase-count">8 partidos</span></div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="partido-col">Partido</th>
+              <th class="result-col-header">Resultado</th>
+              ${headers}
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function render() {
+  buildPhaseFilters();
+  const content = document.getElementById('content');
+  setTimeout(updateResultCells, 50);
+
+  if (activePhase === 'groups') {
+    const grpLetters = Object.keys(groups).sort();
+    let html = buildGroupTabs();
+
+    if (searchTerm) {
+      // Show all groups filtered
+      grpLetters.forEach(g => {
+        html += buildTable(groups[g], `Grupo ${g}`, false, false, true);
+      });
+    } else {
+      html += buildTable(groups[activeGroup] || [], `Grupo ${activeGroup}`, false, false, true);
+    }
+    content.innerHTML = html;
+  } else if (activePhase === '1/16') {
+    let html = '';
+    if (picks1_16.length > 0) {
+      html += buildTable(picks1_16, '🎯 Pronóstico de clasificados (32 puestos)', true, false);
+    }
+    if (knockoutMatches1_16.length > 0) {
+      html += buildTable16Real(knockoutMatches1_16);
+    }
+    content.innerHTML = html;
+  } else if (activePhase === 'today') {
+    content.innerHTML = renderToday();
+  } else if (activePhase === 'tomorrow') {
+    content.innerHTML = renderTomorrow();
+  } else if (activePhase === 'ranking') {
+    content.innerHTML = renderRanking();
+  } else if (activePhase === 'apuestas') {
+    content.innerHTML = renderApuestas();
+  } else if (activePhase === '1/8') {
+    content.innerHTML = buildTable8Real();
+  }
+}
+
+buildStats();
+render();
+updateResultCells();
+loadResults().then(() => updateResultCells());
+</script>
+</body>
+</html>
