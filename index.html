@@ -1641,9 +1641,9 @@ function calcRanking() {
       // Grupos
       g_sign: 0, g_exact: 0, g_pos: 0, g_qual16: 0,
       // Dieciseisavos
-      d_sign: 0, d_exact: 0, d_qual8: 0,
+      d_match: 0, d_sign: 0, d_exact: 0, d_qual8: 0,
       // Octavos
-      o_sign: 0, o_exact: 0, o_qual4: 0,
+      o_match: 0, o_sign: 0, o_exact: 0, o_qual4: 0,
       // Especial
       special: 0
     };
@@ -1701,6 +1701,12 @@ function calcRanking() {
                             (betT1 === realT2 && betT2 === realT1);
         if (!matchesReal) return;
 
+        // +1 por acertar el partido — siempre, sin esperar resultado
+        scores[p].d_match++;
+        scores[p].total += 1;
+
+        if (!actualSign) return; // partido aún no jugado
+
         let effectiveSign = b.sign;
         if (betT1 === realT2 && betT2 === realT1) {
           effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
@@ -1741,6 +1747,88 @@ function calcRanking() {
         if (team && qualSet8.has(team)) {
           scores[p].total += 5;
           scores[p].d_qual8++;
+        }
+      });
+    });
+  }
+
+  // 3b) Resultados octavos (1X2 + exacto + 1 bonus eliminatoria)
+  if (typeof REAL_MATCHES_8 !== 'undefined' && typeof OCTAVOS_BETS !== 'undefined') {
+    REAL_MATCHES_8.forEach((real, idx) => {
+      const [realT1, realT2, realScore, realPens] = real;
+      if (!realScore) return;
+      let actualSign;
+      if (realPens) {
+        const [p1, p2] = realPens.split('-').map(Number);
+        actualSign = p1 > p2 ? '1' : '2';
+      } else {
+        const [g1, g2] = realScore.split('-').map(Number);
+        actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      }
+      const bets_row = OCTAVOS_BETS[idx] || {};
+      PARTICIPANTS.forEach(p => {
+        const val = bets_row[p] || '';
+        const b = parseBet(val);
+        if (!b || !b.isMatch) return;
+        const betT1 = b.teams.split('-')[0]?.trim();
+        const betT2 = b.teams.split('-').slice(1).join('-').trim();
+        const matchesReal = realT1 && ((betT1 === realT1 && betT2 === realT2) || (betT1 === realT2 && betT2 === realT1));
+        if (!matchesReal) return;
+        let effectiveSign = b.sign;
+        if (betT1 === realT2 && betT2 === realT1) effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+        // +1 por acertar el partido (equipos correctos)
+        scores[p].o_match++;
+        scores[p].total += 1;
+        if (effectiveSign === actualSign) {
+          scores[p].o_sign++;
+          scores[p].total += POINTS.sign;
+          if (b.score === realScore) {
+            scores[p].o_exact++;
+            scores[p].total += POINTS.exact;
+          }
+        }
+      });
+    });
+  }
+
+  // 3c) Resultados cuartos (1X2 + exacto + 1 bonus eliminatoria)
+  if (typeof REAL_MATCHES_4 !== 'undefined' && typeof CUARTOS_BETS !== 'undefined') {
+    REAL_MATCHES_4.forEach((real, idx) => {
+      const [realT1, realT2, realScore, realPens] = real;
+      if (!realScore || !realT1) return;
+      let actualSign;
+      if (realPens) {
+        const [p1, p2] = realPens.split('-').map(Number);
+        actualSign = p1 > p2 ? '1' : '2';
+      } else {
+        const [g1, g2] = realScore.split('-').map(Number);
+        actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      }
+      const bets_row = CUARTOS_BETS[idx] || {};
+      PARTICIPANTS.forEach(p => {
+        const val = bets_row[p] || '';
+        const b = parseBet(val);
+        if (!b || !b.isMatch) return;
+        const betT1 = b.teams.split('-')[0]?.trim();
+        const betT2 = b.teams.split('-').slice(1).join('-').trim();
+        const matchesReal = (betT1 === realT1 && betT2 === realT2) || (betT1 === realT2 && betT2 === realT1);
+        if (!matchesReal) return;
+
+        // +1 por acertar el partido — siempre
+        scores[p].o_match++;
+        scores[p].total += 1;
+
+        if (!actualSign) return;
+
+        let effectiveSign = b.sign;
+        if (betT1 === realT2 && betT2 === realT1) effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+        if (effectiveSign === actualSign) {
+          scores[p].o_sign++;
+          scores[p].total += POINTS.sign;
+          if (b.score === realScore) {
+            scores[p].o_exact++;
+            scores[p].total += POINTS.exact;
+          }
         }
       });
     });
@@ -1839,8 +1927,8 @@ function renderRanking() {
     const dPts = (p.d_sign * POINTS.sign) + (p.d_exact * POINTS.exact) + (p.d_qual8 * 5);
     const oPts = (p.o_sign * POINTS.sign) + (p.o_exact * POINTS.exact) + (p.o_qual4 * 6);
     const gResults = (p.g_sign * POINTS.sign) + (p.g_exact * POINTS.exact);
-    const dResults = (p.d_sign * POINTS.sign) + (p.d_exact * POINTS.exact);
-    const oResults = (p.o_sign * POINTS.sign) + (p.o_exact * POINTS.exact);
+    const dResults = (p.d_match || 0) + (p.d_sign * POINTS.sign) + (p.d_exact * POINTS.exact);
+    const oResults = (p.o_match || 0) + (p.o_sign * POINTS.sign) + (p.o_exact * POINTS.exact);
 
     html += `
           <tr>
