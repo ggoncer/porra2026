@@ -926,6 +926,7 @@ function buildPhaseFilters() {
     { key: 'groups', label: '⚽ Fase de Grupos' },
     { key: '1/16', label: '🔥 Dieciseisavos' },
     { key: '1/8', label: '🏆 Octavos' },
+    { key: '1/4', label: '⚡ Cuartos' },
     { key: 'ranking', label: '🏅 Clasificación' },
     { key: 'apuestas', label: '🎲 Apuestas Especiales' },
   ];
@@ -1536,6 +1537,12 @@ const SPECIAL_BETS = {"Roco": {"campeon": "Francia", "subcampeon": "Argentina", 
 // Points per category
 const QUALIFIERS_16 = ["Sudáfrica","Canadá","Brasil","Japón","Alemania","Paraguay","Países Bajos","Marruecos","Costa de Marfil","Noruega","Francia","Suecia","México","Ecuador","Inglaterra","RD Congo","Bélgica","Senegal","Estados Unidos","Bosnia y Herzegovina","España","Austria","Colombia","Croacia","Suiza","Argelia","Australia","Egipto","Argentina","Cabo Verde","Portugal","Ghana"];
 const QUALIFIER_BETS_16 = {"Roco": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Canadá", "Turquía", "Argentina", "Portugal", "Suiza", "Japón", "Escocia", "Marruecos", "Noruega", "Suecia", "Costa de Marfil", "Senegal", "Argelia", "Bosnia y Herzegovina", "Austria", "Croacia", "Egipto", "Irán", "Uruguay", "Ghana"], "Fer": ["República Checa", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Bosnia y Herzegovina", "Suecia", "Paraguay", "Marruecos", "Noruega", "Japón", "Costa de Marfil", "Senegal", "Corea del Sur", "Canadá", "Austria", "Croacia", "Argelia", "Egipto", "Uruguay", "Ghana"], "Cubelos": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Japón", "Escocia", "Marruecos", "Noruega", "Australia", "Costa de Marfil", "Argelia", "República Checa", "Bosnia y Herzegovina", "Austria", "Croacia", "Egipto", "Irán", "Uruguay", "Senegal"], "Nachi": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Suecia", "Escocia", "Marruecos", "Noruega", "Australia", "Arabia Saudita", "Senegal", "Sudáfrica", "Bosnia y Herzegovina", "Austria", "Croacia", "Argelia", "Egipto", "Uruguay", "Ecuador"], "Quique": ["Corea del Sur", "Marruecos", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Bosnia y Herzegovina", "Japón", "Escocia", "Brasil", "Noruega", "Paraguay", "Costa de Marfil", "Senegal", "Arabia Saudita", "Canadá", "Argelia", "Croacia", "Austria", "Egipto", "Uruguay", "Panamá"], "Gonzalo Diaz": ["República Checa", "Brasil", "Alemania", "Países Bajos", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Canadá", "Japón", "Escocia", "Marruecos", "Noruega", "Egipto", "Ecuador", "RD Congo", "Corea del Sur", "Senegal", "Austria", "Croacia", "Argelia", "Irán", "Uruguay", "Ghana"], "Gonzalo Goncer": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Canadá", "Japón", "Paraguay", "Marruecos", "Noruega", "Suecia", "Escocia", "Ecuador", "República Checa", "Bosnia y Herzegovina", "Austria", "Croacia", "Argelia", "Egipto", "Uruguay", "Ghana"], "Pablo Estevez": ["Corea del Sur", "Brasil", "Alemania", "Suecia", "Ecuador", "Francia", "México", "Ghana", "Irán", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Canadá", "Túnez", "Escocia", "Marruecos", "Noruega", "Países Bajos", "Arabia Saudita", "Austria", "República Checa", "Bosnia y Herzegovina", "Argelia", "Inglaterra", "Nueva Zelanda", "Bélgica", "Uruguay", "Costa de Marfil"], "Pablo": ["República Checa", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Suecia", "Paraguay", "Marruecos", "Noruega", "Japón", "Escocia", "Costa de Marfil", "Corea del Sur", "Bosnia y Herzegovina", "Argelia", "Croacia", "Austria", "Egipto", "Uruguay", "Ghana"], "Álvaro Rico": ["Corea del Sur", "Marruecos", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Egipto", "Turquía", "España", "Colombia", "Bosnia y Herzegovina", "Estados Unidos", "Argentina", "Portugal", "Suiza", "Japón", "Escocia", "Brasil", "Senegal", "Suecia", "Costa de Marfil", "Argelia", "República Checa", "Canadá", "Austria", "Croacia", "Irán", "Bélgica", "Uruguay", "Noruega"], "Abo": ["Corea del Sur", "Marruecos", "Alemania", "Países Bajos", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Japón", "Australia", "Brasil", "Senegal", "Suecia", "Ecuador", "Noruega", "República Checa", "Austria", "Argelia", "Croacia", "Irán", "Egipto", "Uruguay", "Ghana"], "Angel": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Japón", "Paraguay", "Escocia", "Noruega", "Suecia", "Marruecos", "Costa de Marfil", "República Checa", "Argelia", "Austria", "Croacia", "Nueva Zelanda", "Egipto", "Cabo Verde", "Ghana"], "Tito": ["República Checa", "Brasil", "Ecuador", "Países Bajos", "Alemania", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Japón", "Escocia", "Marruecos", "Noruega", "Paraguay", "Costa de Marfil", "Senegal", "Corea del Sur", "Bosnia y Herzegovina", "Austria", "Croacia", "Argelia", "Egipto", "Uruguay", "Ghana"], "Nico Muñoz": ["República Checa", "Brasil", "Alemania", "Países Bajos", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Suecia", "Paraguay", "Marruecos", "Noruega", "Arabia Saudita", "Ecuador", "Senegal", "Corea del Sur", "Argelia", "Austria", "Croacia", "Irán", "Egipto", "Uruguay", "Ghana"], "Sergio": ["República Checa", "Brasil", "Alemania", "Suecia", "Costa de Marfil", "Francia", "México", "Croacia", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Paraguay", "Argentina", "Portugal", "Catar", "Países Bajos", "Escocia", "Marruecos", "Senegal", "Turquía", "Ecuador", "RD Congo", "Cabo Verde", "Noruega", "Argelia", "Inglaterra", "Austria", "Egipto", "Uruguay", "Ghana"], "Pozancos": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Paraguay", "Argentina", "Portugal", "Canadá", "Suecia", "Escocia", "Marruecos", "Noruega", "Estados Unidos", "Arabia Saudita", "Costa de Marfil", "República Checa", "Bosnia y Herzegovina", "Argelia", "Croacia", "Austria", "Egipto", "Uruguay", "Ghana"], "Alberto Castillo": ["Corea del Sur", "Marruecos", "Alemania", "Países Bajos", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Canadá", "Australia", "Argentina", "Portugal", "Suiza", "Japón", "Escocia", "Brasil", "Noruega", "Suecia", "Arabia Saudita", "RD Congo", "Sudáfrica", "Bosnia y Herzegovina", "Argelia", "Croacia", "Ecuador", "Egipto", "Uruguay", "Senegal"], "Rober": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Paraguay", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Bosnia y Herzegovina", "Suecia", "Marruecos", "Escocia", "Senegal", "Estados Unidos", "Costa de Marfil", "Noruega", "Argelia", "Canadá", "Austria", "Croacia", "Irán", "Egipto", "Uruguay", "Panamá"], "Goncho": ["República Checa", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Suiza", "Turquía", "Argentina", "Portugal", "Canadá", "Japón", "Escocia", "Marruecos", "Noruega", "Irán", "Costa de Marfil", "Senegal", "Corea del Sur", "Bosnia y Herzegovina", "Argelia", "Croacia", "Austria", "Egipto", "Uruguay", "Ghana"], "Urreison": ["Corea del Sur", "Marruecos", "Alemania", "Japón", "Costa de Marfil", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Bosnia y Herzegovina", "Países Bajos", "Escocia", "Brasil", "Noruega", "Egipto", "Ecuador", "RD Congo", "República Checa", "Senegal", "Argelia", "Ghana", "Austria", "Nueva Zelanda", "Uruguay", "Croacia"], "Juan Dionis": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Canadá", "Japón", "Escocia", "Marruecos", "Noruega", "Paraguay", "Costa de Marfil", "Senegal", "República Checa", "Bosnia y Herzegovina", "Argelia", "Croacia", "Austria", "Egipto", "Uruguay", "Ghana"], "Juanmi": ["Corea del Sur", "Marruecos", "Alemania", "Países Bajos", "Ecuador", "Noruega", "México", "Ghana", "Bélgica", "Turquía", "España", "Colombia", "Suiza", "Estados Unidos", "Argentina", "Portugal", "Canadá", "Suecia", "Escocia", "Brasil", "Francia", "Japón", "Costa de Marfil", "RD Congo", "Senegal", "Bosnia y Herzegovina", "Austria", "Inglaterra", "Argelia", "Irán", "Uruguay", "Croacia"], "El Oráculo": ["Corea del Sur", "Brasil", "Alemania", "Países Bajos", "Ecuador", "Francia", "México", "Inglaterra", "Bélgica", "Estados Unidos", "España", "Colombia", "Canadá", "Turquía", "Argentina", "Portugal", "Suiza", "Japón", "Paraguay", "Escocia", "Noruega", "Suecia", "Costa de Marfil", "Senegal", "República Checa", "Catar", "Austria", "Croacia", "Argelia", "Irán", "Uruguay", "Ghana"]};
+const QUALIFIER_BETS_8 = {"Roco": ["Suiza", "Alemania", "Brasil", "México", "Colombia", "Estados Unidos", "Argentina", "Canadá", "Marruecos", "Francia", "Ecuador", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Fer": ["Bosnia y Herzegovina", "Alemania", "Brasil", "México", "Colombia", "Turquía", "Argentina", "Suiza", "Marruecos", "Francia", "Ecuador", "Inglaterra", "España", "Bélgica", "Egipto", "Portugal"], "Cubelos": ["Corea del Sur", "Alemania", "Brasil", "México", "Colombia", "Estados Unidos", "Argentina", "Suiza", "Países Bajos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Nachi": ["Corea del Sur", "Alemania", "Brasil", "México", "Colombia", "Estados Unidos", "Argentina", "Argelia", "Marruecos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Quique": ["Corea del Sur", "Alemania", "Marruecos", "México", "Colombia", "Turquía", "Uruguay", "Suiza", "Brasil", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Estados Unidos", "Portugal"], "Gonzalo Diaz": ["República Checa", "Alemania", "Brasil", "México", "Croacia", "Senegal", "Argentina", "Suiza", "Países Bajos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Estados Unidos", "Portugal"], "Gonzalo Goncer": ["Canadá", "Alemania", "Brasil", "Escocia", "Croacia", "Turquía", "Argentina", "Suiza", "Países Bajos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Egipto", "Portugal"], "Pablo Estevez": ["Corea del Sur", "Alemania", "Brasil", "México", "Colombia", "Turquía", "Argentina", "Suiza", "Marruecos", "Francia", "Ecuador", "Ghana", "España", "Irán", "Estados Unidos", "Portugal"], "Pablo": ["Canadá", "Alemania", "Brasil", "Escocia", "Colombia", "Estados Unidos", "Uruguay", "Suiza", "Países Bajos", "Francia", "Ecuador", "Inglaterra", "España", "Bélgica", "Egipto", "Portugal"], "Álvaro Rico": ["Suiza", "Alemania", "Marruecos", "México", "Colombia", "Turquía", "Argentina", "Bosnia y Herzegovina", "Brasil", "Francia", "Senegal", "Inglaterra", "España", "Egipto", "Bélgica", "Portugal"], "Abo": ["Canadá", "Alemania", "Marruecos", "México", "Croacia", "Estados Unidos", "Argentina", "Suiza", "Países Bajos", "Francia", "Senegal", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Angel": ["Corea del Sur", "Alemania", "Brasil", "Marruecos", "Croacia", "Estados Unidos", "Argentina", "Suiza", "Países Bajos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Tito": ["República Checa", "Ecuador", "Brasil", "México", "Croacia", "Estados Unidos", "Argentina", "Suiza", "Marruecos", "Francia", "Alemania", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Nico Muñoz": ["Canadá", "Alemania", "Brasil", "México", "Colombia", "Estados Unidos", "Argentina", "Suiza", "Marruecos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Egipto", "Portugal"], "Sergio": ["República Checa", "Alemania", "Brasil", "Ecuador", "Inglaterra", "Noruega", "Argentina", "Suiza", "Marruecos", "Francia", "Senegal", "Croacia", "España", "Bélgica", "Egipto", "Portugal"], "Pozancos": ["Corea del Sur", "Alemania", "Brasil", "México", "Colombia", "Turquía", "Argentina", "Suiza", "Países Bajos", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Paraguay", "Portugal"], "Alberto Castillo": ["Corea del Sur", "Alemania", "Marruecos", "México", "Croacia", "Estados Unidos", "Argentina", "Canadá", "Brasil", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Egipto", "Portugal"], "Rober": ["Corea del Sur", "Alemania", "Brasil", "México", "Croacia", "Paraguay", "Argentina", "Suiza", "Países Bajos", "Francia", "Senegal", "Inglaterra", "España", "Bélgica", "Turquía", "Portugal"], "Goncho": ["Canadá", "Alemania", "Brasil", "México", "Colombia", "Estados Unidos", "Argentina", "Suiza", "Marruecos", "Francia", "Ecuador", "Inglaterra", "España", "Bélgica", "Egipto", "Portugal"], "Urreison": ["Corea del Sur", "Alemania", "Marruecos", "México", "Ghana", "Senegal", "Argentina", "Suiza", "Japón", "Francia", "Noruega", "Inglaterra", "España", "Bélgica", "Estados Unidos", "Portugal"], "Juan Dionis": ["Corea del Sur", "Alemania", "Brasil", "México", "Croacia", "Turquía", "Uruguay", "Suiza", "Países Bajos", "Francia", "Ecuador", "Inglaterra", "España", "Bélgica", "Estados Unidos", "Portugal"], "Juanmi": ["Corea del Sur", "Alemania", "Marruecos", "México", "Colombia", "Turquía", "Argentina", "Suiza", "Países Bajos", "Noruega", "Francia", "Ghana", "España", "Bélgica", "Estados Unidos", "Portugal"], "El Oráculo": ["Suiza", "Alemania", "Brasil", "México", "Colombia", "Estados Unidos", "Argentina", "Canadá", "Países Bajos", "Francia", "Ecuador", "Inglaterra", "España", "Bélgica", "Irán", "Portugal"]};
+const CUARTOS_BETS = [{"Roco": "Francia-Marruecos·1|2-0", "Fer": "Francia-Marruecos·1|2-1", "Cubelos": "Francia-Países Bajos·1|2-0", "Nachi": "Francia-Marruecos·1|1-0", "Quique": "Francia-Brasil·1|3-2", "Gonzalo Diaz": "Francia-Países Bajos·1|3-1", "Gonzalo Goncer": "Francia-Países Bajos·1|2-1", "Pablo Estevez": "Francia-Marruecos·1|2-0", "Pablo": "Francia-Países Bajos·1|2-0", "Álvaro Rico": "Francia-Brasil·1|2-1", "Abo": "Francia-Países Bajos·X|0-0", "Angel": "Francia-Países Bajos·1|2-0", "Tito": "Francia-Marruecos·1|3-1", "Nico Muñoz": "Francia-Marruecos·1|2-1", "Sergio": "Alemania-Marruecos·2|1-2", "Pozancos": "Francia-Países Bajos·1|3-1", "Alberto Castillo": "Francia-Brasil·1|2-1", "Rober": "Francia-Países Bajos·1|2-1", "Goncho": "Francia-Marruecos·1|2-1", "Urreison": "Francia-Japón·1|3-1", "Juan Dionis": "Francia-Países Bajos·1|2-1", "Juanmi": "Noruega-Países Bajos·1|3-1", "El Oráculo": "Francia-Países Bajos·1|2-1"}, {"Roco": "España-Estados Unidos·1|2-1", "Fer": "España-Turquía·1|3-1", "Cubelos": "España-Bélgica·1|2-0", "Nachi": "España-Bélgica·1|2-0", "Quique": "España-Turquía·X|1-1", "Gonzalo Diaz": "España-Senegal·1|3-1", "Gonzalo Goncer": "España-Bélgica·1|2-0", "Pablo Estevez": "España-Irán·1|2-0", "Pablo": "España-Bélgica·1|3-0", "Álvaro Rico": "España-Turquía·1|2-1", "Abo": "España-Bélgica·1|2-1", "Angel": "España-Bélgica·1|2-0", "Tito": "España-Bélgica·1|3-1", "Nico Muñoz": "España-Bélgica·1|3-1", "Sergio": "España-Bélgica·1|2-0", "Pozancos": "España-Bélgica·1|2-0", "Alberto Castillo": "España-Bélgica·1|2-1", "Rober": "España-Bélgica·1|2-1", "Goncho": "España-Estados Unidos·1|2-1", "Urreison": "España-Senegal·1|2-1", "Juan Dionis": "España-Turquía·1|3-1", "Juanmi": "España-Turquía·1|3-0", "El Oráculo": "España-Bélgica·1|2-1"}, {"Roco": "Brasil-Inglaterra·1|2-1", "Fer": "Brasil-Inglaterra·1|2-1", "Cubelos": "Brasil-Inglaterra·2|1-2", "Nachi": "Brasil-Inglaterra·1|2-1", "Quique": "Noruega-México·X|1-1", "Gonzalo Diaz": "Brasil-Inglaterra·1|2-1", "Gonzalo Goncer": "Brasil-Inglaterra·X|2-2", "Pablo Estevez": "Brasil-Ghana·1|2-1", "Pablo": "Brasil-Inglaterra·2|1-2", "Álvaro Rico": "Marruecos-Inglaterra·1|1-0", "Abo": "Marruecos-Inglaterra·X|1-1", "Angel": "Brasil-Marruecos·1|2-1", "Tito": "Brasil-Inglaterra·1|3-2", "Nico Muñoz": "Brasil-Inglaterra·1|1-0", "Sergio": "Brasil-Croacia·1|2-1", "Pozancos": "Brasil-Inglaterra·1|2-1", "Alberto Castillo": "Marruecos-Inglaterra·2|1-2", "Rober": "Brasil-Inglaterra·2|0-1", "Goncho": "Brasil-Inglaterra·1|2-1", "Urreison": "Marruecos-Inglaterra·2|1-2", "Juan Dionis": "Brasil-Inglaterra·X|2-2", "Juanmi": "Francia-México·1|2-0", "El Oráculo": "Brasil-Inglaterra·2|1-2"}, {"Roco": "Argentina-Portugal·X|1-1", "Fer": "Argentina-Portugal·2|1-2", "Cubelos": "Argentina-Portugal·1|2-1", "Nachi": "Argentina-Portugal·1|3-2", "Quique": "Estados Unidos-Portugal·2|1-2", "Gonzalo Diaz": "Argentina-Portugal·2|1-2", "Gonzalo Goncer": "Argentina-Portugal·2|1-2", "Pablo Estevez": "Argentina-Portugal·2|1-2", "Pablo": "Uruguay-Portugal·2|1-3", "Álvaro Rico": "Argentina-Portugal·X|1-1", "Abo": "Argentina-Portugal·X|1-1", "Angel": "Argentina-Portugal·1|2-0", "Tito": "Argentina-Portugal·2|2-3", "Nico Muñoz": "Argentina-Portugal·2|1-3", "Sergio": "Argentina-Portugal·1|2-1", "Pozancos": "Argentina-Portugal·2|1-2", "Alberto Castillo": "Argentina-Portugal·1|2-1", "Rober": "Argentina-Portugal·2|0-1", "Goncho": "Argentina-Portugal·1|2-1", "Urreison": "Argentina-Portugal·2|1-2", "Juan Dionis": "Uruguay-Portugal·2|1-2", "Juanmi": "Argentina-Portugal·X|2-2", "El Oráculo": "Argentina-Portugal·1|2-1"}];
+const REAL_MATCHES_4 = [[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]];
+
+const QUALIFIER_BETS_4 = {"Roco": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Estados Unidos", "Inglaterra", "Portugal"], "Fer": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Turquía", "Inglaterra", "Portugal"], "Cubelos": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Nachi": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Quique": ["Francia", "España", "Noruega", "Estados Unidos", "Brasil", "Turquía", "México", "Portugal"], "Gonzalo Diaz": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Senegal", "Inglaterra", "Portugal"], "Gonzalo Goncer": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Pablo Estevez": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Irán", "Ghana", "Portugal"], "Pablo": ["Francia", "España", "Brasil", "Uruguay", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Álvaro Rico": ["Francia", "España", "Marruecos", "Argentina", "Brasil", "Turquía", "Inglaterra", "Portugal"], "Abo": ["Francia", "España", "Marruecos", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Angel": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Marruecos", "Portugal"], "Tito": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Nico Muñoz": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Sergio": ["Alemania", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Croacia", "Portugal"], "Pozancos": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Alberto Castillo": ["Francia", "España", "Marruecos", "Argentina", "Brasil", "Bélgica", "Inglaterra", "Portugal"], "Rober": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Goncho": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Estados Unidos", "Inglaterra", "Portugal"], "Urreison": ["Francia", "España", "Marruecos", "Argentina", "Japón", "Senegal", "Inglaterra", "Portugal"], "Juan Dionis": ["Francia", "España", "Brasil", "Uruguay", "Países Bajos", "Turquía", "Inglaterra", "Portugal"], "Juanmi": ["Noruega", "España", "Francia", "Argentina", "Países Bajos", "Turquía", "México", "Portugal"], "El Oráculo": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"]};
+const QUALIFIERS_4 = []; // Rellenar cuando se conozcan los 8 cuartofinalistas
 const QUALIFIERS_8 = ["Canadá","Marruecos","Paraguay","Francia","Brasil","Noruega","México","Inglaterra","Portugal","España","Estados Unidos","Bélgica","Argentina","Egipto","Suiza","Colombia"];
 const POINTS = {
   sign: 1,        // 1X2 acertado fase grupos
@@ -1726,10 +1733,10 @@ function calcRanking() {
   }
 
   // 3) Clasificados para octavos (5 pts por equipo acertado)
-  if (typeof QUALIFIERS_8 !== 'undefined' && typeof QUALIFIER_BETS_16 !== 'undefined') {
+  if (typeof QUALIFIERS_8 !== 'undefined' && typeof QUALIFIER_BETS_8 !== 'undefined') {
     const qualSet8 = new Set(QUALIFIERS_8);
     PARTICIPANTS.forEach(p => {
-      const bets = QUALIFIER_BETS_16[p] || [];
+      const bets = QUALIFIER_BETS_8[p] || [];
       bets.forEach(team => {
         if (team && qualSet8.has(team)) {
           scores[p].total += 5;
@@ -1739,7 +1746,21 @@ function calcRanking() {
     });
   }
 
-  // 4) Posiciones de grupo (se evalúan al terminar cada grupo)
+  // 4) Clasificados para cuartos (6 pts por equipo acertado)
+  if (QUALIFIERS_4.length > 0 && typeof QUALIFIER_BETS_4 !== 'undefined') {
+    const qualSet4 = new Set(QUALIFIERS_4);
+    PARTICIPANTS.forEach(p => {
+      const bets = QUALIFIER_BETS_4[p] || [];
+      bets.forEach(team => {
+        if (team && qualSet4.has(team)) {
+          scores[p].total += 6;
+          scores[p].o_qual4++;
+        }
+      });
+    });
+  }
+
+  // 5) Posiciones de grupo (se evalúan al terminar cada grupo)
   // GROUP_STANDINGS: define las posiciones reales cuando se conozcan
   if (typeof GROUP_STANDINGS !== 'undefined') {
     PARTICIPANTS.forEach(p => {
@@ -2160,6 +2181,92 @@ function buildTable8Real() {
     </div>`;
 }
 
+function buildTable4Real() {
+  const headers = PARTICIPANTS.map(p => `<th class="participant-header"><span>${shortName(p)}</span></th>`).join('');
+
+  const rows = REAL_MATCHES_4.map(([realT1, realT2, realScore, realPens, date, time], idx) => {
+    const bets_row = CUARTOS_BETS[idx] || {};
+
+    let actualSign = null, actualScore = null;
+    if (realScore) {
+      if (realPens) {
+        const [p1, p2] = realPens.split('-').map(Number);
+        actualSign = p1 > p2 ? '1' : '2';
+      } else {
+        const [g1, g2] = realScore.split('-').map(Number);
+        actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      }
+      actualScore = realScore;
+    }
+
+    const betCells = PARTICIPANTS.map(p => {
+      const val = bets_row[p] || '';
+      const b = parseBet(val);
+      if (!b || !b.isMatch) return '<td></td>';
+
+      const betT1 = b.teams.split('-')[0]?.trim();
+      const betT2 = b.teams.split('-').slice(1).join('-').trim();
+      const matchesReal = realT1 && (
+        (betT1 === realT1 && betT2 === realT2) ||
+        (betT1 === realT2 && betT2 === realT1)
+      );
+
+      let betClass = '';
+      if (matchesReal && actualSign) {
+        let effectiveSign = b.sign;
+        if (betT1 === realT2 && betT2 === realT1) {
+          effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+        }
+        const signCorrect = effectiveSign === actualSign;
+        const scoreCorrect = signCorrect && b.score === actualScore;
+        betClass = scoreCorrect ? 'bet-exact' : signCorrect ? 'bet-correct' : '';
+      }
+
+      return `<td><div class="bet ${betClass}">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:2px">${b.teams}</div>
+        <span class="sign sign-${b.sign}">${b.sign}</span>
+        <span class="score">${b.score}</span>
+      </div></td>`;
+    }).join('');
+
+    let matchCell, resultCell;
+    if (realT1) {
+      matchCell = `<td class="match-name" style="white-space:nowrap;font-size:12px">${flag(realT1)} ${realT1} - ${realT2} ${flag(realT2)}<div style="font-size:10px;color:var(--muted);margin-top:2px">${date || ''} ${time || ''}</div></td>`;
+      if (realScore) {
+        resultCell = `<td class="result-cell"><span class="score-badge">${realScore}</span>${realPens ? `<div style="font-size:10px;color:var(--gold)">pen. ${realPens}</div>` : ''}</td>`;
+      } else {
+        resultCell = `<td class="result-cell"><span style="color:var(--gold);font-size:11px">🕐 ${time}</span></td>`;
+      }
+    } else {
+      matchCell = `<td class="match-name" style="color:var(--muted);font-style:italic">Pendiente</td>`;
+      resultCell = `<td class="result-cell"><span class="score-pending">—</span></td>`;
+    }
+
+    return `<tr style="border-bottom:1px solid var(--border)">
+      ${matchCell}
+      ${resultCell}
+      ${betCells}
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="phase-section">
+      <div class="phase-header"><span class="phase-label">⚡ Cuartos de Final</span><span class="phase-count">4 partidos</span></div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="partido-col">Partido</th>
+              <th class="result-col-header">Resultado</th>
+              ${headers}
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
 function render() {
   buildPhaseFilters();
   const content = document.getElementById('content');
@@ -2191,6 +2298,8 @@ function render() {
     content.innerHTML = renderToday();
   } else if (activePhase === 'tomorrow') {
     content.innerHTML = renderTomorrow();
+  } else if (activePhase === '1/4') {
+    content.innerHTML = buildTable4Real();
   } else if (activePhase === 'ranking') {
     content.innerHTML = renderRanking();
   } else if (activePhase === 'apuestas') {
