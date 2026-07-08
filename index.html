@@ -927,6 +927,7 @@ function buildPhaseFilters() {
     { key: '1/16', label: '🔥 Dieciseisavos' },
     { key: '1/8', label: '🏆 Octavos' },
     { key: '1/4', label: '⚡ Cuartos' },
+    { key: '1/2', label: '🔴 Semifinales' },
     { key: 'ranking', label: '🏅 Clasificación' },
     { key: 'apuestas', label: '🎲 Apuestas Especiales' },
   ];
@@ -1549,6 +1550,12 @@ const REAL_MATCHES_4 = [["Francia", "Marruecos", null, null, "9 jul", "22:00"], 
 
 const QUALIFIER_BETS_SEMI = {"Roco": ["España", "Brasil", "Francia", "Argentina"], "Fer": ["España", "Brasil", "Francia", "Portugal"], "Cubelos": ["España", "Inglaterra", "Francia", "Argentina"], "Nachi": ["Francia", "Argentina", "España", "Brasil"], "Quique": ["Francia", "México", "España", "Portugal"], "Gonzalo Diaz": ["Francia", "Brasil", "España", "Portugal"], "Gonzalo Goncer": ["Francia", "Portugal", "España", "Inglaterra"], "Pablo Estevez": ["Francia", "Brasil", "España", "Portugal"], "Pablo": ["España", "Inglaterra", "Francia", "Portugal"], "Álvaro Rico": ["Francia", "Marruecos", "España", "Portugal"], "Abo": ["Francia", "Inglaterra", "España", "Argentina"], "Angel": ["Francia", "Brasil", "España", "Argentina"], "Tito": ["Francia", "Portugal", "España", "Brasil"], "Nico Muñoz": ["España", "Portugal", "Francia", "Brasil"], "Sergio": ["Marruecos", "Brasil", "España", "Argentina"], "Pozancos": ["Francia", "Brasil", "España", "Portugal"], "Alberto Castillo": ["Francia", "Argentina", "España", "Inglaterra"], "Rober": ["Francia", "Inglaterra", "España", "Portugal"], "Goncho": ["España", "Brasil", "Francia", "Argentina"], "Urreison": ["España", "Portugal", "Francia", "Inglaterra"], "Juan Dionis": ["Francia", "Brasil", "España", "Portugal"], "Juanmi": ["Noruega", "Francia", "España", "Argentina"], "El Oráculo": ["Francia", "Inglaterra", "España", "Argentina"]};
 const QUALIFIERS_SEMI = []; // Rellenar con los 4 semifinalistas reales
+const SEMI_BETS = [{"Roco": "España-Brasil·2|2-3", "Fer": "España-Brasil·1|1-0", "Cubelos": "España-Inglaterra·1|2-1", "Nachi": "Francia-Argentina·1|1-0", "Quique": "Francia-México·1|2-0", "Gonzalo Diaz": "Francia-Brasil·1|3-1", "Gonzalo Goncer": "Francia-Portugal·2|1-2", "Pablo Estevez": "Francia-Brasil·2|1-2", "Pablo": "España-Inglaterra·X|2-2", "Álvaro Rico": "Francia-Marruecos·X|1-1", "Abo": "Francia-Inglaterra·1|2-0", "Angel": "Francia-Brasil·1|3-0", "Tito": "Francia-Portugal·1|2-1", "Nico Muñoz": "España-Portugal·1|2-1", "Sergio": "Marruecos-Brasil·1|1-0", "Pozancos": "Francia-Brasil·1|3-2", "Alberto Castillo": "Francia-Argentina·1|2-1", "Rober": "Francia-Inglaterra·1|2-1", "Goncho": "España-Brasil·1|2-1", "Urreison": "España-Portugal·2|1-2", "Juan Dionis": "Francia-Brasil·2|0-2", "Juanmi": "Noruega-Francia·1|3-0", "El Oráculo": "Francia-Inglaterra·1|2-1"}, {"Roco": "Francia-Argentina·1|3-2", "Fer": "Francia-Portugal·2|1-2", "Cubelos": "Francia-Argentina·1|2-1", "Nachi": "España-Brasil·1|2-1", "Quique": "España-Portugal·1|2-1", "Gonzalo Diaz": "España-Portugal·1|2-1", "Gonzalo Goncer": "España-Inglaterra·1|3-1", "Pablo Estevez": "España-Portugal·1|2-1", "Pablo": "Francia-Portugal·2|1-2", "Álvaro Rico": "España-Portugal·1|2-1", "Abo": "España-Argentina·1|1-0", "Angel": "España-Argentina·1|2-1", "Tito": "España-Brasil·1|2-1", "Nico Muñoz": "Francia-Brasil·2|1-2", "Sergio": "España-Argentina·1|2-0", "Pozancos": "España-Portugal·1|3-1", "Alberto Castillo": "España-Inglaterra·1|2-1", "Rober": "España-Portugal·X|2-2", "Goncho": "Francia-Argentina·2|1-2", "Urreison": "Francia-Inglaterra·1|2-0", "Juan Dionis": "España-Portugal·1|3-1", "Juanmi": "España-Argentina·1|2-0", "El Oráculo": "España-Argentina·1|2-1"}];
+const REAL_MATCHES_SEMI = [
+  [null, null, null, null, null, null],
+  [null, null, null, null, null, null],
+];
+
 const QUALIFIER_BETS_4 = {"Roco": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Estados Unidos", "Inglaterra", "Portugal"], "Fer": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Turquía", "Inglaterra", "Portugal"], "Cubelos": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Nachi": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Quique": ["Francia", "España", "Noruega", "Estados Unidos", "Brasil", "Turquía", "México", "Portugal"], "Gonzalo Diaz": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Senegal", "Inglaterra", "Portugal"], "Gonzalo Goncer": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Pablo Estevez": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Irán", "Ghana", "Portugal"], "Pablo": ["Francia", "España", "Brasil", "Uruguay", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Álvaro Rico": ["Francia", "España", "Marruecos", "Argentina", "Brasil", "Turquía", "Inglaterra", "Portugal"], "Abo": ["Francia", "España", "Marruecos", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Angel": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Marruecos", "Portugal"], "Tito": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Nico Muñoz": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Sergio": ["Alemania", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Croacia", "Portugal"], "Pozancos": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Alberto Castillo": ["Francia", "España", "Marruecos", "Argentina", "Brasil", "Bélgica", "Inglaterra", "Portugal"], "Rober": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Goncho": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Estados Unidos", "Inglaterra", "Portugal"], "Urreison": ["Francia", "España", "Marruecos", "Argentina", "Japón", "Senegal", "Inglaterra", "Portugal"], "Juan Dionis": ["Francia", "España", "Brasil", "Uruguay", "Países Bajos", "Turquía", "Inglaterra", "Portugal"], "Juanmi": ["Noruega", "España", "Francia", "Argentina", "Países Bajos", "Turquía", "México", "Portugal"], "El Oráculo": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"]};
 const QUALIFIERS_4 = ["Francia", "Marruecos", "España", "Bélgica", "Noruega", "Inglaterra", "Argentina", "Suiza"];
 const QUALIFIERS_8 = ["Canadá","Marruecos","Paraguay","Francia","Brasil","Noruega","México","Inglaterra","Portugal","España","Estados Unidos","Bélgica","Argentina","Egipto","Suiza","Colombia"];
@@ -2362,6 +2369,78 @@ function buildTable4Real() {
     </div>`;
 }
 
+function buildTableSemiReal() {
+  const headers = PARTICIPANTS.map(p => `<th class="participant-header"><span>${shortName(p)}</span></th>`).join('');
+
+  const rows = REAL_MATCHES_SEMI.map(([realT1, realT2, realScore, realPens, date, time], idx) => {
+    const bets_row = SEMI_BETS[idx] || {};
+
+    let actualSign = null, actualScore = null;
+    if (realScore) {
+      const [g1, g2] = realScore.split('-').map(Number);
+      actualSign = g1 > g2 ? '1' : g1 < g2 ? '2' : 'X';
+      actualScore = realScore;
+    }
+
+    const betCells = PARTICIPANTS.map(p => {
+      const val = bets_row[p] || '';
+      const b = parseBet(val);
+      if (!b || !b.isMatch) return '<td></td>';
+      const betT1 = b.teams.split('-')[0]?.trim();
+      const betT2 = b.teams.split('-').slice(1).join('-').trim();
+      const matchesReal = realT1 && (
+        (betT1 === realT1 && betT2 === realT2) ||
+        (betT1 === realT2 && betT2 === realT1)
+      );
+      let betClass = '';
+      if (matchesReal && actualSign) {
+        let effectiveSign = b.sign;
+        if (betT1 === realT2 && betT2 === realT1) effectiveSign = b.sign === '1' ? '2' : b.sign === '2' ? '1' : 'X';
+        const signCorrect = effectiveSign === actualSign;
+        const scoreCorrect = signCorrect && b.score === actualScore;
+        betClass = scoreCorrect ? 'bet-exact' : signCorrect ? 'bet-correct' : '';
+      }
+      return `<td><div class="bet ${betClass}">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:2px">${b.teams}</div>
+        <span class="sign sign-${b.sign}">${b.sign}</span>
+        <span class="score">${b.score}</span>
+      </div></td>`;
+    }).join('');
+
+    let matchCell, resultCell;
+    if (realT1) {
+      matchCell = `<td class="match-name" style="white-space:nowrap;font-size:12px">${flag(realT1)} ${realT1} - ${realT2} ${flag(realT2)}<div style="font-size:10px;color:var(--muted);margin-top:2px">${date||''} ${time||''}</div></td>`;
+      if (realScore) {
+        resultCell = `<td class="result-cell"><span class="score-badge">${realScore}</span>${realPens ? `<div style="font-size:10px;color:var(--gold)">pen. ${realPens}</div>` : ''}</td>`;
+      } else {
+        resultCell = `<td class="result-cell"><span style="color:var(--gold);font-size:11px">🕐 ${time}</span></td>`;
+      }
+    } else {
+      matchCell = `<td class="match-name" style="color:var(--muted);font-style:italic">Pendiente</td>`;
+      resultCell = `<td class="result-cell"><span class="score-pending">—</span></td>`;
+    }
+
+    return `<tr style="border-bottom:1px solid var(--border)">
+      ${matchCell}${resultCell}${betCells}
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="phase-section">
+      <div class="phase-header"><span class="phase-label">🔴 Semifinales</span><span class="phase-count">2 partidos</span></div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr>
+            <th class="partido-col">Partido</th>
+            <th class="result-col-header">Resultado</th>
+            ${headers}
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
 function render() {
   buildPhaseFilters();
   const content = document.getElementById('content');
@@ -2395,6 +2474,8 @@ function render() {
     content.innerHTML = renderTomorrow();
   } else if (activePhase === '1/4') {
     content.innerHTML = buildTable4Real();
+  } else if (activePhase === '1/2') {
+    content.innerHTML = buildTableSemiReal();
   } else if (activePhase === 'ranking') {
     content.innerHTML = renderRanking();
   } else if (activePhase === 'apuestas') {
