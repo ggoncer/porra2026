@@ -1531,6 +1531,7 @@ const GROUP_STANDINGS = {
 // Resultados finales especiales (actualizar al terminar el torneo)
 
 // Equipos aún en competición (actualizar tras cada ronda)
+const ELIMINATED_PLAYERS = new Set(["Vinícius Jr.", "Cristiano Ronaldo", "Kai Havertz", "Endrick", "Raphinha"]);
 const ALIVE_TEAMS = new Set(["Francia","Marruecos","España","Bélgica","Noruega","Inglaterra","Argentina","Suiza"]);
 const SPECIAL_RESULTS = {
   campeon: null, subcampeon: null, tercero: null,
@@ -1619,7 +1620,11 @@ function renderApuestas() {
     pList.forEach(p => {
       const bet = (SPECIAL_BETS[p] || {})[key] || '—';
       const isTeamBet = ['campeon','subcampeon','tercero'].includes(key);
-      const isEliminated = isTeamBet && !actual && bet !== '—' && typeof ALIVE_TEAMS !== 'undefined' && ALIVE_TEAMS.size > 0 && !ALIVE_TEAMS.has(bet);
+      const isBootBet = ['bota_oro','bota_plata','bota_bronce'].includes(key);
+      const isEliminated = (!actual && bet !== '—') && (
+        (isTeamBet && typeof ALIVE_TEAMS !== 'undefined' && ALIVE_TEAMS.size > 0 && !ALIVE_TEAMS.has(bet)) ||
+        (isBootBet && typeof ELIMINATED_PLAYERS !== 'undefined' && ELIMINATED_PLAYERS.has(bet))
+      );
       let style = 'font-size:11px';
       if (actual) {
         if (bet.toLowerCase().trim() === actual.toLowerCase().trim())
