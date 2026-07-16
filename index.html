@@ -1428,7 +1428,7 @@ const GROUP_STANDINGS = {
 
 // Equipos aún en competición (actualizar tras cada ronda)
 const ELIMINATED_PLAYERS = new Set(["Vinícius Jr.", "Cristiano Ronaldo", "Kai Havertz", "Endrick", "Raphinha", "Lukaku"]);
-const ALIVE_TEAMS = new Set(["Francia","España","Inglaterra","Argentina"]);
+const ALIVE_TEAMS = new Set(["España","Argentina","Francia","Inglaterra"]);
 const SPECIAL_RESULTS = {
   campeon: null, subcampeon: null, tercero: null,
   bota_oro: null, bota_plata: null, bota_bronce: null,
@@ -1463,18 +1463,18 @@ const SEMI_TODAY_MATCHES = [
 
 const REAL_MATCHES_SEMI = [
   ["Francia", "España", "0-2", null, "14 jul", "21:00"],
-  ["Inglaterra", "Argentina", null, null, "15 jul", "21:00"],
+  ["Inglaterra", "Argentina", "1-2", null, "15 jul", "21:00"],
 ];
 
 const THIRD_BETS = [{"Roco": "España-Brasil·2|2-3", "Fer": "España-Brasil·1|1-0", "Cubelos": "España-Inglaterra·1|2-1", "Nachi": "Francia-Argentina·1|1-0", "Quique": "Francia-México·1|2-0", "Gonzalo Diaz": "Francia-Brasil·1|3-1", "Gonzalo Goncer": "Francia-Portugal·2|1-2", "Pablo Estevez": "Francia-Brasil·2|1-2", "Pablo": "España-Inglaterra·X|2-2", "Álvaro Rico": "Francia-Marruecos·X|1-1", "Abo": "Francia-Inglaterra·1|2-0", "Angel": "Francia-Brasil·1|3-0", "Tito": "Francia-Portugal·1|2-1", "Nico Muñoz": "España-Portugal·1|2-1", "Sergio": "Marruecos-Brasil·1|1-0", "Pozancos": "Francia-Brasil·1|3-2", "Alberto Castillo": "Francia-Argentina·1|2-1", "Rober": "Francia-Inglaterra·1|2-1", "Goncho": "España-Brasil·1|2-1", "Urreison": "España-Portugal·2|1-2", "Juan Dionis": "Francia-Brasil·2|0-2", "Juanmi": "Noruega-Francia·1|3-0", "El Oráculo": "Francia-Inglaterra·1|2-1"}];
 const FINAL_BETS = [{"Roco": "Francia-Argentina·1|3-2", "Fer": "Francia-Portugal·2|1-2", "Cubelos": "Francia-Argentina·1|2-1", "Nachi": "España-Brasil·1|2-1", "Quique": "España-Portugal·1|2-1", "Gonzalo Diaz": "España-Portugal·1|2-1", "Gonzalo Goncer": "España-Inglaterra·1|3-1", "Pablo Estevez": "España-Portugal·1|2-1", "Pablo": "Francia-Portugal·2|1-2", "Álvaro Rico": "España-Portugal·1|2-1", "Abo": "España-Argentina·1|1-0", "Angel": "España-Argentina·1|2-1", "Tito": "España-Brasil·1|2-1", "Nico Muñoz": "Francia-Brasil·2|1-2", "Sergio": "España-Argentina·1|2-0", "Pozancos": "España-Portugal·1|3-1", "Alberto Castillo": "España-Inglaterra·1|2-1", "Rober": "España-Portugal·X|2-2", "Goncho": "Francia-Argentina·2|1-2", "Urreison": "Francia-Inglaterra·1|2-0", "Juan Dionis": "España-Portugal·1|3-1", "Juanmi": "España-Argentina·1|2-0", "El Oráculo": "España-Argentina·1|2-1"}];
-const REAL_MATCH_THIRD = ["Francia", null, null, null, "18 jul", "23:00"];
-const REAL_MATCH_FINAL = ["España", null, null, null, "19 jul", "21:00"];
+const REAL_MATCH_THIRD = ["Francia", "Inglaterra", null, null, "18 jul", "23:00"];
+const REAL_MATCH_FINAL = ["España", "Argentina", null, null, "19 jul", "21:00"];
 
 const QUALIFIER_BETS_FINAL = {"Roco": ["Francia", "Argentina"], "Fer": ["Francia", "Portugal"], "Cubelos": ["Francia", "Argentina"], "Nachi": ["España", "Brasil"], "Quique": ["España", "Portugal"], "Gonzalo Diaz": ["España", "Portugal"], "Gonzalo Goncer": ["España", "Inglaterra"], "Pablo Estevez": ["España", "Portugal"], "Pablo": ["Francia", "Portugal"], "Álvaro Rico": ["España", "Portugal"], "Abo": ["España", "Argentina"], "Angel": ["España", "Argentina"], "Tito": ["España", "Brasil"], "Nico Muñoz": ["Francia", "Brasil"], "Sergio": ["España", "Argentina"], "Pozancos": ["España", "Portugal"], "Alberto Castillo": ["España", "Inglaterra"], "Rober": ["España", "Portugal"], "Goncho": ["Francia", "Argentina"], "Urreison": ["Francia", "Inglaterra"], "Juan Dionis": ["España", "Portugal"], "Juanmi": ["España", "Argentina"], "El Oráculo": ["España", "Argentina"]};
 const QUALIFIER_BETS_THIRD = {"Roco": ["España", "Brasil"], "Fer": ["España", "Brasil"], "Cubelos": ["España", "Inglaterra"], "Nachi": ["Francia", "Argentina"], "Quique": ["Francia", "México"], "Gonzalo Diaz": ["Francia", "Brasil"], "Gonzalo Goncer": ["Francia", "Portugal"], "Pablo Estevez": ["Francia", "Brasil"], "Pablo": ["España", "Inglaterra"], "Álvaro Rico": ["Francia", "Marruecos"], "Abo": ["Francia", "Inglaterra"], "Angel": ["Francia", "Brasil"], "Tito": ["Francia", "Portugal"], "Nico Muñoz": ["España", "Portugal"], "Sergio": ["Marruecos", "Brasil"], "Pozancos": ["Francia", "Brasil"], "Alberto Castillo": ["Francia", "Argentina"], "Rober": ["Francia", "Inglaterra"], "Goncho": ["España", "Brasil"], "Urreison": ["España", "Portugal"], "Juan Dionis": ["Francia", "Brasil"], "Juanmi": ["Noruega", "Francia"], "El Oráculo": ["Francia", "Inglaterra"]};
-const QUALIFIERS_FINAL = ["España"];
-const QUALIFIERS_THIRD = ["Francia"];
+const QUALIFIERS_FINAL = ["España", "Argentina"];
+const QUALIFIERS_THIRD = ["Francia", "Inglaterra"];
 
 const QUALIFIER_BETS_4 = {"Roco": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Estados Unidos", "Inglaterra", "Portugal"], "Fer": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Turquía", "Inglaterra", "Portugal"], "Cubelos": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Nachi": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Quique": ["Francia", "España", "Noruega", "Estados Unidos", "Brasil", "Turquía", "México", "Portugal"], "Gonzalo Diaz": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Senegal", "Inglaterra", "Portugal"], "Gonzalo Goncer": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Pablo Estevez": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Irán", "Ghana", "Portugal"], "Pablo": ["Francia", "España", "Brasil", "Uruguay", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Álvaro Rico": ["Francia", "España", "Marruecos", "Argentina", "Brasil", "Turquía", "Inglaterra", "Portugal"], "Abo": ["Francia", "España", "Marruecos", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Angel": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Marruecos", "Portugal"], "Tito": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Nico Muñoz": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Inglaterra", "Portugal"], "Sergio": ["Alemania", "España", "Brasil", "Argentina", "Marruecos", "Bélgica", "Croacia", "Portugal"], "Pozancos": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Alberto Castillo": ["Francia", "España", "Marruecos", "Argentina", "Brasil", "Bélgica", "Inglaterra", "Portugal"], "Rober": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"], "Goncho": ["Francia", "España", "Brasil", "Argentina", "Marruecos", "Estados Unidos", "Inglaterra", "Portugal"], "Urreison": ["Francia", "España", "Marruecos", "Argentina", "Japón", "Senegal", "Inglaterra", "Portugal"], "Juan Dionis": ["Francia", "España", "Brasil", "Uruguay", "Países Bajos", "Turquía", "Inglaterra", "Portugal"], "Juanmi": ["Noruega", "España", "Francia", "Argentina", "Países Bajos", "Turquía", "México", "Portugal"], "El Oráculo": ["Francia", "España", "Brasil", "Argentina", "Países Bajos", "Bélgica", "Inglaterra", "Portugal"]};
 const QUALIFIERS_4 = ["Francia", "Marruecos", "España", "Bélgica", "Noruega", "Inglaterra", "Argentina", "Suiza"];
@@ -1903,7 +1903,7 @@ function renderRanking() {
             ${sectionTh('🔥 DIECISEISAVOS', 2, '#1a2a4a')}
             ${sectionTh('🏆 OCTAVOS', 2, '#3a1a1a')}
             ${sectionTh('⚡ CUARTOS', 2, '#3a2a0a')}
-            ${sectionTh('🔴 SEMIFINALES', 3, '#3a0a0a')}
+            ${sectionTh('🔴 SEMIFINALES', 3, '#9b1c1c')}
             <th rowspan="2" style="background:#1a2233;border-bottom:1px solid var(--border);padding:8px 10px;font-size:11px;color:var(--muted)">🏅<br>Especial</th>
           </tr>
           <tr>
@@ -1948,9 +1948,9 @@ function renderRanking() {
             <td style="color:${oQual4>0?'#f85149':'var(--muted)'}">${oQual4 || '—'}</td>
             <td style="color:${qResults>0?'#c97a00':'var(--muted)'}">${qResults || '—'}</td>
             <td style="color:${qQualSemi>0?'#c97a00':'var(--muted)'}">${qQualSemi || '—'}</td>
-            <td style="color:${sResults>0?'#8b0000':'var(--muted)'}">${sResults || '—'}</td>
-            <td style="color:${sQualFinal>0?'#8b0000':'var(--muted)'}">${sQualFinal || '—'}</td>
-            <td style="color:${sQualThird>0?'#8b0000':'var(--muted)'}">${sQualThird || '—'}</td>
+            <td style="color:${sResults>0?'#ff6b6b':'var(--muted)'}">${sResults || '—'}</td>
+            <td style="color:${sQualFinal>0?'#ff6b6b':'var(--muted)'}">${sQualFinal || '—'}</td>
+            <td style="color:${sQualThird>0?'#ff6b6b':'var(--muted)'}">${sQualThird || '—'}</td>
             <td style="color:${p.special>0?'var(--gold)':'var(--muted)'}">${p.special || '—'}</td>
           </tr>`;
   });
